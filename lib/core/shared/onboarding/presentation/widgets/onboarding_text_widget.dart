@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
-import 'package:safety_frist/features/onboarding/presentation/widgets/build_item_onboarding.dart';
+import 'package:safety_frist/core/shared/onboarding/presentation/widgets/build_item_onboarding.dart';
 
 class OnBoardingTextWidget extends StatelessWidget {
   const OnBoardingTextWidget({super.key, required this.widget});

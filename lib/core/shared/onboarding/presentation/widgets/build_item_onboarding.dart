@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safety_frist/core/helper/functions/build_animation.dart';
+import 'package:safety_frist/core/helper/utils/extentions.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
+import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/widgets/app_text_button.dart';
-import 'package:safety_frist/features/onboarding/data/datasource/onboarding_data_list.dart';
-import 'package:safety_frist/features/onboarding/data/models/onboarding_model.dart';
+import 'package:safety_frist/core/shared/onboarding/data/datasource/onboarding_data_list.dart';
+import 'package:safety_frist/core/shared/onboarding/data/models/onboarding_model.dart';
 import 'onboarding_text_widget.dart';
 import 'onborading_image_widget.dart';
 import 'smooth_page_indicator_widget.dart';
@@ -78,9 +80,9 @@ class _BuildItemOnBoardingState extends State<BuildItemOnBoarding> {
                               backgroundColor:
                                   Theme.of(context).scaffoldBackgroundColor,
                               onPressed: () {
-                                // context.navigateToReplacement(
-                                //   Routes.loginScreen,
-                                // );
+                                context.navigateToReplacement(
+                                  Routes.userTypeScreen,
+                                );
                               },
                             ),
                           )
@@ -117,7 +119,7 @@ class _BuildItemOnBoardingState extends State<BuildItemOnBoarding> {
         );
       });
     } else {
-      // context.navigateToReplacement(Routes.loginScreen);
+      context.navigateToReplacement(Routes.userTypeScreen);
     }
   }
 }

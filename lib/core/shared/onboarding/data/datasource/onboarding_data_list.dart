@@ -1,4 +1,4 @@
-import 'package:safety_frist/features/onboarding/data/models/onboarding_model.dart';
+import 'package:safety_frist/core/shared/onboarding/data/models/onboarding_model.dart';
 
 List<OnBoardingModel> onBoardingArabicList = [
   OnBoardingModel(

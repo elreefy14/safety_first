@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:safety_frist/features/onboarding/data/datasource/onboarding_data_list.dart';
-import 'package:safety_frist/features/onboarding/presentation/widgets/build_item_onboarding.dart';
+import 'package:safety_frist/core/shared/onboarding/data/datasource/onboarding_data_list.dart';
+import 'package:safety_frist/core/shared/onboarding/presentation/widgets/build_item_onboarding.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});

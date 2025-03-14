@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:safety_frist/core/helper/functions/build_page_route.dart';
 import 'package:safety_frist/core/routes/routes.dart';
-import 'package:safety_frist/features/onboarding/presentation/screens/onboarding_screen.dart';
-import 'package:safety_frist/features/onboarding/presentation/screens/splash_screen.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/screens/client_register_screen.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/screens/user_type_screen.dart';
+import 'package:safety_frist/core/shared/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:safety_frist/core/shared/onboarding/presentation/screens/splash_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -19,6 +21,24 @@ class AppRouter {
       case Routes.onboardingScreen:
         return smoothEaseInOutPageRoute(
           const OnboardingScreen(),
+          settings: settings,
+        );
+
+      case Routes.userTypeScreen:
+        return smoothEaseInOutPageRoute(
+          const UserTypeScreen(),
+          settings: settings,
+        );
+
+      // case Routes.loginScreen:
+      //   return smoothEaseInOutPageRoute(
+      //     const LoginScreen(),
+      //     settings: settings,
+      //   );
+
+      case Routes.clientRegisterScreen:
+        return smoothEaseInOutPageRoute(
+          const ClientRegisterScreen(),
           settings: settings,
         );
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextButton extends StatelessWidget {
   const AppTextButton({
@@ -27,29 +26,28 @@ class AppTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: buttonWidth ?? double.infinity,
-        height: buttonHeight ?? 60.h,
-        clipBehavior: Clip.antiAlias,
-        decoration: ShapeDecoration(
-          color: backgroundColor ?? const Color(0xFF103A69),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius ?? 16),
-          ),
+    return ElevatedButton(
+      onPressed: onPressed,
+      clipBehavior: Clip.antiAlias,
+      style: ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(
+          backgroundColor ?? const Color(0xFF103A69),
         ),
-        child: Center(
-          child: Text(
-            textAlign: TextAlign.center,
-            textButton,
-            style:
-                textStyle ??
-                Theme.of(
-                  context,
-                ).textTheme.titleSmall!.copyWith(color: Colors.white),
-          ),
+        overlayColor: WidgetStatePropertyAll(
+          backgroundColor ?? const Color(0xFF103A69),
         ),
+        elevation: WidgetStatePropertyAll(0.4),
+        shadowColor: WidgetStatePropertyAll(
+          Theme.of(context).scaffoldBackgroundColor,
+        ),
+      ),
+      child: Text(
+        textButton,
+        style:
+            textStyle ??
+            Theme.of(
+              context,
+            ).textTheme.bodyMedium!.copyWith(color: Colors.white),
       ),
     );
   }

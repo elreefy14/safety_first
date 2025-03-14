@@ -1,25 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:safety_frist/core/helper/functions/app_regex.dart';
-import 'package:safety_frist/core/helper/functions/validator.dart';
+import 'package:safety_frist/core/widgets/password_validations.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
-import 'package:safety_frist/core/shared/authentication/presentation/widgets/forgot%20password/forgot_password_message_widget.dart';
 import 'package:safety_frist/core/widgets/app_text_button.dart';
 import 'package:safety_frist/core/widgets/app_text_form_field.dart';
 
-class LoginFormWidget extends StatefulWidget {
-  const LoginFormWidget({super.key});
+class ChangePasswordFormWidget extends StatefulWidget {
+  const ChangePasswordFormWidget({super.key});
 
   @override
-  State<LoginFormWidget> createState() => _LoginFormWidgetState();
+  State<ChangePasswordFormWidget> createState() =>
+      _ChangePasswordFormWidgetState();
 }
 
-class _LoginFormWidgetState extends State<LoginFormWidget> {
+class _ChangePasswordFormWidgetState extends State<ChangePasswordFormWidget> {
   bool isObscureText = true;
   IconData visibility = Icons.visibility_off_outlined;
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  bool hasLowerCase = false;
+  bool hasUpperCase = false;
+  bool hasSpecialCharacters = false;
+  bool hasNumber = false;
+  bool hasMinLength = false;
+
+  late TextEditingController passwordController;
   GlobalKey<FormState> formKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    passwordController = TextEditingController();
+    setupPasswordControllerListener();
+  }
+
+  void setupPasswordControllerListener() {
+    passwordController.addListener(() {
+      setState(() {
+        hasLowerCase = AppRegex.hasLowerCase(passwordController.text);
+        hasUpperCase = AppRegex.hasUpperCase(passwordController.text);
+        hasSpecialCharacters = AppRegex.hasSpecialCharacter(
+          passwordController.text,
+        );
+        hasNumber = AppRegex.hasNumber(passwordController.text);
+        hasMinLength = AppRegex.hasMinLength(passwordController.text);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,45 +55,22 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '  البريد الإلكتروني',
+            '  كلمة المرور الجديدة',
             style: Theme.of(
               context,
             ).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
           ),
-          verticalSpace(2),
-          AppTextFormField(
-            textInputType: TextInputType.emailAddress,
-            hintText: 'user42@gmail.com',
-            controller: emailController,
-            prefixIcon: Icon(
-              Icons.email_outlined,
-              color: Theme.of(context).iconTheme.color,
-            ),
-            validator: (value) {
-              if (AppRegex.isEmailValid(value!) == false) {
-                return 'بالرجاء إدخال اسماَ صالحاً';
-              } else {
-                return null;
-              }
-            },
-          ),
-          verticalSpace(16),
-          Text(
-            '  كلمة المرور',
-            style: Theme.of(
-              context,
-            ).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
-          ),
-          verticalSpace(2),
+          verticalSpace(4),
           AppTextFormField(
             textInputType: TextInputType.visiblePassword,
             hintText: '********',
+            controller: passwordController,
             prefixIcon: Icon(
               Icons.lock_outline_rounded,
               color: Theme.of(context).iconTheme.color,
             ),
             validator: (value) {
-              return passwordValidator(value);
+              AppRegex.isPasswordValid(value!);
             },
             isObscureText: isObscureText,
             suffixIcon: IconButton(
@@ -80,12 +83,18 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
             ),
           ),
           verticalSpace(8),
-          const ForgotPasswordMessageWidget(),
-          verticalSpace(50),
+          PasswordValidations(
+            hasLowerCase: hasLowerCase,
+            hasUpperCase: hasUpperCase,
+            hasSpecialCharacters: hasSpecialCharacters,
+            hasNumber: hasNumber,
+            hasMinLength: hasMinLength,
+          ),
+          verticalSpace(30),
           SizedBox(
             width: double.infinity,
             child: AppTextButton(
-              textButton: 'تسجيل الدخول',
+              textButton: 'حفظ كلمة المرور',
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   print('validate');
@@ -98,5 +107,11 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
   }
 }

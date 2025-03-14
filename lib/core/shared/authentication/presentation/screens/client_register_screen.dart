@@ -19,10 +19,11 @@ class ClientRegisterScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
+                  height: 130,
                   child: Image.asset('assets/icons/logo_horizontal_edit.png'),
                 ),
                 RegisterWelcomeMessage(),
-                verticalSpace(20),
+                verticalSpace(16),
                 RegisterFormWidget(),
                 verticalSpace(16),
                 ClientHaveAnAccount(),

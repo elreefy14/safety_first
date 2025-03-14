@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safety_frist/core/helper/functions/is_arabic.dart';
+import 'package:safety_frist/core/helper/utils/extentions.dart';
+import 'package:safety_frist/core/routes/routes.dart';
 
 class ForgotPasswordMessageWidget extends StatelessWidget {
   const ForgotPasswordMessageWidget({super.key});
@@ -14,7 +16,9 @@ class ForgotPasswordMessageWidget extends StatelessWidget {
             Theme.of(context).scaffoldBackgroundColor,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          context.navigateTo(Routes.forgotPasswordScreen);
+        },
         child: Text(
           'هل نسيت كلمة المرور ؟',
           style: Theme.of(

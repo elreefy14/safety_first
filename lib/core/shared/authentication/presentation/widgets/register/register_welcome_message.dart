@@ -18,7 +18,7 @@ class RegisterWelcomeMessage extends StatelessWidget {
             ),
           ],
         ),
-        verticalSpace(8),
+        verticalSpace(4),
         Text(
           'أنشئ حسابك علشان تقدر تبلغ عن مشاكلك بسهولة، وتتابع حالة الطلبات، وتتواصل مع فريق الدعم',
           style: Theme.of(context).textTheme.titleSmall,

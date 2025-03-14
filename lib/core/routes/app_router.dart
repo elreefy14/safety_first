@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:safety_frist/core/helper/functions/build_page_route.dart';
 import 'package:safety_frist/core/routes/routes.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/screens/change_password_screen.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/client_register_screen.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/screens/forgot_password_screen.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/user_type_screen.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/screens/verification_code_screen.dart';
 import 'package:safety_frist/core/shared/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:safety_frist/core/shared/onboarding/presentation/screens/splash_screen.dart';
 
@@ -35,6 +38,24 @@ class AppRouter {
       //     const LoginScreen(),
       //     settings: settings,
       //   );
+
+      case Routes.forgotPasswordScreen:
+        return smoothEaseInOutPageRoute(
+          const ForgotPasswordScreen(),
+          settings: settings,
+        );
+
+      case Routes.verificationCodeScreen:
+        return smoothEaseInOutPageRoute(
+          const VerificationCodeScreen(),
+          settings: settings,
+        );
+
+      case Routes.changePasswordScreen:
+        return smoothEaseInOutPageRoute(
+          const ChangePasswordScreen(),
+          settings: settings,
+        );
 
       case Routes.clientRegisterScreen:
         return smoothEaseInOutPageRoute(

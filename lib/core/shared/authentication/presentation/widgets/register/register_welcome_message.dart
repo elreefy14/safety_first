@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:safety_frist/core/helper/functions/build_welcome_message.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/user_type_model.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/welcome_message_model.dart';
 
-class LoginWelcomeMessage extends StatelessWidget {
-  const LoginWelcomeMessage({super.key, required this.userType});
-
-  final UserType userType;
+class RegisterWelcomeMessage extends StatelessWidget {
+  const RegisterWelcomeMessage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    WelcomeMessage message = buildWelcomeMessage(userType);
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              message.messageTitile,
+              'انضم إلينا وابدأ في حل مشاكلك',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
             ),
@@ -26,7 +20,7 @@ class LoginWelcomeMessage extends StatelessWidget {
         ),
         verticalSpace(8),
         Text(
-          message.messageContent,
+          'أنشئ حسابك علشان تقدر تبلغ عن مشاكلك بسهولة، وتتابع حالة الطلبات، وتتواصل مع فريق الدعم',
           style: Theme.of(context).textTheme.titleSmall,
           textAlign: TextAlign.center,
         ),

@@ -21,8 +21,11 @@ class LoginScreen extends StatelessWidget {
             padding: EdgeInsets.only(right: 16.w, left: 16.w, bottom: 30.h),
             child: Column(
               children: [
-                Image.asset('assets/icons/logo_vertical.png'),
-                MenteeWelcomeMessageWidget(userType: userType),
+                SizedBox(
+                  height: 240,
+                  child: Image.asset('assets/icons/logo_vertical.png'),
+                ),
+                LoginWelcomeMessage(userType: userType),
                 verticalSpace(20),
                 LoginFormWidget(),
                 verticalSpace(16),

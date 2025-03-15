@@ -13,7 +13,7 @@ class Routes {
   static const String clientBottomNavBar = '/clientBottomNavBar';
 
   // Technichian
-  static const String technichianTasksScreen = '/technichianTasksScreen';
+  static const String technichianBottomNavBar = '/clientBottomNavBar';
 
   // Admin
   static const String adminBottomNavBar = '/adminBottomNavBar';

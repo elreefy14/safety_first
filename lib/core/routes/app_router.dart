@@ -8,6 +8,7 @@ import 'package:safety_frist/core/shared/authentication/presentation/screens/use
 import 'package:safety_frist/core/shared/authentication/presentation/screens/verification_code_screen.dart';
 import 'package:safety_frist/core/shared/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:safety_frist/core/shared/onboarding/presentation/screens/splash_screen.dart';
+import 'package:safety_frist/users/client/home/presentation/screens/client_bottom_navigation_bar_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -33,12 +34,6 @@ class AppRouter {
           settings: settings,
         );
 
-      // case Routes.loginScreen:
-      //   return smoothEaseInOutPageRoute(
-      //     const LoginScreen(),
-      //     settings: settings,
-      //   );
-
       case Routes.forgotPasswordScreen:
         return smoothEaseInOutPageRoute(
           const ForgotPasswordScreen(),
@@ -60,6 +55,12 @@ class AppRouter {
       case Routes.clientRegisterScreen:
         return smoothEaseInOutPageRoute(
           const ClientRegisterScreen(),
+          settings: settings,
+        );
+
+      case Routes.clientBottomNavBar:
+        return smoothEaseInOutPageRoute(
+          const ClientBottomNavigationBarScreen(),
           settings: settings,
         );
 

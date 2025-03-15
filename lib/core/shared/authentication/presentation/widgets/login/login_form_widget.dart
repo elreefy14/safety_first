@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:safety_frist/core/helper/functions/app_regex.dart';
 import 'package:safety_frist/core/helper/functions/validator.dart';
+import 'package:safety_frist/core/helper/utils/extentions.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
+import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/widgets/forgot%20password/forgot_password_message_widget.dart';
 import 'package:safety_frist/core/widgets/app_text_button.dart';
 import 'package:safety_frist/core/widgets/app_text_form_field.dart';
@@ -88,9 +90,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
               textButton: 'تسجيل الدخول',
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  print('validate');
-                } else {
-                  print('Invalid');
+                  context.navigateToReplacement(Routes.clientBottomNavBar);
                 }
               },
             ),

@@ -14,6 +14,7 @@ ThemeData lightTheme = ThemeData(
     ),
     backgroundColor: const Color(0xFF103A69),
     elevation: 0,
+    centerTitle: true,
     actionsIconTheme: const IconThemeData(color: Colors.white),
     iconTheme: const IconThemeData(color: Colors.white),
     titleTextStyle: TextStyle(

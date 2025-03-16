@@ -13,6 +13,7 @@ ThemeData darkTheme = ThemeData(
       systemNavigationBarIconBrightness: Brightness.light,
     ),
     backgroundColor: const Color(0xFF1C1C1E),
+    centerTitle: true,
     elevation: 0,
     actionsIconTheme: const IconThemeData(color: Color(0xFFE0E0E0)),
     iconTheme: const IconThemeData(color: Color(0xFFE0E0E0)),

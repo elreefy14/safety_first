@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+import 'package:safety_frist/core/helper/functions/app_regex.dart';
+import 'package:safety_frist/core/widgets/app_text_form_field.dart';
+
+class PasswordFormField extends StatefulWidget {
+  const PasswordFormField({super.key, this.title});
+
+  final String? title;
+
+  @override
+  State<PasswordFormField> createState() => _PasswordFormFieldState();
+}
+
+class _PasswordFormFieldState extends State<PasswordFormField> {
+  bool isObscureText = true;
+  IconData visibility = Icons.visibility_off_outlined;
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.title ?? '  كلمة المرور',
+          style: Theme.of(
+            context,
+          ).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
+        ),
+        AppTextFormField(
+          textInputType: TextInputType.visiblePassword,
+          hintText: '********',
+          controller: passwordController,
+          prefixIcon: Icon(
+            Icons.lock_outline_rounded,
+            color: Theme.of(context).iconTheme.color,
+          ),
+          validator: (value) {
+            AppRegex.isPasswordValid(value!);
+          },
+          isObscureText: isObscureText,
+          suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                isObscureText = !isObscureText;
+              });
+            },
+            icon: Icon(isObscureText == true ? visibility : Icons.visibility),
+          ),
+        ),
+      ],
+    );
+  }
+}

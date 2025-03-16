@@ -15,15 +15,15 @@ class ClientRegisterScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(right: 16.w, left: 16.w, bottom: 30.h),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
             child: Column(
               children: [
                 SizedBox(
-                  height: 130,
+                  height: 120,
                   child: Image.asset('assets/icons/logo_horizontal_edit.png'),
                 ),
                 RegisterWelcomeMessage(),
-                verticalSpace(16),
+                verticalSpace(8),
                 RegisterFormWidget(),
                 verticalSpace(16),
                 ClientHaveAnAccount(),

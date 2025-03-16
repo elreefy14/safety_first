@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/user_type_model.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/widgets/login/client_dont_have_an_account.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/widgets/login/login_form_widget.dart';
@@ -18,17 +17,13 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(right: 16.w, left: 16.w, bottom: 30.h),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
             child: Column(
+              spacing: 16.h,
               children: [
-                SizedBox(
-                  height: 240,
-                  child: Image.asset('assets/icons/logo_vertical.png'),
-                ),
+                Image.asset('assets/icons/logo_vertical_edit.png'),
                 LoginWelcomeMessage(userType: userType),
-                verticalSpace(20),
                 LoginFormWidget(),
-                verticalSpace(16),
                 userType == UserType.client
                     ? ClientDontHaveAnAccount()
                     : SizedBox.shrink(),

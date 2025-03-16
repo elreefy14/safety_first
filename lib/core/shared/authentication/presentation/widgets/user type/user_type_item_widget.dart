@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/user_type_model.dart';
 
 class UserTypeItemWidget extends StatelessWidget {
@@ -19,8 +18,7 @@ class UserTypeItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200.w,
-      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 30.h),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       decoration: ShapeDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
         shape: RoundedRectangleBorder(
@@ -43,10 +41,9 @@ class UserTypeItemWidget extends StatelessWidget {
         ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        spacing: 20.h,
         children: [
-          SvgPicture.asset(userType[index].image, width: 100.w),
-          verticalSpace(20),
+          SvgPicture.asset(userType[index].image, width: 120.w),
           Text(
             userType[index].user,
             style: Theme.of(context).textTheme.bodyMedium,

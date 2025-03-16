@@ -14,7 +14,7 @@ class AppTextFormField extends StatelessWidget {
   final TextStyle? inputTextStyle;
   final TextStyle? hintTextStyle;
   final Color? backGroundColorHint;
-  final TextInputType textInputType;
+  final TextInputType? textInputType;
   final TextEditingController? controller;
   final Function(String?) validator;
   final Function(String? value)? onChanged;
@@ -31,7 +31,7 @@ class AppTextFormField extends StatelessWidget {
     this.contentPadding,
     this.hintTextStyle,
     this.backGroundColorHint,
-    required this.textInputType,
+    this.textInputType,
     this.controller,
     required this.validator,
     this.onChanged,
@@ -46,7 +46,7 @@ class AppTextFormField extends StatelessWidget {
       maxLines: maxLines ?? 1,
       style: inputTextStyle ?? Theme.of(context).textTheme.titleSmall,
       controller: controller,
-      keyboardType: textInputType,
+      keyboardType: textInputType ?? TextInputType.text,
       enabled: enabled ?? true,
       onChanged: onChanged,
       decoration: InputDecoration(

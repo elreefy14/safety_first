@@ -14,15 +14,10 @@ class LoginWelcomeMessage extends StatelessWidget {
     WelcomeMessage message = buildWelcomeMessage(userType);
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              message.messageTitile,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ],
+        Text(
+          message.messageTitile,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         verticalSpace(8),
         Text(

@@ -28,7 +28,7 @@ class EmailTextFormField extends StatelessWidget {
           ),
           validator: (value) {
             if (AppRegex.isEmailValid(value!) == false) {
-              return 'بالرجاء إدخال اسماَ صالحاً';
+              return 'بالرجاء إدخال بريد إلكتروني صالح';
             } else {
               return null;
             }

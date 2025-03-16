@@ -3,7 +3,11 @@ import 'package:safety_frist/core/helper/functions/app_regex.dart';
 import 'package:safety_frist/core/widgets/password_validations.dart';
 
 class PasswordValidatorInstructions extends StatefulWidget {
-  const PasswordValidatorInstructions({super.key});
+  const PasswordValidatorInstructions({
+    super.key,
+    required this.passwordController,
+  });
+  final TextEditingController passwordController;
 
   @override
   State<PasswordValidatorInstructions> createState() =>
@@ -18,8 +22,6 @@ class _PasswordValidatorInstructionsState
   bool hasNumber = false;
   bool hasMinLength = false;
 
-  TextEditingController passwordController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -27,15 +29,15 @@ class _PasswordValidatorInstructionsState
   }
 
   void setupPasswordControllerListener() {
-    passwordController.addListener(() {
+    widget.passwordController.addListener(() {
       setState(() {
-        hasLowerCase = AppRegex.hasLowerCase(passwordController.text);
-        hasUpperCase = AppRegex.hasUpperCase(passwordController.text);
+        hasLowerCase = AppRegex.hasLowerCase(widget.passwordController.text);
+        hasUpperCase = AppRegex.hasUpperCase(widget.passwordController.text);
         hasSpecialCharacters = AppRegex.hasSpecialCharacter(
-          passwordController.text,
+          widget.passwordController.text,
         );
-        hasNumber = AppRegex.hasNumber(passwordController.text);
-        hasMinLength = AppRegex.hasMinLength(passwordController.text);
+        hasNumber = AppRegex.hasNumber(widget.passwordController.text);
+        hasMinLength = AppRegex.hasMinLength(widget.passwordController.text);
       });
     });
   }
@@ -53,7 +55,7 @@ class _PasswordValidatorInstructionsState
 
   @override
   void dispose() {
-    passwordController.dispose();
+    widget.passwordController.dispose();
     super.dispose();
   }
 }

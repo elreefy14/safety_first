@@ -12,6 +12,7 @@ class ChangePasswordFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> formKey = GlobalKey();
+    TextEditingController passwordController = TextEditingController();
 
     return AutofillGroup(
       child: Form(
@@ -19,9 +20,14 @@ class ChangePasswordFormWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            PasswordFormField(title: '  كلمة المرور الجديدة'),
+            PasswordFormField(
+              title: '  كلمة المرور الجديدة',
+              passwordController: passwordController,
+            ),
             verticalSpace(8),
-            PasswordValidatorInstructions(),
+            PasswordValidatorInstructions(
+              passwordController: passwordController,
+            ),
             verticalSpace(30),
             SizedBox(
               width: double.infinity,

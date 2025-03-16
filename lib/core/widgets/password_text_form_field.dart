@@ -3,9 +3,14 @@ import 'package:safety_frist/core/helper/functions/app_regex.dart';
 import 'package:safety_frist/core/widgets/app_text_form_field.dart';
 
 class PasswordFormField extends StatefulWidget {
-  const PasswordFormField({super.key, this.title});
+  const PasswordFormField({
+    super.key,
+    this.title,
+    required this.passwordController,
+  });
 
   final String? title;
+  final TextEditingController passwordController;
 
   @override
   State<PasswordFormField> createState() => _PasswordFormFieldState();
@@ -14,7 +19,6 @@ class PasswordFormField extends StatefulWidget {
 class _PasswordFormFieldState extends State<PasswordFormField> {
   bool isObscureText = true;
   IconData visibility = Icons.visibility_off_outlined;
-  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +34,17 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
         AppTextFormField(
           textInputType: TextInputType.visiblePassword,
           hintText: '********',
-          controller: passwordController,
+          controller: widget.passwordController,
           prefixIcon: Icon(
             Icons.lock_outline_rounded,
             color: Theme.of(context).iconTheme.color,
           ),
           validator: (value) {
-            AppRegex.isPasswordValid(value!);
+            if (AppRegex.isPasswordValid(value!) == false) {
+              return 'بالرجاء اتباع التعليمات المذكورة في الاسفل';
+            } else {
+              return null;
+            }
           },
           isObscureText: isObscureText,
           suffixIcon: IconButton(

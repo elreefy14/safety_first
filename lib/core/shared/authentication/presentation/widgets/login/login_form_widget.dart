@@ -13,6 +13,7 @@ class LoginFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> formKey = GlobalKey();
+    TextEditingController passwordController = TextEditingController();
 
     return AutofillGroup(
       child: Form(
@@ -22,7 +23,7 @@ class LoginFormWidget extends StatelessWidget {
           children: [
             EmailTextFormField(),
             verticalSpace(8),
-            PasswordFormField(),
+            PasswordFormField(passwordController: passwordController),
             verticalSpace(8),
             const ForgotPasswordMessageWidget(),
             verticalSpace(50),

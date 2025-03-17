@@ -78,7 +78,7 @@ class _UserTypeScreenState extends State<UserTypeScreen> {
   }
 
   void _navigateToLoginScreen(BuildContext context) {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       PageRouteBuilder(
         pageBuilder:

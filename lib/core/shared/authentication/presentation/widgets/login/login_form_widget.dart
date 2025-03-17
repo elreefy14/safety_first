@@ -32,9 +32,10 @@ class LoginFormWidget extends StatelessWidget {
               child: AppTextButton(
                 textButton: 'تسجيل الدخول',
                 onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    context.navigateToReplacement(Routes.clientBottomNavBar);
-                  }
+                  // if (formKey.currentState!.validate()) {
+                  //   context.navigateToReplacement(Routes.clientBottomNavBar);
+                  // }
+                  context.navigateToReplacement(Routes.clientBottomNavBar);
                 },
               ),
             ),

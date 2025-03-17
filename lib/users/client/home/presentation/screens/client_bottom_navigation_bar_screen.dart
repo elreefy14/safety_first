@@ -32,17 +32,17 @@ class _BottomNavigationBarScreenState
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         iconTheme: Theme.of(context).appBarTheme.iconTheme,
         actionsIconTheme: Theme.of(context).appBarTheme.actionsIconTheme,
-        elevation: 0.0,
-        centerTitle: true,
         title: Text(
           'SAFETY FIRST',
           style: Theme.of(context).appBarTheme.titleTextStyle,
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
-          child: screens[_currentIndex],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 16.w),
+            child: screens[_currentIndex],
+          ),
         ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
@@ -69,7 +69,7 @@ class _BottomNavigationBarScreenState
           ),
           CurvedNavigationBarItem(
             child: Icon(
-              Icons.explore_outlined,
+              Icons.bookmark_border_rounded,
               size: 30,
               color:
                   Theme.of(

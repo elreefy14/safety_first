@@ -40,11 +40,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
             color: Theme.of(context).iconTheme.color,
           ),
           validator: (value) {
-            if (AppRegex.isPasswordValid(value!) == false) {
-              return 'بالرجاء اتباع التعليمات المذكورة في الاسفل';
-            } else {
-              return null;
-            }
+            AppRegex.isPasswordValid(value!);
           },
           isObscureText: isObscureText,
           suffixIcon: IconButton(

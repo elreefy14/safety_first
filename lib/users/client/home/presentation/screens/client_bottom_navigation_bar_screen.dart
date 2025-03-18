@@ -28,19 +28,22 @@ class _BottomNavigationBarScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [Image.asset('assets/icons/app_icon.png')],
+        actions: [Padding(
+          padding:  EdgeInsets.only(left: 16.w),
+          child: Image.asset('assets/icons/app_icon.png'),
+        )],
         title: Text('SAFETY FIRST'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 30.h),
+            padding: EdgeInsets.symmetric(vertical: 16.h),
             child: screens[_currentIndex],
           ),
         ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
-        height: 74.h,
+        // height: 74.h,
         animationDuration: const Duration(milliseconds: 900),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         buttonBackgroundColor:

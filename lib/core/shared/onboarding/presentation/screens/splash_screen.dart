@@ -1,25 +1,55 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:safety_frist/core/shared/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          context.go('/onboardingScreen');
+        }
+      });
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AnimatedSplashScreen(
-      backgroundColor: const Color(0xff040B32),
-      splash: Image.asset('assets/icons/logo_vertical.png'),
-      splashIconSize: 200,
-      pageTransitionType: PageTransitionType.topToBottom,
-      animationDuration: const Duration(milliseconds: 800),
-      nextScreen: const OnboardingScreen(),
+    return Scaffold(
+      backgroundColor: Color(0xFF010930),
+      body: Center(
+        child: FadeTransition(
+          opacity: _animation,
+          child: Image.asset('assets/icons/logo_vertical.png'),
+        ),
+      ),
     );
   }
 }

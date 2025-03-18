@@ -12,6 +12,7 @@ class AppTextButton extends StatelessWidget {
     this.borderRadius,
     this.verticalPadding,
     this.horizontalPadding,
+    this.isLoading,
   });
 
   final String textButton;
@@ -23,6 +24,7 @@ class AppTextButton extends StatelessWidget {
   final double? borderRadius;
   final double? verticalPadding;
   final double? horizontalPadding;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +43,17 @@ class AppTextButton extends StatelessWidget {
           Theme.of(context).scaffoldBackgroundColor,
         ),
       ),
-      child: Text(
-        textButton,
-        style:
-            textStyle ??
-            Theme.of(
-              context,
-            ).textTheme.bodyMedium!.copyWith(color: Colors.white),
-      ),
+      child:
+          isLoading == true
+              ? CircularProgressIndicator()
+              : Text(
+                textButton,
+                style:
+                    textStyle ??
+                    Theme.of(
+                      context,
+                    ).textTheme.bodyMedium!.copyWith(color: Colors.white),
+              ),
     );
   }
 }

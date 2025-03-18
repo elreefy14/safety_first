@@ -4,7 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/widgets/forgot%20password/change_password_form_widget.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
-  const ChangePasswordScreen({super.key});
+  const ChangePasswordScreen({super.key, this.token, this.email});
+
+  final String? token;
+  final String? email;
 
   @override
   State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();

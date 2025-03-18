@@ -27,20 +27,14 @@ class _BottomNavigationBarScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        iconTheme: Theme.of(context).appBarTheme.iconTheme,
-        actionsIconTheme: Theme.of(context).appBarTheme.actionsIconTheme,
-        title: Text(
-          'SAFETY FIRST',
-          style: Theme.of(context).appBarTheme.titleTextStyle,
-        ),
+        actions: [Image.asset('assets/icons/app_icon.png')],
+        title: Text('SAFETY FIRST'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 16.w),
+            padding: EdgeInsets.symmetric(vertical: 30.h),
             child: screens[_currentIndex],
           ),
         ),
@@ -82,7 +76,7 @@ class _BottomNavigationBarScreenState
           ),
           CurvedNavigationBarItem(
             child: Icon(
-              Icons.access_time,
+              Icons.person_2_outlined,
               size: 30,
               color:
                   Theme.of(

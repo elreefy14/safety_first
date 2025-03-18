@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safety_frist/core/helper/utils/extentions.dart';
+import 'package:go_router/go_router.dart';
 import 'package:safety_frist/core/routes/routes.dart';
 
 class ClientHaveAnAccount extends StatelessWidget {
@@ -9,7 +9,7 @@ class ClientHaveAnAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.navigateToReplacement(Routes.userTypeScreen);
+        context.pushReplacement(Routes.userTypeScreen);
       },
       child: Text(
         'لدي حساب بالفعل',

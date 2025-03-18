@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safety_frist/core/helper/utils/extentions.dart';
+import 'package:go_router/go_router.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/widgets/forgot%20password/forgot_password_message_widget.dart';
@@ -32,10 +32,7 @@ class LoginFormWidget extends StatelessWidget {
               child: AppTextButton(
                 textButton: 'تسجيل الدخول',
                 onPressed: () {
-                  // if (formKey.currentState!.validate()) {
-                  //   context.navigateToReplacement(Routes.clientBottomNavBar);
-                  // }
-                  context.navigateToReplacement(Routes.clientBottomNavBar);
+                  context.pushReplacement(Routes.clientBottomNavBar);
                 },
               ),
             ),

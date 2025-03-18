@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:safety_frist/core/helper/functions/build_animation.dart';
-import 'package:safety_frist/core/helper/utils/extentions.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/widgets/app_text_button.dart';
@@ -80,9 +80,7 @@ class _BuildItemOnBoardingState extends State<BuildItemOnBoarding> {
                               backgroundColor:
                                   Theme.of(context).scaffoldBackgroundColor,
                               onPressed: () {
-                                context.navigateToReplacement(
-                                  Routes.userTypeScreen,
-                                );
+                                context.pushReplacement(Routes.userTypeScreen);
                               },
                             ),
                           )
@@ -119,7 +117,7 @@ class _BuildItemOnBoardingState extends State<BuildItemOnBoarding> {
         );
       });
     } else {
-      context.navigateToReplacement(Routes.userTypeScreen);
+      context.pushReplacement(Routes.userTypeScreen);
     }
   }
 }

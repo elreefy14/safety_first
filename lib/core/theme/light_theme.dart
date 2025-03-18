@@ -20,7 +20,7 @@ ThemeData lightTheme = ThemeData(
     titleTextStyle: TextStyle(
       color: Colors.white,
       fontSize: 24.sp,
-      fontFamily: 'Lato',
+      fontFamily: 'Lobster',
       fontWeight: FontWeight.w700,
       height: 0,
     ),

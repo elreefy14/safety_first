@@ -76,7 +76,7 @@ class TaskDetailsScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 filled: true,
-                fillColor: Colors.grey[200], // لون خلفية مشابه لتكست فيلد
+                fillColor: Colors.grey[200],
               ),
               style: TextStyle(fontSize: 18, color: Colors.black87),
             ),

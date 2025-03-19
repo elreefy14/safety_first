@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:safety_frist/users/client/profile/presentation/widgets/card_setting_item_widget.dart';
-import 'package:safety_frist/users/client/profile/presentation/widgets/notification_playing_widget.dart';
+import 'package:go_router/go_router.dart';
+import 'package:safety_frist/core/routes/routes.dart';
+import 'package:safety_frist/core/shared/profile/presentation/widgets/card_setting_item_widget.dart';
+import 'package:safety_frist/core/shared/profile/presentation/widgets/notification_playing_widget.dart';
 
-class ClientProfileScreen extends StatelessWidget {
-  const ClientProfileScreen({super.key});
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CardSettingItemWidget(
-          title: 'تعديل الملف الشخصي',
+          title: 'الملف الشخصي',
           image: 'assets/icons/user-pen.svg',
-          onTap: () {},
-        ),
-        Divider(color: Colors.grey),
-        CardSettingItemWidget(
-          title: 'تغيير الباسورد',
-          image: 'assets/icons/password-lock.svg',
-          onTap: () {},
+          onTap: () {
+            context.push(Routes.profileScreen);
+          },
         ),
         Divider(color: Colors.grey),
         const NotificationPlayingWidget(),

@@ -16,7 +16,7 @@ class AppTextFormField extends StatelessWidget {
   final Color? backGroundColorHint;
   final TextInputType? textInputType;
   final TextEditingController? controller;
-  final Function(String?) validator;
+  final Function(String?)? validator;
   final Function(String? value)? onChanged;
 
   const AppTextFormField({
@@ -33,7 +33,7 @@ class AppTextFormField extends StatelessWidget {
     this.backGroundColorHint,
     this.textInputType,
     this.controller,
-    required this.validator,
+    this.validator,
     this.onChanged,
     this.maxLines,
     this.enabled,
@@ -43,11 +43,11 @@ class AppTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: enabled ?? true,
       maxLines: maxLines ?? 1,
       style: inputTextStyle ?? Theme.of(context).textTheme.titleSmall,
       controller: controller,
       keyboardType: textInputType ?? TextInputType.text,
-      enabled: enabled ?? true,
       onChanged: onChanged,
       decoration: InputDecoration(
         isDense: true,
@@ -67,7 +67,7 @@ class AppTextFormField extends StatelessWidget {
       ),
       obscureText: isObscureText ?? false,
       validator: (value) {
-        return validator(value);
+        return validator!(value);
       },
     );
   }

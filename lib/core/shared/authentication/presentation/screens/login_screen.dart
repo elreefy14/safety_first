@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Image.asset('assets/icons/logo_vertical_edit.png'),
                 LoginWelcomeMessage(userType: userType),
-                LoginFormWidget(),
+                LoginFormWidget(userType: userType),
                 userType == UserType.client
                     ? ClientDontHaveAnAccount()
                     : SizedBox.shrink(),

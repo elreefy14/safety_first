@@ -5,7 +5,6 @@ import 'package:safety_frist/core/cache/shared_pref_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await CacheHelper.init();
   await ScreenUtil.ensureScreenSize();
   runApp(SafetyFirstApp());

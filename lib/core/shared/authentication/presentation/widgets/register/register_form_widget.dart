@@ -22,7 +22,13 @@ class RegisterFormWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            NamePasswordTextForm(),
+            Row(
+              children: [
+                Expanded(child: NameTextFormField(name: 'الإسم الأول')),
+                horizontalSpace(12),
+                Expanded(child: NameTextFormField(name: 'الإسم الأخير')),
+              ],
+            ),
             verticalSpace(8),
             EmailTextFormField(),
             verticalSpace(8),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safety_frist/users/client/bookings/presentation/screens/client_bookings_screen.dart';
 import 'package:safety_frist/users/client/home/presentation/screens/client_home_screen.dart';
-import 'package:safety_frist/users/client/profile/presentation/screens/client_profile_screen.dart';
+import 'package:safety_frist/core/shared/profile/presentation/screens/settings_screen.dart';
 
 class ClientBottomNavigationBarScreen extends StatefulWidget {
   const ClientBottomNavigationBarScreen({super.key});
@@ -18,8 +18,8 @@ class _BottomNavigationBarScreenState
     extends State<ClientBottomNavigationBarScreen> {
   final List<Widget> screens = [
     const ClientHomeScreen(),
-     ClientBookingsScreen(),
-    const ClientProfileScreen(),
+    ClientBookingsScreen(),
+    const SettingsScreen(),
   ];
 
   int _currentIndex = 0;
@@ -28,10 +28,12 @@ class _BottomNavigationBarScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [Padding(
-          padding:  EdgeInsets.only(left: 16.w),
-          child: Image.asset('assets/icons/app_icon.png'),
-        )],
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(left: 16.w),
+            child: Image.asset('assets/icons/app_icon.png'),
+          ),
+        ],
         title: Text('SAFETY FIRST'),
       ),
       body: SafeArea(
@@ -79,14 +81,14 @@ class _BottomNavigationBarScreenState
           ),
           CurvedNavigationBarItem(
             child: Icon(
-              Icons.person_2_outlined,
+              Icons.settings,
               size: 30,
               color:
                   Theme.of(
                     context,
                   ).bottomNavigationBarTheme.selectedIconTheme?.color,
             ),
-            label: 'الملف الشـخـصـي',
+            label: 'الإعدادات',
             labelStyle:
                 Theme.of(context).bottomNavigationBarTheme.selectedLabelStyle,
           ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TaskDetailsScreen extends StatelessWidget {
+class AssignProblemToTechnichianScreen extends StatelessWidget {
   final String title;
   final String description;
   final String imagePath;
 
-  const TaskDetailsScreen({
+  const AssignProblemToTechnichianScreen({
     super.key,
     required this.title,
     required this.description,

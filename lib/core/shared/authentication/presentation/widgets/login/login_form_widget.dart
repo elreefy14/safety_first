@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/routes/routes.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/user_type_model.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/widgets/forgot%20password/forgot_password_message_widget.dart';
 import 'package:safety_frist/core/widgets/app_text_button.dart';
 import 'package:safety_frist/core/widgets/email_text_form_field.dart';
 import 'package:safety_frist/core/widgets/password_text_form_field.dart';
 
 class LoginFormWidget extends StatelessWidget {
-  const LoginFormWidget({super.key});
+  const LoginFormWidget({super.key, required this.userType});
+
+  final UserType userType;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,11 @@ class LoginFormWidget extends StatelessWidget {
               child: AppTextButton(
                 textButton: 'تسجيل الدخول',
                 onPressed: () {
-                  context.pushReplacement(Routes.clientBottomNavBar);
+                  if (userType == UserType.client) {
+                    context.pushReplacement(Routes.clientBottomNavBar);
+                  } else if (userType == UserType.admin) {
+                    context.pushReplacement(Routes.adminBottomNavBar);
+                  }
                 },
               ),
             ),

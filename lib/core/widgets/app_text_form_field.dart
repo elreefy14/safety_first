@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class AppTextFormField extends StatelessWidget {
   final String? hintText;
   final String? labelText;
@@ -18,6 +19,7 @@ class AppTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final Function(String?)? validator;
   final Function(String? value)? onChanged;
+  final FocusNode? focusNode;
 
   const AppTextFormField({
     super.key,
@@ -38,22 +40,26 @@ class AppTextFormField extends StatelessWidget {
     this.maxLines,
     this.enabled,
     this.labelText,
+    this.focusNode,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      readOnly: enabled ?? true,
-      maxLines: maxLines ?? 1,
-      style: inputTextStyle ?? Theme.of(context).textTheme.titleSmall,
       controller: controller,
+      focusNode: focusNode,
       keyboardType: textInputType ?? TextInputType.text,
+      maxLines: maxLines ?? 1,
+      obscureText: isObscureText ?? false,
+      readOnly: !(enabled ?? true),
+      autofocus: false,
+      style: inputTextStyle ?? Theme.of(context).textTheme.titleSmall,
       onChanged: onChanged,
       decoration: InputDecoration(
         isDense: true,
-        contentPadding: Theme.of(context).inputDecorationTheme.contentPadding,
-        focusedBorder: Theme.of(context).inputDecorationTheme.focusedBorder,
-        enabledBorder: Theme.of(context).inputDecorationTheme.enabledBorder,
+        contentPadding: contentPadding ?? Theme.of(context).inputDecorationTheme.contentPadding,
+        focusedBorder: focusedBorder ?? Theme.of(context).inputDecorationTheme.focusedBorder,
+        enabledBorder: enabledBorder ?? Theme.of(context).inputDecorationTheme.enabledBorder,
         errorBorder: Theme.of(context).inputDecorationTheme.errorBorder,
         focusedErrorBorder: Theme.of(context).inputDecorationTheme.errorBorder,
         hintText: hintText,
@@ -65,10 +71,8 @@ class AppTextFormField extends StatelessWidget {
         suffixIconColor: Theme.of(context).iconTheme.color!,
         prefixIconColor: Theme.of(context).iconTheme.color!,
       ),
-      obscureText: isObscureText ?? false,
-      validator: (value) {
-        return validator!(value);
-      },
+      validator: validator != null ? (value) => validator!(value) : null,
     );
   }
 }
+

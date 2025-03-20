@@ -10,31 +10,37 @@ class NameTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController nameController = TextEditingController();
+    FocusNode focusNode = FocusNode(); // إنشاء focus node للتحكم في الكيبورد
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           '  $name',
-          style: Theme.of(
-            context,
-          ).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
         ),
-        AppTextFormField(
-          textInputType: TextInputType.name,
-          hintText: 'الإسم',
-          controller: nameController,
-          prefixIcon: Icon(
-            Icons.factory_outlined,
-            color: Theme.of(context).iconTheme.color,
-          ),
-          validator: (value) {
-            if (AppRegex.isNameValid(value!) == false) {
-              return 'بالرجاء إدخال اسماَ صالحاً';
-            } else {
-              return null;
-            }
+        GestureDetector(
+          onTap: () {
+            focusNode.requestFocus(); // إجبار الكيبورد على الفتح عند الضغط
           },
+          child: AppTextFormField(
+            textInputType: TextInputType.name,
+            hintText: 'الإسم',
+            controller: nameController,
+            focusNode: focusNode, // تمرير focusNode لضمان التحكم
+            enabled: true, // السماح بالكتابة
+            prefixIcon: Icon(
+              Icons.person_outline,
+              color: Theme.of(context).iconTheme.color,
+            ),
+            validator: (value) {
+              if (AppRegex.isNameValid(value!) == false) {
+                return 'بالرجاء إدخال اسماً صالحاً';
+              } else {
+                return null;
+              }
+            },
+          ),
         ),
       ],
     );

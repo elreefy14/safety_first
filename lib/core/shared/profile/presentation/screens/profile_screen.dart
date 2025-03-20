@@ -14,33 +14,35 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('الملف الشخصي'), leading: AppbarIcon()),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 16.w),
-          child: AutofillGroup(
-            child: Form(
-              child: Column(
-                children: [
-                  ProfileImageWidget(),
-                  verticalSpace(20),
-                  Row(
-                    children: [
-                      Expanded(child: NameTextFormField(name: 'الإسم الأول')),
-                      horizontalSpace(12),
-                      Expanded(child: NameTextFormField(name: 'الإسم الأخير')),
-                    ],
-                  ),
-                  verticalSpace(20),
-                  ProfileEmailAndPasswordWidget(),
-                  verticalSpace(50),
-                  SizedBox(
-                    width: double.infinity,
-                    child: AppTextButton(
-                      textButton: 'تحديث الملف الشخصي',
-                      onPressed: () {},
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 16.w),
+            child: AutofillGroup(
+              child: Form(
+                child: Column(
+                  children: [
+                    ProfileImageWidget(),
+                    verticalSpace(20),
+                    Row(
+                      children: [
+                        Expanded(child: NameTextFormField(name: 'الإسم الأول')),
+                        horizontalSpace(12),
+                        Expanded(child: NameTextFormField(name: 'الإسم الأخير')),
+                      ],
                     ),
-                  ),
-                ],
+                    verticalSpace(20),
+                    ProfileEmailAndPasswordWidget(),
+                    verticalSpace(50),
+                    SizedBox(
+                      width: double.infinity,
+                      child: AppTextButton(
+                        textButton: 'تحديث الملف الشخصي',
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

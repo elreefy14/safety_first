@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
-import 'package:safety_frist/core/widgets/app_text_form_field.dart';
 
 class ProfileEmailAndPasswordWidget extends StatelessWidget {
   const ProfileEmailAndPasswordWidget({super.key});
@@ -11,20 +10,40 @@ class ProfileEmailAndPasswordWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '  البريد الإلكتروني',
-          style: Theme.of(
-            context,
-          ).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
+          'البريد الإلكتروني',
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
         ),
-        AppTextFormField(enabled: false, hintText: 'user42@gmail.com'),
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+          margin: EdgeInsets.only(top: 5),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            'user42@gmail.com',
+            style: TextStyle(fontSize: 16, color: Colors.black),
+          ),
+        ),
         verticalSpace(20),
         Text(
-          '  كلمة المرور',
-          style: Theme.of(
-            context,
-          ).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
+          'كلمة المرور',
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
         ),
-        AppTextFormField(enabled: false, hintText: '*********'),
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+          margin: EdgeInsets.only(top: 5),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            '*********',
+            style: TextStyle(fontSize: 16, color: Colors.black),
+          ),
+        ),
       ],
     );
   }

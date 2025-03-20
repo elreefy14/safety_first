@@ -12,10 +12,3 @@ RefreshTokenResponse _$RefreshTokenResponseFromJson(
   accessToken: json['accessToken'] as String,
   refreshToken: json['refreshToken'] as String,
 );
-
-Map<String, dynamic> _$RefreshTokenResponseToJson(
-  RefreshTokenResponse instance,
-) => <String, dynamic>{
-  'accessToken': instance.accessToken,
-  'refreshToken': instance.refreshToken,
-};

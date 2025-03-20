@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_element_parameter
-
 part of 'auth_service.dart';
 
 // **************************************************************************
@@ -12,7 +10,7 @@ part of 'auth_service.dart';
 
 class _AuthServices implements AuthServices {
   _AuthServices(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://vcare.mentorea.com/api/';
+    baseUrl ??= 'https://safety.runasp.net/api/';
   }
 
   final Dio _dio;

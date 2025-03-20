@@ -14,7 +14,7 @@ final class RegisterErrorState extends RegisterState {
 }
 
 final class RegisterSuccessState extends RegisterState {
-  final LoginResponseModel loginResponseModel;
+  final AuthResponseModel authResponseModel;
 
-  RegisterSuccessState({required this.loginResponseModel});
+  RegisterSuccessState({required this.authResponseModel});
 }

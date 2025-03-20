@@ -3,12 +3,12 @@ import 'package:safety_frist/core/helper/functions/app_regex.dart';
 import 'package:safety_frist/core/widgets/app_text_form_field.dart';
 
 class EmailTextFormField extends StatelessWidget {
-  const EmailTextFormField({super.key});
+  const EmailTextFormField({super.key, required this.emailController});
+
+  final TextEditingController emailController;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -15,7 +15,7 @@ class ForgotPasswordFormWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            EmailTextFormField(),
+            EmailTextFormField(emailController: TextEditingController()),
             verticalSpace(32),
             SizedBox(
               width: double.infinity,

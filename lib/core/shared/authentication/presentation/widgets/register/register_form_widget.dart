@@ -30,7 +30,7 @@ class RegisterFormWidget extends StatelessWidget {
               ],
             ),
             verticalSpace(8),
-            EmailTextFormField(),
+            EmailTextFormField(emailController: passwordController),
             verticalSpace(8),
             PasswordFormField(passwordController: passwordController),
             verticalSpace(8),

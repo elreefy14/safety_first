@@ -1,16 +1,28 @@
 import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/refresh_token_request.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/refresh_token_response.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/auth/auth_response_model.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/auth/refresh_token_request.dart';
 import 'package:safety_frist/core/shared/authentication/data/services/auth_service.dart';
 
 class ApiClient {
   static final ApiClient _instance = ApiClient._internal();
-  final Dio _dio = Dio();
+  static final Dio _dio = Dio();
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
   factory ApiClient() {
     return _instance;
+  }
+
+  static Dio getDio() {
+    Duration timeOut = const Duration(seconds: 60);
+    _dio
+      ..options.connectTimeout = timeOut
+      ..options.receiveTimeout = timeOut;
+
+    addDioInterceptor();
+    ApiClient._internal();
+    return _dio;
   }
 
   ApiClient._internal() {
@@ -57,7 +69,7 @@ class ApiClient {
     );
   }
 
-  Future<RefreshTokenResponse> _refreshToken(String refreshToken) async {
+  Future<AuthResponseModel> _refreshToken(String refreshToken) async {
     final response = await apiService.refreshToken(
       RefreshTokenRequest(refreshToken: refreshToken),
     );
@@ -65,4 +77,14 @@ class ApiClient {
   }
 
   AuthServices get apiService => AuthServices(_dio);
+
+  static void addDioInterceptor() {
+    _dio.interceptors.add(
+      PrettyDioLogger(
+        requestBody: true,
+        requestHeader: true,
+        responseHeader: true,
+      ),
+    );
+  }
 }

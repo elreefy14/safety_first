@@ -12,7 +12,7 @@ part of 'auth_service.dart';
 
 class _AuthServices implements AuthServices {
   _AuthServices(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://safety.runasp.net/api/';
+    baseUrl ??= 'https://safety.runasp.net/api';
   }
 
   final Dio _dio;
@@ -22,7 +22,7 @@ class _AuthServices implements AuthServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<LoginResponseModel> loginWithEmailPassword(
+  Future<AuthResponseModel> loginWithEmailPassword(
     LoginRequestBody loginRequestBody,
   ) async {
     final _extra = <String, dynamic>{};
@@ -30,20 +30,20 @@ class _AuthServices implements AuthServices {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(loginRequestBody.toJson());
-    final _options = _setStreamType<LoginResponseModel>(
+    final _options = _setStreamType<AuthResponseModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'Auth/login',
+            '/Authentication/Login',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late LoginResponseModel _value;
+    late AuthResponseModel _value;
     try {
-      _value = LoginResponseModel.fromJson(_result.data!);
+      _value = AuthResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -52,7 +52,7 @@ class _AuthServices implements AuthServices {
   }
 
   @override
-  Future<LoginResponseModel> registerWithEmailPassword(
+  Future<AuthResponseModel> registerWithEmailPassword(
     ClientRegisterRequestBody clientRegisterRequestBody,
   ) async {
     final _extra = <String, dynamic>{};
@@ -60,20 +60,20 @@ class _AuthServices implements AuthServices {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(clientRegisterRequestBody.toJson());
-    final _options = _setStreamType<LoginResponseModel>(
+    final _options = _setStreamType<AuthResponseModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'Auth/clientRegister',
+            '/Authentication/Register',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late LoginResponseModel _value;
+    late AuthResponseModel _value;
     try {
-      _value = LoginResponseModel.fromJson(_result.data!);
+      _value = AuthResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -82,26 +82,28 @@ class _AuthServices implements AuthServices {
   }
 
   @override
-  Future<RefreshTokenResponse> refreshToken(RefreshTokenRequest request) async {
+  Future<AuthResponseModel> refreshToken(
+    RefreshTokenRequest refreshTokenRequest,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
-    final _options = _setStreamType<RefreshTokenResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+    _data.addAll(refreshTokenRequest.toJson());
+    final _options = _setStreamType<AuthResponseModel>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'Auth/Refresh',
+            '/Authentication/Refresh-Token',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late RefreshTokenResponse _value;
+    late AuthResponseModel _value;
     try {
-      _value = RefreshTokenResponse.fromJson(_result.data!);
+      _value = AuthResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -9,7 +9,8 @@ part of 'client_register_request_body.dart';
 Map<String, dynamic> _$ClientRegisterRequestBodyToJson(
   ClientRegisterRequestBody instance,
 ) => <String, dynamic>{
-  'name': instance.name,
-  'email': instance.email,
-  'password': instance.password,
+  'FirstName': instance.firstName,
+  'LastName': instance.lastName,
+  'Email': instance.email,
+  'Password': instance.password,
 };

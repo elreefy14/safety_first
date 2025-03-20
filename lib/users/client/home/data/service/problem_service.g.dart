@@ -12,7 +12,7 @@ part of 'problem_service.dart';
 
 class _ProblemService implements ProblemService {
   _ProblemService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://safety.runasp.net/api/';
+    baseUrl ??= 'https://safety.runasp.net/api';
   }
 
   final Dio _dio;
@@ -32,7 +32,7 @@ class _ProblemService implements ProblemService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'Problem',
+            '/Problem',
             queryParameters: queryParameters,
             data: _data,
           )

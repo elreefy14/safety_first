@@ -1,8 +1,8 @@
 import 'package:safety_frist/core/networking/api_error_model.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/client_register_request_body.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/login_request_body.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/login_response_model.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/auth/auth_response_model.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/auth/client_register_request_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/auth/login_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/services/auth_service.dart';
 
 class AuthRepository {
@@ -10,7 +10,7 @@ class AuthRepository {
 
   AuthRepository(this._authServices);
 
-  Future<ApiResult<LoginResponseModel>> loginWithEmailPassword(
+  Future<ApiResult<AuthResponseModel>> loginWithEmailPassword(
     LoginRequestBody loginRequestBody,
   ) async {
     try {
@@ -24,7 +24,7 @@ class AuthRepository {
     }
   }
 
-  Future<ApiResult<LoginResponseModel>> registerWithEmailPassword(
+  Future<ApiResult<AuthResponseModel>> registerWithEmailPassword(
     ClientRegisterRequestBody registerRequestBody,
   ) async {
     try {

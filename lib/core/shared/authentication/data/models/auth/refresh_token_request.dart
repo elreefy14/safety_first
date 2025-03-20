@@ -4,9 +4,9 @@ part 'refresh_token_request.g.dart';
 
 @JsonSerializable()
 class RefreshTokenRequest {
-  final String refreshToken;
-
   RefreshTokenRequest({required this.refreshToken});
+
+  final String? refreshToken;
 
   Map<String, dynamic> toJson() => _$RefreshTokenRequestToJson(this);
 }

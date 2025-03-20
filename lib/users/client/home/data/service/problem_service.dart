@@ -9,6 +9,6 @@ part 'problem_service.g.dart';
 abstract class ProblemService {
   factory ProblemService(Dio dio, {String baseUrl}) = _ProblemService;
 
-  @POST(ApiConstants.problem)
+  @POST(ApiConstants.addProblem)
   Future<ProblemModel> createProblem(@Body() ProblemModel problemModel);
 }

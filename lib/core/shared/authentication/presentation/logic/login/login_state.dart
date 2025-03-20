@@ -14,7 +14,7 @@ final class LoginErrorState extends LoginState {
 }
 
 final class LoginSuccessState extends LoginState {
-  final LoginResponseModel loginResponseModel;
+  final AuthResponseModel authResponseModel;
 
-  LoginSuccessState({required this.loginResponseModel});
+  LoginSuccessState({required this.authResponseModel});
 }

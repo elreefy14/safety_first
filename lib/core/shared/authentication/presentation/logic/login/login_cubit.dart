@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/login_request_body.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/login_response_model.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/auth/auth_response_model.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/auth/login_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/repository/auth_repository.dart';
 
 part 'login_state.dart';
@@ -17,11 +17,11 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
 
-  late LoginResponseModel? userModel;
+  late AuthResponseModel? userModel;
 
   void emitLoginStates() async {
     emit(LoginLoadingState());
-    ApiResult<LoginResponseModel> response = await _authRepository
+    ApiResult<AuthResponseModel> response = await _authRepository
         .loginWithEmailPassword(
           LoginRequestBody(
             email: emailController.text,
@@ -29,11 +29,11 @@ class LoginCubit extends Cubit<LoginState> {
           ),
         );
 
-    if (response is Success<LoginResponseModel>) {
+    if (response is Success<AuthResponseModel>) {
       userModel = response.data;
 
-      emit(LoginSuccessState(loginResponseModel: userModel!));
-    } else if (response is Failure<LoginResponseModel>) {
+      emit(LoginSuccessState(authResponseModel: userModel!));
+    } else if (response is Failure<AuthResponseModel>) {
       emit(LoginErrorState(message: response.error.message));
     }
   }

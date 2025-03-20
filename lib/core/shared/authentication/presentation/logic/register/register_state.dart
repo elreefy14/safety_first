@@ -8,9 +8,9 @@ final class RegisterInitialState extends RegisterState {}
 final class RegisterLoadingState extends RegisterState {}
 
 final class RegisterErrorState extends RegisterState {
-  final String message;
+  final String? message;
 
-  RegisterErrorState({required this.message});
+  RegisterErrorState(this.message);
 }
 
 final class RegisterSuccessState extends RegisterState {

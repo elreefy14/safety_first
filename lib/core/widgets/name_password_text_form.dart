@@ -3,32 +3,38 @@ import 'package:safety_frist/core/helper/functions/app_regex.dart';
 import 'package:safety_frist/core/widgets/app_text_form_field.dart';
 
 class NameTextFormField extends StatelessWidget {
-  const NameTextFormField({super.key, required this.name});
+  const NameTextFormField({
+    super.key,
+    required this.name,
+    required this.nameController,
+  });
 
   final String name;
+  final TextEditingController nameController;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameController = TextEditingController();
-    FocusNode focusNode = FocusNode(); // إنشاء focus node للتحكم في الكيبورد
+    FocusNode focusNode = FocusNode();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           '  $name',
-          style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
+          style: Theme.of(
+            context,
+          ).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
         ),
         GestureDetector(
           onTap: () {
-            focusNode.requestFocus(); // إجبار الكيبورد على الفتح عند الضغط
+            focusNode.requestFocus();
           },
           child: AppTextFormField(
             textInputType: TextInputType.name,
             hintText: 'الإسم',
             controller: nameController,
-            focusNode: focusNode, // تمرير focusNode لضمان التحكم
-            enabled: true, // السماح بالكتابة
+            focusNode: focusNode,
+            enabled: true,
             prefixIcon: Icon(
               Icons.person_outline,
               color: Theme.of(context).iconTheme.color,

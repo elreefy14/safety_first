@@ -1,4 +1,4 @@
-import 'package:safety_frist/core/networking/api_error_model.dart';
+import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/auth/auth_response_model.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/auth/client_register_request_body.dart';
@@ -20,7 +20,7 @@ class AuthRepository {
 
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorModel(message: error.toString()));
+      return ApiResult.failure(ApiErrorHandler());
     }
   }
 
@@ -33,7 +33,7 @@ class AuthRepository {
       );
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorModel(message: error.toString()));
+      return ApiResult.failure(ApiErrorHandler());
     }
   }
 }

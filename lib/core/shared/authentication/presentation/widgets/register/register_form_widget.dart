@@ -1,6 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/logic/register/register_cubit.dart';
 import 'package:safety_frist/core/widgets/email_text_form_field.dart';
 import 'package:safety_frist/core/widgets/name_password_text_form.dart';
 import 'package:safety_frist/core/widgets/password_text_form_field.dart';
@@ -13,47 +13,67 @@ class RegisterFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> formKey = GlobalKey();
-    TextEditingController passwordController = TextEditingController();
-
     return AutofillGroup(
       child: Form(
-        key: formKey,
+        key: RegisterCubit.get(context).formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Expanded(child: NameTextFormField(name: 'الإسم الأول')),
+                Expanded(
+                  child: NameTextFormField(
+                    name: 'الإسم الأول',
+                    nameController:
+                        RegisterCubit.get(context).firstNameController,
+                  ),
+                ),
                 horizontalSpace(12),
-                Expanded(child: NameTextFormField(name: 'الإسم الأخير')),
+                Expanded(
+                  child: NameTextFormField(
+                    name: 'الإسم الأخير',
+                    nameController:
+                        RegisterCubit.get(context).lastNameController,
+                  ),
+                ),
               ],
             ),
             verticalSpace(8),
-            EmailTextFormField(emailController: passwordController),
+            EmailTextFormField(
+              emailController: RegisterCubit.get(context).emailController,
+            ),
             verticalSpace(8),
-            PasswordFormField(passwordController: passwordController),
+            PasswordFormField(
+              passwordController: RegisterCubit.get(context).passwordController,
+            ),
             verticalSpace(8),
             PasswordValidatorInstructions(
-              passwordController: passwordController,
+              passwordController: RegisterCubit.get(context).passwordController,
             ),
             verticalSpace(30),
-            SizedBox(
-              width: double.infinity,
-              child: AppTextButton(
-                textButton: 'إنشاء حساب',
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    log('validate');
-                  } else {
-                    log('Invalid');
-                  }
-                },
-              ),
+            BlocBuilder<RegisterCubit, RegisterState>(
+              builder: (context, state) {
+                return SizedBox(
+                  width: double.infinity,
+                  child: AppTextButton(
+                    textButton: 'إنشاء حساب',
+                    isLoading: state is RegisterLoadingState ? true : false,
+                    onPressed: () {
+                      validateThenNavigate(context);
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),
       ),
     );
+  }
+
+  void validateThenNavigate(context) {
+    if (RegisterCubit.get(context).formKey.currentState!.validate()) {
+      RegisterCubit.get(context).emitRegisterStates();
+    }
   }
 }

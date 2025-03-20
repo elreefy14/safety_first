@@ -37,7 +37,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
       emit(RegisterSuccessState(authResponseModel: userModel!));
     } else if (response is Failure<AuthResponseModel>) {
-      emit(RegisterErrorState(message: response.error.message));
+      emit(RegisterErrorState(response.error.toString()));
     }
   }
 }

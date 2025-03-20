@@ -19,24 +19,26 @@ class ProblemCubit extends Cubit<ProblemState> {
 
   Future<void> pickImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
     if (pickedFile != null) {
       imagePath = pickedFile.path;
-      emit(ProblemImageSelected(imagePath!));
+      emit(ProblemImageSelected(service: imagePath!));
     }
   }
 
   Future<void> createProblem() async {
     if (imagePath == null) {
-      emit(ProblemFailure("يجب إضافة صورة"));
+      emit(ProblemFailure(error: "يجب إضافة صورة"));
       return;
     }
     if (descriptionController.text.isEmpty) {
-      emit(ProblemFailure("يجب إضافة وصف للمشكلة"));
+      emit(ProblemFailure(error: "يجب إضافة وصف للمشكلة"));
       return;
     }
     if (selectedService == null) {
-      emit(ProblemFailure("يجب اختيار نوع الخدمة"));
+      emit(ProblemFailure(error: "يجب اختيار نوع الخدمة"));
       return;
     }
 
@@ -47,12 +49,14 @@ class ProblemCubit extends Cubit<ProblemState> {
       type: selectedService!,
     );
 
-    ApiResult<ProblemModel> response = await _problemRepository.createProblem(problemModel);
+    ApiResult<ProblemModel> response = await _problemRepository.createProblem(
+      problemModel,
+    );
 
     if (response is Success<ProblemModel>) {
       emit(ProblemSuccess(response.data));
     } else if (response is Failure<ProblemModel>) {
-      emit(ProblemFailure(response.error.message));
+      emit(ProblemFailure(error: response.error.toString()));
     }
   }
 }

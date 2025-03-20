@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:safety_frist/core/di/dependency_injection.dart' show getIt;
+import 'package:safety_frist/core/helper/functions/show_toast.dart';
 import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/user_type_model.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/logic/login/login_cubit.dart';
@@ -25,8 +26,6 @@ class LoginBlocListener extends StatelessWidget {
         listener: (context, state) {
           switch (state) {
             case LoginSuccessState():
-              context.pop();
-              //  showToast(msg: 'تم تسجيل الدخول بنجاح', color: Colors.green);
               if (userType == UserType.client) {
                 context.pushReplacement(Routes.clientBottomNavBar);
               } else if (userType == UserType.admin) {
@@ -34,11 +33,11 @@ class LoginBlocListener extends StatelessWidget {
               } else {
                 context.pushReplacement(Routes.technichianBottomNavBar);
               }
-            case LoginErrorState():
-            // setupErrorState(
-            //   context,
-            //   error: 'الايميل او كلمة المرور غير صحيحة',
-            // );
+              showSnackBar(
+                context: context,
+                message: 'تم تسجيل الدخول بنجاح',
+                color: Colors.green,
+              );
 
             default:
           }

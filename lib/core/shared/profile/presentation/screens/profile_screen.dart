@@ -26,9 +26,19 @@ class ProfileScreen extends StatelessWidget {
                     verticalSpace(20),
                     Row(
                       children: [
-                        Expanded(child: NameTextFormField(name: 'الإسم الأول')),
+                        Expanded(
+                          child: NameTextFormField(
+                            name: 'الإسم الأول',
+                            nameController: TextEditingController(),
+                          ),
+                        ),
                         horizontalSpace(12),
-                        Expanded(child: NameTextFormField(name: 'الإسم الأخير')),
+                        Expanded(
+                          child: NameTextFormField(
+                            name: 'الإسم الأخير',
+                            nameController: TextEditingController(),
+                          ),
+                        ),
                       ],
                     ),
                     verticalSpace(20),

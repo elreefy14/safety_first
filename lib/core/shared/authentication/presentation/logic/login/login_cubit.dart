@@ -34,7 +34,7 @@ class LoginCubit extends Cubit<LoginState> {
 
       emit(LoginSuccessState(authResponseModel: userModel!));
     } else if (response is Failure<AuthResponseModel>) {
-      emit(LoginErrorState(message: response.error.message));
+      emit(LoginErrorState(message: response.error.toString()));
     }
   }
 }

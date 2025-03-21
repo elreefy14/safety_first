@@ -5,7 +5,8 @@ class Routes {
   static const String userTypeScreen = '/userTypeScreen';
   static const String loginScreen = '/loginScreen';
   static const String forgotPasswordScreen = '/forgotPasswordScreen';
-  static const String changePasswordScreen = '/changePasswordScreen';
+  static const String resetPasswordScreen = '/reset-password';
+  static const String verifyEmailScreen = '/verify-email';
   static const String profileScreen = '/profileScreen';
 
   // Client

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:safety_frist/core/routes/routes.dart';
-import 'package:safety_frist/core/shared/authentication/presentation/screens/change_password_screen.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/client_register_screen.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/screens/confirm_email_screen.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/forgot_password_screen.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/screens/reset_password_screen.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/user_type_screen.dart';
 import 'package:safety_frist/core/shared/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:safety_frist/core/shared/onboarding/presentation/screens/splash_screen.dart';
@@ -45,13 +46,21 @@ final GoRouter router = GoRouter(
       },
     ),
 
-    // Change Password Screen
+    // Reset Password Screen
     GoRoute(
-      path: '/reset-password',
+      path: Routes.resetPasswordScreen,
       builder: (BuildContext context, GoRouterState state) {
         final String? token = state.uri.queryParameters['token'];
         final String? email = state.uri.queryParameters['email'];
-        return ChangePasswordScreen(token: token, email: email);
+        return ResetPasswordScreen(token: token, email: email);
+      },
+    ),
+
+    // Verify Email Screen
+    GoRoute(
+      path: Routes.verifyEmailScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return ConfirmEmailScreen();
       },
     ),
 

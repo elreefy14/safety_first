@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/auth/auth_response_model.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/auth/login_request_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/forgot_password_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/repository/auth_repository.dart';
 
 part 'login_state.dart';
@@ -21,19 +22,31 @@ class LoginCubit extends Cubit<LoginState> {
 
   void emitLoginStates() async {
     emit(LoginLoadingState());
-    ApiResult<AuthResponseModel> response = await _authRepository
-        .loginWithEmailPassword(
-          LoginRequestBody(
-            email: emailController.text,
-            password: passwordController.text,
-          ),
-        );
+    final response = await _authRepository.loginWithEmailPassword(
+      LoginRequestBody(
+        email: emailController.text,
+        password: passwordController.text,
+      ),
+    );
 
     if (response is Success<AuthResponseModel>) {
       userModel = response.data;
 
       emit(LoginSuccessState(authResponseModel: userModel!));
     } else if (response is Failure<AuthResponseModel>) {
+      emit(LoginErrorState(message: response.error.toString()));
+    }
+  }
+
+  void emitForgotPasswordStates() async {
+    emit(LoginLoadingState());
+    final response = await _authRepository.forgotPassword(
+      ForgotPasswordRequestBody(email: emailController.text),
+    );
+
+    if (response is Success) {
+      emit(LoginSuccessState(authResponseModel: userModel!));
+    } else if (response is Failure) {
       emit(LoginErrorState(message: response.error.toString()));
     }
   }

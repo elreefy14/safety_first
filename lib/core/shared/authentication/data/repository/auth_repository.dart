@@ -3,6 +3,8 @@ import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/auth/auth_response_model.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/auth/client_register_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/auth/login_request_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/forgot_password_request_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/reset_password_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/services/auth_service.dart';
 
 class AuthRepository {
@@ -30,6 +32,39 @@ class AuthRepository {
     try {
       final result = await _authServices.registerWithEmailPassword(
         registerRequestBody,
+      );
+      return ApiResult.success(result);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler());
+    }
+  }
+
+  Future<ApiResult<void>> confirmEmail(String email, String token) async {
+    try {
+      final result = await _authServices.confirmEmail(email, token);
+      return ApiResult.success(result);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler());
+    }
+  }
+
+  Future<ApiResult<void>> forgotPassword(
+    ForgotPasswordRequestBody email,
+  ) async {
+    try {
+      final result = await _authServices.forgotPassword(email);
+      return ApiResult.success(result);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler());
+    }
+  }
+
+  Future<ApiResult<void>> resetPassword(
+    ResetPasswordRequestBody resetPasswordRequestBody,
+  ) async {
+    try {
+      final result = await _authServices.resetPassword(
+        resetPasswordRequestBody,
       );
       return ApiResult.success(result);
     } catch (error) {

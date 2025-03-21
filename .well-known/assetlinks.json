@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.example.safety_frist",
+      "sha256_cert_fingerprints": [
+        "5A:8F:6D:6F:EF:6E:7C:3B:DE:D3:E2:71:DD:AA:81:61:22:63:A7:22:1C:D1:28:F2:DA:59:A7:66:0F:B6:32:26"
+      ]
+    }
+  }
+]

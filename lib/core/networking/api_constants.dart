@@ -6,5 +6,7 @@ class ApiConstants {
   static const String clientRegister = '/Authentication/Register';
   static const String confirmEmail = '/Authentication/Confirm-Email';
   static const String refreshToken = '/Authentication/Refresh-Token';
+  static const String forgotPassword = '/Authentication/Forgot-Password';
+  static const String resetPassword = '/Authentication/Reset-Password';
   static const String addProblem = '/Problem';
 }

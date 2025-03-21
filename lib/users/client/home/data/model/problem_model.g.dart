@@ -8,7 +8,7 @@ part of 'problem_model.dart';
 
 ProblemModel _$ProblemModelFromJson(Map<String, dynamic> json) => ProblemModel(
   description: json['description'] as String,
-  type: json['type'] as int,
+  type: (json['type'] as num).toInt(),
 );
 
 Map<String, dynamic> _$ProblemModelToJson(ProblemModel instance) =>

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:safety_frist/core/networking/api_constants.dart';
-import '../model/problem_model.dart';
 
 part 'problem_service.g.dart';
 
@@ -11,8 +10,8 @@ abstract class ProblemService {
 
   @POST(ApiConstants.addProblem)
   @MultiPart()
-  Future<ProblemModel> createProblem(
-      @Header('Authorization') String userToken,
-      @Body() FormData formData,
-      );
+  Future<void> createProblem(
+    @Header('Authorization') String userToken,
+    @Body() FormData formData,
+  );
 }

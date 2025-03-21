@@ -1,24 +1,21 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:safety_frist/users/client/home/presentation/logic/problem_cubit.dart';
 
-class SelectTypeServiceDropdown extends StatelessWidget {
-  final String? selectedService;
-  final ValueChanged<String> onChanged;
+class SelectTypeServiceDropdown extends StatefulWidget {
+  const SelectTypeServiceDropdown({super.key});
 
-  const SelectTypeServiceDropdown({
-    super.key,
-    required this.selectedService,
-    required this.onChanged,
-  });
+  @override
+  State<SelectTypeServiceDropdown> createState() =>
+      _SelectTypeServiceDropdownState();
+}
+
+class _SelectTypeServiceDropdownState extends State<SelectTypeServiceDropdown> {
+  String? selectedService;
+  final List<String> services = ["🔥 إصلاح انظمة الحرائق", "🛠️ الإصلاح العام"];
 
   @override
   Widget build(BuildContext context) {
-    final List<String> services = [
-      "🔥 خدمة الحرائق",
-      "🛠️ الإصلاح العام",
-      "🏭 خدمات المصانع",
-    ];
-
     return DropdownButtonFormField2<String>(
       isExpanded: true,
       value: selectedService,
@@ -29,6 +26,7 @@ class SelectTypeServiceDropdown extends StatelessWidget {
           color: Colors.blueGrey,
         ),
       ),
+      alignment: AlignmentDirectional.topStart,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         hintText: "اختر الخدمة",
@@ -82,8 +80,10 @@ class SelectTypeServiceDropdown extends StatelessWidget {
             );
           }).toList(),
       onChanged: (value) {
-        if (value != null) {
-          onChanged(value);
+        if (value == services[0]) {
+          ProblemCubit.get(context).serviceType = 0;
+        } else if (value == services[1]) {
+          ProblemCubit.get(context).serviceType = 1;
         }
       },
       validator: (value) {

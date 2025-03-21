@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: unused_element_parameter
+
 part of 'problem_service.dart';
 
 // **************************************************************************
@@ -20,16 +22,13 @@ class _ProblemService implements ProblemService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ProblemModel> createProblem(
-    String userToken,
-    FormData formData,
-  ) async {
+  Future<void> createProblem(String userToken, FormData formData) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': userToken};
     _headers.removeWhere((k, v) => v == null);
     final _data = formData;
-    final _options = _setStreamType<ProblemModel>(
+    final _options = _setStreamType<void>(
       Options(
             method: 'POST',
             headers: _headers,
@@ -44,15 +43,7 @@ class _ProblemService implements ProblemService {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ProblemModel _value;
-    try {
-      _value = ProblemModel.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
+    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:safety_frist/users/admin/bookings/presentation/widgets/task_list_card.dart';
 

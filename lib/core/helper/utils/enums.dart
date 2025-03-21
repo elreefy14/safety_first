@@ -1,0 +1,1 @@
+enum ImageSource { gallery, camera }

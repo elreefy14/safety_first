@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_element_parameter
-
 part of 'problem_service.dart';
 
 // **************************************************************************
@@ -22,14 +20,22 @@ class _ProblemService implements ProblemService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ProblemModel> createProblem(ProblemModel problemModel) async {
+  Future<ProblemModel> createProblem(
+    String userToken,
+    FormData formData,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(problemModel.toJson());
+    final _headers = <String, dynamic>{r'Authorization': userToken};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = formData;
     final _options = _setStreamType<ProblemModel>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+      Options(
+            method: 'POST',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'multipart/form-data',
+          )
           .compose(
             _dio.options,
             '/Problem',

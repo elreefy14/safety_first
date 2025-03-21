@@ -10,5 +10,9 @@ abstract class ProblemService {
   factory ProblemService(Dio dio, {String baseUrl}) = _ProblemService;
 
   @POST(ApiConstants.addProblem)
-  Future<ProblemModel> createProblem(@Body() ProblemModel problemModel);
+  @MultiPart()
+  Future<ProblemModel> createProblem(
+      @Header('Authorization') String userToken,
+      @Body() FormData formData,
+      );
 }

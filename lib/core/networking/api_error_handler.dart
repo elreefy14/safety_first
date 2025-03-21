@@ -6,7 +6,10 @@ class ApiErrorHandler {
     if (error is DioException) {
       return _handleDioError(error);
     } else {
-      return ApiErrorModel(statusCode: 500, message: 'حدث خطأ غير معروف');
+      return ApiErrorModel(
+        statusCode: 500,
+        message: 'An unexpected error occurred.',
+      );
     }
   }
 
@@ -17,12 +20,15 @@ class ApiErrorHandler {
       case DioExceptionType.receiveTimeout:
         return ApiErrorModel(
           statusCode: 408,
-          message: 'يرجى التحقق من اتصالك بالإنترنت',
+          message: 'Request timeout. Please check your internet connection.',
         );
       case DioExceptionType.badResponse:
         return _handleBadResponse(error.response!);
       case DioExceptionType.cancel:
-        return ApiErrorModel(statusCode: 499, message: 'تم إلغاء الطلب');
+        return ApiErrorModel(
+          statusCode: 499,
+          message: 'Request was cancelled.',
+        );
       case DioExceptionType.unknown:
         if (error.message!.contains('SocketException')) {
           return ApiErrorModel(
@@ -30,10 +36,16 @@ class ApiErrorHandler {
             message: 'No internet connection. Please check your network.',
           );
         } else {
-          return ApiErrorModel(statusCode: 500, message: 'حدث خطأ غير معروف');
+          return ApiErrorModel(
+            statusCode: 500,
+            message: 'An unknown error occurred.',
+          );
         }
       default:
-        return ApiErrorModel(statusCode: 500, message: 'حدث خطأ غير معروف');
+        return ApiErrorModel(
+          statusCode: 500,
+          message: 'An unexpected error occurred.',
+        );
     }
   }
 
@@ -42,35 +54,34 @@ class ApiErrorHandler {
       case 400:
         return ApiErrorModel(
           statusCode: 400,
-          message:
-              'الايميل او كلمة المرور غير صحيحه يرجى التأكد من البيانات المدخلة والمحاولة مرة أخرى',
+          message: 'Bad request. Please check your input.',
         );
       case 401:
         return ApiErrorModel(
           statusCode: 401,
-          message: 'غير مُصرَّح به. يُرجى تسجيل الدخول مرة أخرى.',
+          message: 'Unauthorized. Please login again.',
         );
       case 403:
-        return ApiErrorModel(statusCode: 403, message: 'ممنوع. ليس لديك إذن');
-      case 404:
         return ApiErrorModel(
-          statusCode: 404,
-          message: 'لم يتم العثور على المورد',
+          statusCode: 403,
+          message: 'Forbidden. You do not have permission.',
         );
+      case 404:
+        return ApiErrorModel(statusCode: 404, message: 'Resource not found.');
       case 500:
         return ApiErrorModel(
           statusCode: 500,
-          message: 'خطأ داخلي في الخادم. يُرجى المحاولة لاحقًا',
+          message: 'Internal server error. Please try again later.',
         );
       case 503:
         return ApiErrorModel(
           statusCode: 503,
-          message: 'الخدمة غير متاحة. يُرجى المحاولة لاحقًا.',
+          message: 'Service unavailable. Please try again later.',
         );
       default:
         return ApiErrorModel(
           statusCode: response.statusCode ?? 500,
-          message: 'حدث خطأ أثناء معالجة الاستجابة',
+          message: 'An error occurred while processing the response.',
         );
     }
   }

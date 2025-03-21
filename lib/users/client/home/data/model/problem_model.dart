@@ -1,28 +1,25 @@
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'problem_model.g.dart';
+
+@JsonSerializable()
 class ProblemModel {
-  final String imageUrl;
+  @JsonKey(ignore: true) // لأن الصورة سترفع كـ Multipart
+  final File? imageFile;
+
   final String description;
-  final String type;
+  final int type;
 
   ProblemModel({
-    required this.imageUrl,
+    this.imageFile,
     required this.description,
     required this.type,
   });
 
+  Map<String, dynamic> toJson() => _$ProblemModelToJson(this);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'imageUrl': imageUrl,
-      'description': description,
-      'type': type,
-    };
-  }
-
-  factory ProblemModel.fromJson(Map<String, dynamic> json) {
-    return ProblemModel(
-      imageUrl: json['imageUrl'],
-      description: json['description'],
-      type: json['type'],
-    );
-  }
+  factory ProblemModel.fromJson(Map<String, dynamic> json) =>
+      _$ProblemModelFromJson(json);
 }

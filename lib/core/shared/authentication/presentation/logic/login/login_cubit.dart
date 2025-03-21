@@ -6,6 +6,8 @@ import 'package:safety_frist/core/shared/authentication/data/models/auth/login_r
 import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/forgot_password_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/repository/auth_repository.dart';
 
+import '../../../../../cache/shared_pref_helper.dart';
+
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -31,7 +33,7 @@ class LoginCubit extends Cubit<LoginState> {
 
     if (response is Success<AuthResponseModel>) {
       userModel = response.data;
-
+      saveUserToken(response.data.accessToken!);
       emit(LoginSuccessState(authResponseModel: userModel!));
     } else if (response is Failure<AuthResponseModel>) {
       emit(LoginErrorState(message: response.error.toString()));
@@ -49,5 +51,8 @@ class LoginCubit extends Cubit<LoginState> {
     } else if (response is Failure) {
       emit(LoginErrorState(message: response.error.toString()));
     }
+  }
+  saveUserToken(String token) {
+    CacheHelper.saveData(key:'token',value:  token);
   }
 }

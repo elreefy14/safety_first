@@ -26,23 +26,24 @@ class LoginBlocListener extends StatelessWidget {
         listener: (context, state) {
           switch (state) {
             case LoginSuccessState():
-              if (userType == UserType.client) {
-                context.pushReplacement(Routes.clientBottomNavBar);
-              } else if (userType == UserType.admin) {
-                context.pushReplacement(Routes.adminBottomNavBar);
-              } else {
-                context.pushReplacement(Routes.technichianBottomNavBar);
-              }
-              showSnackBar(
-                context: context,
-                message: 'تم تسجيل الدخول بنجاح',
-                color: Colors.green,
-              );
+              setupSuccess(context);
 
             default:
           }
         },
       ),
     );
+  }
+
+  void setupSuccess(BuildContext context) {
+    if (userType == UserType.client) {
+      context.pushReplacement(Routes.clientBottomNavBar);
+
+      showToast(msg: 'تم تسجيل الدخول بنجاح', color: Colors.green);
+    } else if (userType == UserType.admin) {
+      context.pushReplacement(Routes.adminBottomNavBar);
+    } else {
+      context.pushReplacement(Routes.technichianBottomNavBar);
+    }
   }
 }

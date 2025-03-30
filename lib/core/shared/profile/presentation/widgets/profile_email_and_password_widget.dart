@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 
 class ProfileEmailAndPasswordWidget extends StatelessWidget {
-  const ProfileEmailAndPasswordWidget({super.key});
+  const ProfileEmailAndPasswordWidget({super.key, required this.email});
+
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,9 @@ class ProfileEmailAndPasswordWidget extends StatelessWidget {
       children: [
         Text(
           'البريد الإلكتروني',
-          style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
+          style: Theme.of(
+            context,
+          ).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
         ),
         Container(
           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
@@ -22,14 +26,16 @@ class ProfileEmailAndPasswordWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Text(
-            'user42@gmail.com',
+            email,
             style: TextStyle(fontSize: 16, color: Colors.black),
           ),
         ),
         verticalSpace(20),
         Text(
           'كلمة المرور',
-          style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
+          style: Theme.of(
+            context,
+          ).textTheme.titleSmall!.copyWith(color: Color(0xff000000)),
         ),
         Container(
           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),

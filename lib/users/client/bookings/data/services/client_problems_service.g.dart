@@ -2,7 +2,7 @@
 
 // ignore_for_file: unused_element_parameter
 
-part of 'problem_service.dart';
+part of 'client_problems_service.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -10,8 +10,8 @@ part of 'problem_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _ProblemService implements ProblemService {
-  _ProblemService(this._dio, {this.baseUrl, this.errorLogger}) {
+class _ClientProblemsService implements ClientProblemsService {
+  _ClientProblemsService(this._dio, {this.baseUrl, this.errorLogger}) {
     baseUrl ??= 'https://safety.runasp.net/api';
   }
 
@@ -20,31 +20,6 @@ class _ProblemService implements ProblemService {
   String? baseUrl;
 
   final ParseErrorLogger? errorLogger;
-
-  @override
-  Future<void> createProblem(String userToken, FormData formData) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': userToken};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = formData;
-    final _options = _setStreamType<void>(
-      Options(
-            method: 'POST',
-            headers: _headers,
-            extra: _extra,
-            contentType: 'multipart/form-data',
-          )
-          .compose(
-            _dio.options,
-            '/Problem',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    await _dio.fetch<void>(_options);
-  }
 
   @override
   Future<List<ProblemResponseModel>> getClientProblems(String userToken) async {

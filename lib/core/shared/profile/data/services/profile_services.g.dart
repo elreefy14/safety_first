@@ -2,7 +2,7 @@
 
 // ignore_for_file: unused_element_parameter
 
-part of 'problem_service.dart';
+part of 'profile_services.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -10,8 +10,8 @@ part of 'problem_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _ProblemService implements ProblemService {
-  _ProblemService(this._dio, {this.baseUrl, this.errorLogger}) {
+class _ProfileServices implements ProfileServices {
+  _ProfileServices(this._dio, {this.baseUrl, this.errorLogger}) {
     baseUrl ??= 'https://safety.runasp.net/api';
   }
 
@@ -22,57 +22,54 @@ class _ProblemService implements ProblemService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<void> createProblem(String userToken, FormData formData) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': userToken};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = formData;
-    final _options = _setStreamType<void>(
-      Options(
-            method: 'POST',
-            headers: _headers,
-            extra: _extra,
-            contentType: 'multipart/form-data',
-          )
-          .compose(
-            _dio.options,
-            '/Problem',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    await _dio.fetch<void>(_options);
-  }
-
-  @override
-  Future<List<ProblemResponseModel>> getClientProblems(String userToken) async {
+  Future<ProfileResponseModel> getProfileData(String userToken) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': userToken};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<ProblemResponseModel>>(
+    final _options = _setStreamType<ProfileResponseModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/Problem/client',
+            '/Authentication',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<ProblemResponseModel> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ProfileResponseModel _value;
     try {
-      _value =
-          _result.data!
-              .map(
-                (dynamic i) =>
-                    ProblemResponseModel.fromJson(i as Map<String, dynamic>),
-              )
-              .toList();
+      _value = ProfileResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<LogoutResponseModel> logoutUser(String userToken) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': userToken};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<LogoutResponseModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/Authentication/Logout',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LogoutResponseModel _value;
+    try {
+      _value = LogoutResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

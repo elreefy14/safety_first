@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safety_frist/core/di/dependency_injection.dart';
+import 'package:safety_frist/core/shared/profile/presentation/logic/profile_cubit.dart';
 import 'package:safety_frist/users/client/bookings/presentation/screens/client_bookings_screen.dart';
 import 'package:safety_frist/users/client/home/presentation/logic/problem_cubit.dart';
 import 'package:safety_frist/users/client/home/presentation/screens/client_home_screen.dart';
@@ -30,7 +31,12 @@ class _BottomNavigationBarScreenState
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => getIt<ProblemCubit>())],
+      providers: [
+        BlocProvider(create: (context) => getIt<ProblemCubit>()),
+        BlocProvider(
+          create: (context) => getIt<ProfileCubit>()..getProfileDate(),
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(
           actions: [
@@ -50,7 +56,6 @@ class _BottomNavigationBarScreenState
           ),
         ),
         bottomNavigationBar: CurvedNavigationBar(
-          // height: 74.h,
           animationDuration: const Duration(milliseconds: 900),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           buttonBackgroundColor:

@@ -10,7 +10,6 @@ import 'package:safety_frist/core/shared/onboarding/presentation/screens/onboard
 import 'package:safety_frist/core/shared/onboarding/presentation/screens/splash_screen.dart';
 import 'package:safety_frist/users/admin/bookings/presentation/screens/admin_bottom_navigation_bar_screen.dart';
 import 'package:safety_frist/users/client/home/presentation/screens/client_bottom_navigation_bar_screen.dart';
-import 'package:safety_frist/core/shared/profile/presentation/screens/profile_screen.dart';
 
 final GoRouter router = GoRouter(
   routes: <GoRoute>[
@@ -77,14 +76,6 @@ final GoRouter router = GoRouter(
       path: Routes.clientBottomNavBar,
       builder: (BuildContext context, GoRouterState state) {
         return const ClientBottomNavigationBarScreen();
-      },
-    ),
-
-    // Client Profile Screen
-    GoRoute(
-      path: Routes.profileScreen,
-      builder: (BuildContext context, GoRouterState state) {
-        return const ProfileScreen();
       },
     ),
 

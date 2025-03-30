@@ -8,5 +8,9 @@ class ApiConstants {
   static const String refreshToken = '/Authentication/Refresh-Token';
   static const String forgotPassword = '/Authentication/Forgot-Password';
   static const String resetPassword = '/Authentication/Reset-Password';
+  static const String logout = '/Authentication/Logout';
+  static const String getProfile = '/Authentication';
   static const String addProblem = '/Problem';
+  static const String clientProblems = '/Problem/client';
+  static const String updateClient = '/Client';
 }

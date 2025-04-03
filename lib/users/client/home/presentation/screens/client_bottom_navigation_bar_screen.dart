@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safety_frist/core/di/dependency_injection.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_cubit.dart';
 import 'package:safety_frist/core/shared/profile/presentation/screens/client_settings_screen.dart';
+import 'package:safety_frist/users/client/bookings/presentation/logic/client_problems_cubit.dart';
 import 'package:safety_frist/users/client/bookings/presentation/screens/client_bookings_screen.dart';
 import 'package:safety_frist/users/client/home/presentation/logic/problem_cubit.dart';
 import 'package:safety_frist/users/client/home/presentation/screens/client_home_screen.dart';
@@ -34,6 +35,10 @@ class _BottomNavigationBarScreenState
       providers: [
         BlocProvider(create: (context) => getIt<ProblemCubit>()),
         BlocProvider(
+          create:
+              (context) => getIt<ClientProblemsCubit>()..getClientProblems(),
+        ),
+        BlocProvider(
           create: (context) => getIt<ProfileCubit>()..getProfileDate(),
         ),
       ],
@@ -48,11 +53,9 @@ class _BottomNavigationBarScreenState
           title: Text('SAFETY FIRST'),
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.h),
-              child: screens[_currentIndex],
-            ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.h),
+            child: screens[_currentIndex],
           ),
         ),
         bottomNavigationBar: CurvedNavigationBar(

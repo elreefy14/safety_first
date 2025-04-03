@@ -13,13 +13,13 @@ class ClientProblemsCubit extends Cubit<ClientProblemsState> {
 
   static ClientProblemsCubit get(context) => BlocProvider.of(context);
 
-  List<ProblemResponseModel>? clientProblems = [];
+  List<ProblemResponseModel> clientProblems = [];
 
   Future<void> getClientProblems() async {
     final response = await _clientProblemsRepo.getClientProblems();
 
-    if (response is Success) {
-      clientProblems = response as List<ProblemResponseModel>;
+    if (response is Success<List<ProblemResponseModel>>) {
+      clientProblems = response.data;
       emit(GetClientProblemSuccessState());
     } else {
       emit(GetClientProblemErrorState());

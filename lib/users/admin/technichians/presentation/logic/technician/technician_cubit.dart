@@ -31,6 +31,8 @@ class TechnicianCubit extends Cubit<TechnicianState> {
     );
 
     if (response is Success) {
+      getAllTechnicians();
+
       emit(AddTechnicianSuccessState());
     } else if (response is Failure) {
       emit(AddTechnicianErrorState(error: response.error.toString()));
@@ -50,6 +52,8 @@ class TechnicianCubit extends Cubit<TechnicianState> {
     );
 
     if (response is Success) {
+      getAllTechnicians();
+
       emit(UpdateTechnicianSuccessState());
     } else if (response is Failure) {
       emit(UpdateTechnicianErrorState(error: response.error.toString()));
@@ -61,6 +65,7 @@ class TechnicianCubit extends Cubit<TechnicianState> {
     final response = await _repository.deleteTechnician(id);
 
     if (response is Success) {
+      getAllTechnicians();
       emit(DeleteTechnicianSuccessState());
     } else if (response is Failure) {
       emit(DeleteTechnicianErrorState(error: response.error.toString()));

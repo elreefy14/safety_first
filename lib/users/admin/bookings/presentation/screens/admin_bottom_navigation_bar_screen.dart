@@ -7,6 +7,7 @@ import 'package:safety_frist/core/di/dependency_injection.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_cubit.dart';
 import 'package:safety_frist/core/shared/profile/presentation/screens/engineer_settings_screen.dart';
 import 'package:safety_frist/users/admin/bookings/presentation/screens/admin_problems_screen.dart';
+import 'package:safety_frist/users/admin/technichians/presentation/logic/technician/technician_cubit.dart';
 import 'package:safety_frist/users/admin/technichians/presentation/screens/admin_technichians_screen.dart';
 
 class AdminBottomNavigationBarScreen extends StatefulWidget {
@@ -34,6 +35,9 @@ class _BottomNavigationBarScreenState
         BlocProvider(
           create: (context) => getIt<ProfileCubit>()..getProfileDate(),
         ),
+        BlocProvider(
+          create: (context) => getIt<TechnicianCubit>()..getAllTechnicians(),
+        ),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -46,11 +50,9 @@ class _BottomNavigationBarScreenState
           title: Text('SAFETY FIRST'),
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.h),
-              child: screens[_currentIndex],
-            ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.h),
+            child: screens[_currentIndex],
           ),
         ),
         bottomNavigationBar: CurvedNavigationBar(

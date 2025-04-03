@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:safety_frist/core/helper/utils/spacing.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/widgets/register/pin_code_validation.dart';
+import 'package:safety_frist/core/widgets/appbar_icon.dart';
+
+class VerifyEmailScreen extends StatelessWidget {
+  const VerifyEmailScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('تأكيد الأيميل'), leading: AppbarIcon()),
+
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 14.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SvgPicture.asset('assets/images/Verification_Code.svg'),
+              verticalSpace(22),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 22),
+                child: Text(
+                  'الرجاء إدخال الرمز المكون من 6 أرقام المرسل إلى: You@gmail.com',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              verticalSpace(22),
+              const PinCodeVerification(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

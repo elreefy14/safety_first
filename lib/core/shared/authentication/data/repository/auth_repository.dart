@@ -1,8 +1,8 @@
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/auth/auth_response_model.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/auth/client_register_request_body.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/auth/login_request_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/register/client_register_request_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/login/login_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/forgot_password_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/reset_password_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/services/auth_service.dart';

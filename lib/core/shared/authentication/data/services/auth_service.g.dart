@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_element_parameter
-
 part of 'auth_service.dart';
 
 // **************************************************************************
@@ -82,9 +80,12 @@ class _AuthServices implements AuthServices {
   }
 
   @override
-  Future<void> confirmEmail(String email, String token) async {
+  Future<void> confirmEmail(String email, String otpCode) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'Email': email, r'Token': token};
+    final queryParameters = <String, dynamic>{
+      r'Email': email,
+      r'Token': otpCode,
+    };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
@@ -92,6 +93,28 @@ class _AuthServices implements AuthServices {
           .compose(
             _dio.options,
             '/Authentication/Confirm-Email',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<void> resendOtpConfirmEmail(
+    ResendOptConfirmEmailRequestBody email,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(email.toJson());
+    final _options = _setStreamType<void>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/Authentication/Resend-EmailConfirmation-Otp',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -112,6 +135,28 @@ class _AuthServices implements AuthServices {
           .compose(
             _dio.options,
             '/Authentication/Forgot-Password',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<void> resendOtpResetPassword(
+    ResendOtpResetPasswordRequestBody email,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(email.toJson());
+    final _options = _setStreamType<void>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/Authentication/Resend-PasswordReset-Otp',
             queryParameters: queryParameters,
             data: _data,
           )

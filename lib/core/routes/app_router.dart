@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/client_register_screen.dart';
-import 'package:safety_frist/core/shared/authentication/presentation/screens/confirm_email_screen.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/screens/verify_email_screen.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/forgot_password_screen.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/reset_password_screen.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/user_type_screen.dart';
 import 'package:safety_frist/core/shared/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:safety_frist/core/shared/onboarding/presentation/screens/splash_screen.dart';
+import 'package:safety_frist/users/admin/technichians/presentation/screens/add_engineer_screen.dart';
+import 'package:safety_frist/users/admin/technichians/presentation/screens/add_technician_screen.dart';
 import 'package:safety_frist/users/admin/bookings/presentation/screens/admin_bottom_navigation_bar_screen.dart';
 import 'package:safety_frist/users/client/home/presentation/screens/client_bottom_navigation_bar_screen.dart';
 
@@ -59,7 +61,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.verifyEmailScreen,
       builder: (BuildContext context, GoRouterState state) {
-        return ConfirmEmailScreen();
+        return VerifyEmailScreen();
       },
     ),
 
@@ -84,6 +86,22 @@ final GoRouter router = GoRouter(
       path: Routes.adminBottomNavBar,
       builder: (BuildContext context, GoRouterState state) {
         return const AdminBottomNavigationBarScreen();
+      },
+    ),
+
+    // Admin Bottom Navigation Bar Screen
+    GoRoute(
+      path: Routes.addEngineerScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const AddEngineerScreen();
+      },
+    ),
+
+    // Admin Bottom Navigation Bar Screen
+    GoRoute(
+      path: Routes.addTechnicianScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const AddTechnicianScreen();
       },
     ),
   ],

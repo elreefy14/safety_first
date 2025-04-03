@@ -37,4 +37,9 @@ class AppRegex {
   static bool hasMinLength(String password) {
     return RegExp(r'^(?=.{8,})').hasMatch(password);
   }
+
+  static bool validateOTP(String otp) {
+    final regex = RegExp(r'^\d{6}$');
+    return regex.hasMatch(otp);
+  }
 }

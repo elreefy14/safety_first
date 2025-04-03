@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/auth/auth_response_model.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/auth/login_request_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/login/login_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/forgot_password_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/repository/auth_repository.dart';
 
@@ -52,7 +52,8 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginErrorState(message: response.error.toString()));
     }
   }
+
   saveUserToken(String token) {
-    CacheHelper.saveData(key:'token',value:  token);
+    CacheHelper.saveData(key: 'token', value: token);
   }
 }

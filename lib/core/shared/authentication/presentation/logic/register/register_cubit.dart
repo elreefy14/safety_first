@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/auth/auth_response_model.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/auth/client_register_request_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/register/client_register_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/repository/auth_repository.dart';
 
 part 'register_state.dart';

@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safety_frist/core/di/dependency_injection.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_cubit.dart';
+import 'package:safety_frist/core/shared/profile/presentation/screens/client_settings_screen.dart';
 import 'package:safety_frist/users/client/bookings/presentation/screens/client_bookings_screen.dart';
 import 'package:safety_frist/users/client/home/presentation/logic/problem_cubit.dart';
 import 'package:safety_frist/users/client/home/presentation/screens/client_home_screen.dart';
-import 'package:safety_frist/core/shared/profile/presentation/screens/settings_screen.dart';
 
 class ClientBottomNavigationBarScreen extends StatefulWidget {
   const ClientBottomNavigationBarScreen({super.key});
@@ -23,7 +23,7 @@ class _BottomNavigationBarScreenState
   final List<Widget> screens = [
     const ClientHomeScreen(),
     ClientBookingsScreen(),
-    const SettingsScreen(),
+    const ClientSettingsScreen(),
   ];
 
   int _currentIndex = 0;

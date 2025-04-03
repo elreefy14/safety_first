@@ -14,3 +14,12 @@ AuthResponseModel _$AuthResponseModelFromJson(Map<String, dynamic> json) =>
       accessToken: json['AccessToken'] as String?,
       refreshToken: json['RefreshToken'] as String?,
     );
+
+Map<String, dynamic> _$AuthResponseModelToJson(AuthResponseModel instance) =>
+    <String, dynamic>{
+      'FirstName': instance.firstName,
+      'LastName': instance.lastName,
+      'Email': instance.email,
+      'AccessToken': instance.accessToken,
+      'RefreshToken': instance.refreshToken,
+    };

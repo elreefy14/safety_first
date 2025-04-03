@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/auth/auth_response_model.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/auth/refresh_token_request.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/login/refresh_token_request.dart';
 import 'package:safety_frist/core/shared/authentication/data/services/auth_service.dart';
 
 class ApiClient {

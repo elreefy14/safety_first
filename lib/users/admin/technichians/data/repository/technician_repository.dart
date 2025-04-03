@@ -1,0 +1,84 @@
+import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/networking/api_error_handler.dart';
+import 'package:safety_frist/core/networking/api_result.dart';
+import 'package:safety_frist/users/admin/technichians/data/models/add_technician_request_body.dart';
+import 'package:safety_frist/users/admin/technichians/data/models/technician_response_model.dart';
+import 'package:safety_frist/users/admin/technichians/data/services/technician_service.dart';
+
+class TechnicianRepository {
+  final TechnicianService _service;
+
+  TechnicianRepository(this._service);
+
+  Future<ApiResult<void>> addTechnician(
+    AddTechnicianRequestBody technician,
+  ) async {
+    try {
+      var token = CacheHelper.getData(key: 'token');
+
+      final response = await _service.addTechnician(
+        "Bearer $token",
+        technician,
+      );
+
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler());
+    }
+  }
+
+  Future<ApiResult<void>> deleteTechnician(String id) async {
+    try {
+      var token = CacheHelper.getData(key: 'token');
+
+      final response = await _service.deleteTechnician("Bearer $token", id);
+
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler());
+    }
+  }
+
+  Future<ApiResult<void>> updateTechnician(
+    AddTechnicianRequestBody technician,
+    String id,
+  ) async {
+    try {
+      var token = CacheHelper.getData(key: 'token');
+
+      final response = await _service.updateTechnician(
+        "Bearer $token",
+        id,
+        technician,
+      );
+
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler());
+    }
+  }
+
+  Future<ApiResult<TechnicianResponseModel>> getTechnician(String id) async {
+    try {
+      var token = CacheHelper.getData(key: 'token');
+
+      final response = await _service.getTechnician("Bearer $token", id);
+
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler());
+    }
+  }
+
+  Future<ApiResult<List<TechnicianResponseModel>>> getAllTechnicians() async {
+    try {
+      var token = CacheHelper.getData(key: 'token');
+
+      final response = await _service.getAllTechnicians("Bearer $token");
+
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler());
+    }
+  }
+}

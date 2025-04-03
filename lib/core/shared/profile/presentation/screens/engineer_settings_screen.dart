@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/profile/data/models/profile_response_model.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_cubit.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_state.dart';
@@ -8,8 +10,8 @@ import 'package:safety_frist/core/shared/profile/presentation/widgets/card_setti
 import 'package:safety_frist/core/shared/profile/presentation/widgets/logout_bloc_listener_widget.dart';
 import 'package:safety_frist/core/shared/profile/presentation/widgets/notification_playing_widget.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class EngineerSettingsScreen extends StatelessWidget {
+  const EngineerSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,22 @@ class SettingsScreen extends StatelessWidget {
         ),
         Divider(color: Colors.grey),
         const NotificationPlayingWidget(),
+        Divider(color: Colors.grey),
+        CardSettingItemWidget(
+          title: 'اضافة فنيين',
+          image: 'assets/icons/feedback-review.svg',
+          onTap: () {
+            context.push(Routes.addTechnicianScreen);
+          },
+        ),
+        Divider(color: Colors.grey),
+        CardSettingItemWidget(
+          title: 'اضافة مهندسين',
+          image: 'assets/icons/feedback-review.svg',
+          onTap: () {
+            context.push(Routes.addEngineerScreen);
+          },
+        ),
         Divider(color: Colors.grey),
         CardSettingItemWidget(
           title: 'قيمنا الأن',

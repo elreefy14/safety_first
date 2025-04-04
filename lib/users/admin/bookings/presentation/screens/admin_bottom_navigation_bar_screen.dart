@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safety_frist/core/di/dependency_injection.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_cubit.dart';
 import 'package:safety_frist/core/shared/profile/presentation/screens/engineer_settings_screen.dart';
+import 'package:safety_frist/users/admin/bookings/presentation/logic/engineer_problems_cubit.dart';
 import 'package:safety_frist/users/admin/bookings/presentation/screens/admin_problems_screen.dart';
 import 'package:safety_frist/users/admin/technichians/presentation/logic/technician/technician_cubit.dart';
 import 'package:safety_frist/users/admin/technichians/presentation/screens/admin_technichians_screen.dart';
@@ -32,6 +33,9 @@ class _BottomNavigationBarScreenState
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => getIt<EngineerProblemsCubit>()..getAllProblems(),
+        ),
         BlocProvider(
           create: (context) => getIt<ProfileCubit>()..getProfileDate(),
         ),

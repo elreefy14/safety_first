@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/logic/forgot%20password/forgot_password_cubit.dart';
 import 'package:safety_frist/core/widgets/app_text_button.dart';
 import 'package:safety_frist/core/widgets/email_text_form_field.dart';
 
@@ -12,19 +12,32 @@ class ForgotPasswordFormWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutofillGroup(
       child: Form(
+        key: ForgotPasswordCubit.get(context).formKeyForgot,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            EmailTextFormField(emailController: TextEditingController()),
+            EmailTextFormField(
+              emailController: ForgotPasswordCubit.get(context).emailController,
+            ),
             verticalSpace(32),
-            SizedBox(
-              width: double.infinity,
-              child: AppTextButton(
-                textButton: 'إرسال الرمز',
-                onPressed: () {
-                  context.pop();
-                },
-              ),
+            BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
+              builder: (context, state) {
+                return SizedBox(
+                  width: double.infinity,
+                  child: AppTextButton(
+                    textButton: 'إرسال الرمز',
+                    isLoading:
+                        state is ForgotPasswordLoadingState ? true : false,
+                    onPressed: () {
+                      if (ForgotPasswordCubit.get(
+                        context,
+                      ).formKeyForgot.currentState!.validate()) {
+                        ForgotPasswordCubit.get(context).forgotPassword();
+                      }
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),

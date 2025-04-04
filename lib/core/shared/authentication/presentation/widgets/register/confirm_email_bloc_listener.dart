@@ -7,8 +7,8 @@ import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/logic/register/register_cubit.dart';
 
-class RegisterBlocListener extends StatelessWidget {
-  const RegisterBlocListener({super.key, required this.child});
+class ConfirmEmailBlocListener extends StatelessWidget {
+  const ConfirmEmailBlocListener({super.key, required this.child});
 
   final Widget child;
 
@@ -20,13 +20,21 @@ class RegisterBlocListener extends StatelessWidget {
         child: child,
         listener: (context, state) {
           switch (state) {
-            case RegisterSuccessState():
+            case ConfirmEmailSuccessState():
+              showToast(msg: 'تم تأكيد الايميل بنجاح', color: Colors.green);
+              context.pushReplacement(Routes.userTypeScreen);
+
+            case ConfirmEmailErrorState():
+              showToast(msg: 'فشكل تأكيد الايميل', color: Colors.red);
+
+            case ResendConfirmEmailSuccessState():
               showToast(
-                msg: 'بالرجاء قم بفحص الايميل لتأكيد الأكونت',
+                msg: 'تم إرسال الكود إلي الايميل بنجاح',
                 color: Colors.green,
               );
-              context.pushReplacement(Routes.verifyEmailScreen);
 
+            case ResendConfirmEmailErrorState():
+              showToast(msg: 'فشل إرسال الكود إلي الايميل', color: Colors.red);
             default:
           }
         },

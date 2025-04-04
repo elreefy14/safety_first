@@ -82,10 +82,7 @@ class _AuthServices implements AuthServices {
   @override
   Future<void> confirmEmail(String email, String otpCode) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'Email': email,
-      r'Token': otpCode,
-    };
+    final queryParameters = <String, dynamic>{r'Email': email, r'otp': otpCode};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
@@ -144,9 +141,7 @@ class _AuthServices implements AuthServices {
   }
 
   @override
-  Future<void> resendOtpResetPassword(
-    ResendOtpResetPasswordRequestBody email,
-  ) async {
+  Future<void> resendOtpResetPassword(ForgotPasswordRequestBody email) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -175,7 +170,7 @@ class _AuthServices implements AuthServices {
     final _data = <String, dynamic>{};
     _data.addAll(resetPasswordRequestBody.toJson());
     final _options = _setStreamType<void>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+      Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             '/Authentication/Reset-Password',

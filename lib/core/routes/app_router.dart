@@ -51,9 +51,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.resetPasswordScreen,
       builder: (BuildContext context, GoRouterState state) {
-        final String? token = state.uri.queryParameters['token'];
-        final String? email = state.uri.queryParameters['email'];
-        return ResetPasswordScreen(token: token, email: email);
+        return ResetPasswordScreen();
       },
     ),
 

@@ -7,6 +7,14 @@ class AdminProblemsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [SizedBox(height: 700.w, child: TaskTabs())]);
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: Column(
+        children: [
+          SizedBox(),
+          Expanded(child: SizedBox(height: 700.w, child: TaskTabs())),
+        ],
+      ),
+    );
   }
 }

@@ -6,7 +6,6 @@ import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/shared/profile/data/models/profile_response_model.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_cubit.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_state.dart';
-import 'package:safety_frist/core/widgets/app_text_button.dart';
 import 'package:safety_frist/core/widgets/appbar_icon.dart';
 import 'package:safety_frist/core/widgets/name_password_text_form.dart';
 import 'package:safety_frist/core/shared/profile/presentation/widgets/profile_email_and_password_widget.dart';
@@ -65,14 +64,14 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           verticalSpace(20),
                           ProfileEmailAndPasswordWidget(email: user.email!),
-                          verticalSpace(50),
-                          SizedBox(
-                            width: double.infinity,
-                            child: AppTextButton(
-                              textButton: 'تحديث الملف الشخصي',
-                              onPressed: () {},
-                            ),
-                          ),
+                          // verticalSpace(50),
+                          // SizedBox(
+                          //   width: double.infinity,
+                          //   child: AppTextButton(
+                          //     textButton: 'تحديث الملف الشخصي',
+                          //     onPressed: () {},
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

@@ -1,3 +1,4 @@
+import 'package:safety_frist/core/cache/shared_pref_helper.dart';
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
@@ -5,12 +6,16 @@ import 'package:safety_frist/core/shared/authentication/data/models/register/cli
 import 'package:safety_frist/core/shared/authentication/data/models/login/login_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/forgot_password_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/reset_password_request_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/register/resend_otp_confirm_email_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/services/auth_service.dart';
 
 class AuthRepository {
   final AuthServices _authServices;
 
   AuthRepository(this._authServices);
+
+  var token = CacheHelper.getData(key: 'token');
+  var email = CacheHelper.getData(key: 'email');
 
   Future<ApiResult<AuthResponseModel>> loginWithEmailPassword(
     LoginRequestBody loginRequestBody,
@@ -39,9 +44,20 @@ class AuthRepository {
     }
   }
 
-  Future<ApiResult<void>> confirmEmail(String email, String token) async {
+  Future<ApiResult<void>> confirmEmail(String otpCode) async {
     try {
-      final result = await _authServices.confirmEmail(email, token);
+      final result = await _authServices.confirmEmail(email, otpCode);
+      return ApiResult.success(result);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler());
+    }
+  }
+
+  Future<ApiResult<void>> resendOtpConfirmEmail() async {
+    try {
+      final result = await _authServices.resendOtpConfirmEmail(
+        ResendOptConfirmEmailRequestBody(email: email),
+      );
       return ApiResult.success(result);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler());
@@ -59,12 +75,28 @@ class AuthRepository {
     }
   }
 
-  Future<ApiResult<void>> resetPassword(
-    ResetPasswordRequestBody resetPasswordRequestBody,
+  Future<ApiResult<void>> resendOtpResetPassword(
+    ForgotPasswordRequestBody email,
   ) async {
     try {
+      final result = await _authServices.resendOtpResetPassword(email);
+      return ApiResult.success(result);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler());
+    }
+  }
+
+  Future<ApiResult<void>> resetPassword({
+    required String otpCode,
+    required String newPassword,
+  }) async {
+    try {
       final result = await _authServices.resetPassword(
-        resetPasswordRequestBody,
+        ResetPasswordRequestBody(
+          email: email,
+          otp: otpCode,
+          newPassword: newPassword,
+        ),
       );
       return ApiResult.success(result);
     } catch (error) {

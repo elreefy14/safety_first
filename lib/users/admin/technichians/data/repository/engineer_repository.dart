@@ -10,10 +10,10 @@ class EngineerRepository {
 
   EngineerRepository(this._service);
 
+  var token = CacheHelper.getData(key: 'token');
+
   Future<ApiResult<void>> addEngineer(AddEngineerRequestBody engineer) async {
     try {
-      var token = CacheHelper.getData(key: 'token');
-
       final response = await _service.addEngineer("Bearer $token", engineer);
 
       return ApiResult.success(response);
@@ -24,8 +24,6 @@ class EngineerRepository {
 
   Future<ApiResult<void>> deleteEngineer(String id) async {
     try {
-      var token = CacheHelper.getData(key: 'token');
-
       final response = await _service.deleteEngineer("Bearer $token", id);
 
       return ApiResult.success(response);
@@ -39,8 +37,6 @@ class EngineerRepository {
     String id,
   ) async {
     try {
-      var token = CacheHelper.getData(key: 'token');
-
       final response = await _service.updateEngineer(
         "Bearer $token",
         id,
@@ -55,8 +51,6 @@ class EngineerRepository {
 
   Future<ApiResult<EngineerResponseModel>> getEngineer(String id) async {
     try {
-      var token = CacheHelper.getData(key: 'token');
-
       final response = await _service.getEngineer("Bearer $token", id);
 
       return ApiResult.success(response);
@@ -67,8 +61,6 @@ class EngineerRepository {
 
   Future<ApiResult<List<EngineerResponseModel>>> getAllEngineers() async {
     try {
-      var token = CacheHelper.getData(key: 'token');
-
       final response = await _service.getAllEngineers("Bearer $token");
 
       return ApiResult.success(response);

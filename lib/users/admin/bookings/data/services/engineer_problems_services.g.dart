@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'client_problems_service.dart';
+part of 'engineer_problems_services.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'client_problems_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _ClientProblemsService implements ClientProblemsService {
-  _ClientProblemsService(this._dio, {this.baseUrl, this.errorLogger}) {
+class _EngineerProblemsServices implements EngineerProblemsServices {
+  _EngineerProblemsServices(this._dio, {this.baseUrl, this.errorLogger}) {
     baseUrl ??= 'https://safety.runasp.net/api';
   }
 
@@ -20,7 +20,7 @@ class _ClientProblemsService implements ClientProblemsService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<ProblemResponseModel>> getClientProblems(String userToken) async {
+  Future<List<ProblemResponseModel>> getAllProblems(String userToken) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': userToken};
@@ -30,7 +30,7 @@ class _ClientProblemsService implements ClientProblemsService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/Problem/client',
+            '/Problem',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -85,42 +85,58 @@ class _ClientProblemsService implements ClientProblemsService {
   }
 
   @override
-  Future<void> deleteProblem(String userToken, String id) async {
+  Future<List<ProblemResponseModel>> getProblemByStatus(
+    String userToken,
+    int id,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': userToken};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<List<ProblemResponseModel>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/Problem/status/${id}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<ProblemResponseModel> _value;
+    try {
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    ProblemResponseModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<void> assignProblemToTechnician(
+    String userToken,
+    String problemId,
+    String technicianId,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': userToken};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
-      Options(method: 'DELETE', headers: _headers, extra: _extra)
+      Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/Problem/${id}',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    await _dio.fetch<void>(_options);
-  }
-
-  @override
-  Future<void> updateProblem(
-    String userToken,
-    String id,
-    UpdateProblemRequestBody updateProblemRequestBody,
-  ) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': userToken};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    _data.addAll(updateProblemRequestBody.toJson());
-    final _options = _setStreamType<void>(
-      Options(method: 'DELETE', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/Problem/${id}',
+            '/Problem/${problemId}/assign/${technicianId}',
             queryParameters: queryParameters,
             data: _data,
           )

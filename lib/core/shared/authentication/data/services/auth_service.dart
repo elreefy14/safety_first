@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:safety_frist/core/networking/api_constants.dart';
-import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/resend_otp_reset_password_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/register/client_register_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/login/login_request_body.dart';
@@ -29,7 +28,7 @@ abstract class AuthServices {
   @POST(ApiConstants.confirmEmail)
   Future<void> confirmEmail(
     @Query("Email") String email,
-    @Query("Token") String otpCode,
+    @Query("otp") String otpCode,
   );
 
   @POST(ApiConstants.resendOtpConfirmEmail)
@@ -41,11 +40,9 @@ abstract class AuthServices {
   Future<void> forgotPassword(@Body() ForgotPasswordRequestBody email);
 
   @POST(ApiConstants.resendOtpResetPassword)
-  Future<void> resendOtpResetPassword(
-    @Body() ResendOtpResetPasswordRequestBody email,
-  );
+  Future<void> resendOtpResetPassword(@Body() ForgotPasswordRequestBody email);
 
-  @POST(ApiConstants.resetPassword)
+  @PUT(ApiConstants.resetPassword)
   Future<void> resetPassword(
     @Body() ResetPasswordRequestBody resetPasswordRequestBody,
   );

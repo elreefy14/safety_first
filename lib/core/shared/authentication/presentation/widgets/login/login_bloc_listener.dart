@@ -38,12 +38,11 @@ class LoginBlocListener extends StatelessWidget {
   void setupSuccess(BuildContext context) {
     if (userType == UserType.client) {
       context.pushReplacement(Routes.clientBottomNavBar);
-
-      showToast(msg: 'تم تسجيل الدخول بنجاح', color: Colors.green);
     } else if (userType == UserType.admin) {
       context.pushReplacement(Routes.adminBottomNavBar);
     } else {
       context.pushReplacement(Routes.technichianBottomNavBar);
     }
+    showToast(msg: 'تم تسجيل الدخول بنجاح', color: Colors.green);
   }
 }

@@ -1,24 +1,21 @@
 import 'package:safety_frist/core/cache/shared_pref_helper.dart';
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
-import 'package:safety_frist/users/client/bookings/data/models/update_problem_request_body.dart';
-import 'package:safety_frist/users/client/bookings/data/services/client_problems_service.dart';
+import 'package:safety_frist/users/admin/bookings/data/services/engineer_problems_services.dart';
 import 'package:safety_frist/users/client/bookings/data/models/problem_response_model.dart';
 
-class ClientProblemsRepo {
-  final ClientProblemsService _clientProblemsService;
+class EngineerProblemsRepository {
+  final EngineerProblemsServices _services;
 
-  ClientProblemsRepo(this._clientProblemsService);
+  EngineerProblemsRepository(this._services);
 
   var token = CacheHelper.getData(key: 'token');
 
-  Future<ApiResult<List<ProblemResponseModel>>> getClientProblems() async {
+  Future<ApiResult<List<ProblemResponseModel>>> getAllProblems() async {
     try {
-      final result = await _clientProblemsService.getClientProblems(
-        "Bearer $token",
-      );
+      final response = await _services.getAllProblems("Bearer $token");
 
-      return ApiResult.success(result);
+      return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler());
     }
@@ -28,7 +25,7 @@ class ClientProblemsRepo {
     String problemId,
   ) async {
     try {
-      final response = await _clientProblemsService.getProblemById(
+      final response = await _services.getProblemById(
         "Bearer $token",
         problemId,
       );
@@ -39,15 +36,13 @@ class ClientProblemsRepo {
     }
   }
 
-  Future<ApiResult<void>> updateProblem(
-    String problemId,
-    UpdateProblemRequestBody updateProblem,
+  Future<ApiResult<List<ProblemResponseModel>>> getProblemByStatus(
+    int statusId,
   ) async {
     try {
-      final response = await _clientProblemsService.updateProblem(
+      final response = await _services.getProblemByStatus(
         "Bearer $token",
-        problemId,
-        updateProblem,
+        statusId,
       );
 
       return ApiResult.success(response);
@@ -56,11 +51,15 @@ class ClientProblemsRepo {
     }
   }
 
-  Future<ApiResult<void>> deleteProblem(String problemId) async {
+  Future<ApiResult<void>> assignProblemToTechnician(
+    String problemId,
+    String technicianId,
+  ) async {
     try {
-      final response = await _clientProblemsService.deleteProblem(
+      final response = await _services.assignProblemToTechnician(
         "Bearer $token",
         problemId,
+        technicianId,
       );
 
       return ApiResult.success(response);

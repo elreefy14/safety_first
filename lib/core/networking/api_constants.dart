@@ -17,9 +17,21 @@ class ApiConstants {
   static const String getProfile = '/Authentication';
 
   // Client
+
+  static const String updateClient = '/Client';
+
+  // Problems
   static const String addProblem = '/Problem';
   static const String clientProblems = '/Problem/client';
-  static const String updateClient = '/Client';
+  static const String technicianProblems = '/Problem/technician';
+  static const String getAllProblems = '/Problem';
+  static const String getProblemById = '/Problem/{id}';
+  static const String getProblemByStatus = '/Problem/status/{id}';
+  static const String deleteProblem = '/Problem/{id}';
+  static const String updateProblem = '/Problem/{id}';
+  static const String updateProblemStatus = '/Problem';
+  static const String assignProblemToTechnician =
+      '/Problem/{problemId}/assign/{technicianId}';
 
   // Admin
   static const String addTechnician = '/Technician';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:safety_frist/core/cache/shared_pref_helper.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/register/client_register_request_body.dart';
@@ -14,6 +15,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   static RegisterCubit get(context) => BlocProvider.of(context);
 
   GlobalKey<FormState> formKey = GlobalKey();
+  GlobalKey<FormState> formKeyConfirm = GlobalKey();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
@@ -34,10 +36,36 @@ class RegisterCubit extends Cubit<RegisterState> {
 
     if (response is Success<AuthResponseModel>) {
       userModel = response.data;
-
+      saveUserEmail(response.data.email!);
       emit(RegisterSuccessState(authResponseModel: userModel!));
     } else if (response is Failure<AuthResponseModel>) {
       emit(RegisterErrorState(response.error.toString()));
     }
+  }
+
+  void confirmEmail({required String otpCode}) async {
+    emit(ConfirmEmailLoadingState());
+    final response = await _authRepository.confirmEmail(otpCode);
+
+    if (response is Success) {
+      emit(ConfirmEmailSuccessState());
+    } else if (response is Failure) {
+      emit(ConfirmEmailErrorState(response.error.toString()));
+    }
+  }
+
+  void resendOtpConfirmEmail() async {
+    emit(ConfirmEmailLoadingState());
+    final response = await _authRepository.resendOtpConfirmEmail();
+
+    if (response is Success) {
+      emit(ConfirmEmailSuccessState());
+    } else if (response is Failure) {
+      emit(ConfirmEmailErrorState(response.error.toString()));
+    }
+  }
+
+  saveUserEmail(String email) {
+    CacheHelper.saveData(key: 'email', value: email);
   }
 }

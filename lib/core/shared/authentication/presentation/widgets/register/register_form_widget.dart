@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/logic/register/register_cubit.dart';
 import 'package:safety_frist/core/widgets/email_text_form_field.dart';
 import 'package:safety_frist/core/widgets/name_password_text_form.dart';
@@ -61,8 +59,7 @@ class RegisterFormWidget extends StatelessWidget {
                     textButton: 'إنشاء حساب',
                     isLoading: state is RegisterLoadingState ? true : false,
                     onPressed: () {
-                      //  validateThenNavigate(context);
-                      context.pushReplacement(Routes.verifyEmailScreen);
+                      validateThenNavigate(context);
                     },
                   ),
                 );

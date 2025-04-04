@@ -32,6 +32,7 @@ dependencies:
   app_links: ^6.4.0
   awesome_dialog: ^3.2.1
   build_runner: ^2.4.15
+  cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
   curved_labeled_navigation_bar: ^2.0.6
   dio: ^5.8.0+1
@@ -63,6 +64,7 @@ dependencies:
   retrofit: ^4.4.2
   retrofit_generator: ^9.1.9
   shared_preferences: ^2.5.2
+  shimmer: ^3.0.0
   smart_auth: ^3.2.0
   smooth_page_indicator: ^1.2.1
 

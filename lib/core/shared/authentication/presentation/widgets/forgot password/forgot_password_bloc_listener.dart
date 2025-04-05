@@ -27,6 +27,9 @@ class ForgotPasswordBlocListener extends StatelessWidget {
               );
               context.pushReplacement(Routes.resetPasswordScreen);
 
+            case ForgotPasswordErrorState():
+              showToast(msg: 'فشل إرسال الكود إلي الايميل', color: Colors.red);
+
             default:
           }
         },

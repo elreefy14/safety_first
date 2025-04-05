@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/helper/functions/show_toast.dart';
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/core/shared/profile/data/models/logout_response_model.dart';
@@ -16,7 +18,11 @@ class ProfileRepository {
 
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -28,7 +34,11 @@ class ProfileRepository {
 
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 }

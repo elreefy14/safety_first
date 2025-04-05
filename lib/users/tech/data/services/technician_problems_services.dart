@@ -4,15 +4,15 @@ import 'package:safety_frist/core/networking/api_constants.dart';
 import 'package:safety_frist/users/client/bookings/data/models/problem_response_model.dart';
 import 'package:safety_frist/users/tech/data/models/update_problem_request_body.dart';
 
-part 'client_problems_service.g.dart';
+part 'technician_problems_services.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
-abstract class ClientProblemsService {
-  factory ClientProblemsService(Dio dio, {String baseUrl}) =
-      _ClientProblemsService;
+abstract class TechnicianProblemsServices {
+  factory TechnicianProblemsServices(Dio dio, {String baseUrl}) =
+      _TechnicianProblemsServices;
 
-  @GET(ApiConstants.clientProblems)
-  Future<List<ProblemResponseModel>> getClientProblems(
+  @GET(ApiConstants.technicianProblems)
+  Future<List<ProblemResponseModel>> getTechnicianProblems(
     @Header('Authorization') String userToken,
   );
 
@@ -33,5 +33,20 @@ abstract class ClientProblemsService {
     @Header('Authorization') String userToken,
     @Path("id") String id,
     @Body() UpdateProblemRequestBody updateProblemRequestBody,
+  );
+
+  @PUT(ApiConstants.updateProblemImage)
+  @MultiPart()
+  Future<void> updateProblemImage(
+    @Header('Authorization') String userToken,
+    @Path("id") String id,
+    @Body() FormData formData,
+  );
+
+  @PUT(ApiConstants.updateProblemStatus)
+  Future<void> updateProblemStatus(
+    @Header('Authorization') String userToken,
+    @Path("id") String id,
+    @Query("status") int status,
   );
 }

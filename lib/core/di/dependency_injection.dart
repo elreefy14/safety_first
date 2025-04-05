@@ -5,6 +5,7 @@ import 'package:safety_frist/users/admin/bookings/data/services/emgineer_problem
 import 'package:safety_frist/users/admin/technichians/data/services/technician_dependency.dart';
 import 'package:safety_frist/users/client/bookings/data/services/client_problems_dependency.dart';
 import 'package:safety_frist/users/client/home/data/service/problem_dependency.dart';
+import 'package:safety_frist/users/tech/data/services/technician_problem_dependency.dart';
 
 final getIt = GetIt.instance;
 
@@ -15,4 +16,5 @@ Future<void> setupGetIt() async {
   await profileDependency();
   await technicianDependency();
   await engineerProblemsDependency();
+  await technicianProblemsDependency();
 }

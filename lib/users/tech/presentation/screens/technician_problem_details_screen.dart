@@ -8,23 +8,24 @@ import 'package:safety_frist/core/widgets/app_text_button.dart';
 import 'package:safety_frist/core/widgets/app_text_form_field.dart';
 import 'package:safety_frist/core/widgets/appbar_icon.dart';
 import 'package:safety_frist/users/client/bookings/data/models/problem_response_model.dart';
-import 'package:safety_frist/users/client/bookings/presentation/logic/client_problems_cubit.dart';
+import 'package:safety_frist/users/tech/presentation/logic/technician_problems_cubit.dart';
+import 'package:safety_frist/users/tech/presentation/logic/technician_problems_state.dart';
 
-class ClientProblemDetailsScreen extends StatelessWidget {
-  const ClientProblemDetailsScreen({super.key, required this.problem});
+class TechnicianProblemDetailsScreen extends StatelessWidget {
+  const TechnicianProblemDetailsScreen({super.key, required this.problem});
 
   final ProblemResponseModel problem;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController problemDescriptionController =
-        TextEditingController();
+    TextEditingController desController = TextEditingController();
+
     return BlocProvider(
-      create: (context) => getIt<ClientProblemsCubit>(),
-      child: BlocConsumer<ClientProblemsCubit, ClientProblemsState>(
+      create: (context) => getIt<TechnicianProblemsCubit>(),
+      child: BlocConsumer<TechnicianProblemsCubit, TechnicianProblemsState>(
         listener: (context, state) {
-          if (state is UpdateProblemSuccessState) {
-            showToast(msg: 'تم تحديث الطلب بنجاح', color: Colors.green);
+          if (state is UpdateProblemStatusSuccessState) {
+            showToast(msg: 'تم تحديث حالة الطلب بنجاح', color: Colors.green);
           }
         },
         builder: (context, state) {
@@ -104,21 +105,21 @@ class ClientProblemDetailsScreen extends StatelessWidget {
                       AppTextFormField(
                         maxLines: 4,
                         hintText: problem.description,
-                        // controller:
-                        //     ClientProblemsCubit.get(context).problemDescriptionController,
+                        controller: desController,
                       ),
                       verticalSpace(30),
                       SizedBox(
                         width: double.infinity,
                         child: AppTextButton(
-                          textButton: 'تحديث الطلب',
+                          textButton: 'تحديث حالة الطلب',
                           isLoading:
-                              state is UpdateProblemLoadingState ? true : false,
+                              state is UpdateProblemStatusLoadingState
+                                  ? true
+                                  : false,
                           onPressed: () {
-                            ClientProblemsCubit.get(context).updateProblem(
-                              problemId: problem.id!,
-                              description: problemDescriptionController,
-                            );
+                            TechnicianProblemsCubit.get(
+                              context,
+                            ).updateProblemStatus(problemId: problem.id!);
                           },
                         ),
                       ),

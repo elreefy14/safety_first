@@ -34,6 +34,6 @@ IconData statusIcon({required int status}) {
   } else if (status == 1) {
     return Icons.sync;
   } else {
-    return Icons.sync;
+    return Icons.done_outline;
   }
 }

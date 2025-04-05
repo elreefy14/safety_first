@@ -6,7 +6,10 @@ class ApiErrorHandler {
     if (error is DioException) {
       return _handleDioError(error);
     } else {
-      return ApiErrorModel(statusCode: 500, message: 'حدث خطأ غير متوقع.');
+      return ApiErrorModel(
+        statusCode: 500,
+        message: 'لا يوجد اتصال بالإنترنت، يرجى التحقق من الشبكة',
+      );
     }
   }
 
@@ -17,19 +20,19 @@ class ApiErrorHandler {
       case DioExceptionType.receiveTimeout:
         return ApiErrorModel(
           statusCode: 408,
-          message: 'انتهت مهلة الطلب، يرجى التحقق من اتصالك بالإنترنت.',
+          message: 'انتهت مهلة الطلب، يرجى التحقق من اتصالك بالإنترنت',
         );
       case DioExceptionType.badResponse:
         return _handleBadResponse(error.response!);
       case DioExceptionType.cancel:
-        return ApiErrorModel(statusCode: 499, message: 'تم إلغاء الطلب.');
+        return ApiErrorModel(statusCode: 499, message: 'تم إلغاء الطلب');
       case DioExceptionType.unknown:
         return ApiErrorModel(
           statusCode: 503,
-          message: 'لا يوجد اتصال بالإنترنت، يرجى التحقق من الشبكة.',
+          message: 'لا يوجد اتصال بالإنترنت، يرجى التحقق من الشبكة',
         );
       default:
-        return ApiErrorModel(statusCode: 500, message: 'حدث خطأ غير متوقع.');
+        return ApiErrorModel(statusCode: 500, message: 'حدث خطأ غير متوقع');
     }
   }
 
@@ -38,12 +41,14 @@ class ApiErrorHandler {
       case 400:
         return ApiErrorModel(
           statusCode: 400,
-          message: 'طلب غير صحيح، يرجى التحقق من المدخلات.',
+          message:
+              'عذرًا، هذا البريد الإلكتروني مستخدم بالفعل. يرجى استخدام بريد إلكتروني آخر',
         );
       case 401:
         return ApiErrorModel(
           statusCode: 401,
-          message: 'غير مصرح، يرجى تسجيل الدخول مجددًا.',
+          message:
+              'عذرًا، البريد الإلكتروني أو كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخر',
         );
       case 403:
         return ApiErrorModel(

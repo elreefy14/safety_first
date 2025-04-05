@@ -21,7 +21,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
 
-  late AuthResponseModel? userModel;
+  AuthResponseModel? userModel;
 
   void emitRegisterStates() async {
     emit(RegisterLoadingState());
@@ -36,7 +36,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
     if (response is Success<AuthResponseModel>) {
       userModel = response.data;
-      saveUserEmail(response.data.email!);
+      saveUserEmail(emailController.text);
       emit(RegisterSuccessState(authResponseModel: userModel!));
     } else if (response is Failure<AuthResponseModel>) {
       emit(RegisterErrorState(response.error.toString()));
@@ -55,13 +55,13 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   void resendOtpConfirmEmail() async {
-    emit(ConfirmEmailLoadingState());
+    emit(ResendConfirmEmailLoadingState());
     final response = await _authRepository.resendOtpConfirmEmail();
 
     if (response is Success) {
-      emit(ConfirmEmailSuccessState());
+      emit(ResendConfirmEmailSuccessState());
     } else if (response is Failure) {
-      emit(ConfirmEmailErrorState(response.error.toString()));
+      emit(ResendConfirmEmailErrorState(response.error.toString()));
     }
   }
 

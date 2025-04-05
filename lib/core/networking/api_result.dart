@@ -1,9 +1,7 @@
-import 'package:safety_frist/core/networking/api_error_handler.dart';
-
 abstract class ApiResult<T> {
   const ApiResult();
   factory ApiResult.success(T data) = Success<T>;
-  factory ApiResult.failure(ApiErrorHandler error) = Failure<T>;
+  factory ApiResult.failure(String error) = Failure<T>;
 }
 
 class Success<T> extends ApiResult<T> {
@@ -12,6 +10,6 @@ class Success<T> extends ApiResult<T> {
 }
 
 class Failure<T> extends ApiResult<T> {
-  final ApiErrorHandler error;
+  final String error;
   const Failure(this.error);
 }

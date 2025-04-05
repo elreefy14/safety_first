@@ -12,6 +12,7 @@ import 'package:safety_frist/users/admin/technichians/presentation/screens/add_e
 import 'package:safety_frist/users/admin/technichians/presentation/screens/add_technician_screen.dart';
 import 'package:safety_frist/users/admin/bookings/presentation/screens/admin_bottom_navigation_bar_screen.dart';
 import 'package:safety_frist/users/client/home/presentation/screens/client_bottom_navigation_bar_screen.dart';
+import 'package:safety_frist/users/tech/presentation/screens/technician_bottom_nav_bar.dart';
 
 final GoRouter router = GoRouter(
   routes: <GoRoute>[
@@ -76,6 +77,14 @@ final GoRouter router = GoRouter(
       path: Routes.clientBottomNavBar,
       builder: (BuildContext context, GoRouterState state) {
         return const ClientBottomNavigationBarScreen();
+      },
+    ),
+
+    // Technician Bottom Navigation Bar Screen
+    GoRoute(
+      path: Routes.technicianBottomNavBar,
+      builder: (BuildContext context, GoRouterState state) {
+        return const TechnicianBottomNavBar();
       },
     ),
 

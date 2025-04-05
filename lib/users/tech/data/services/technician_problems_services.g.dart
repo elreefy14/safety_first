@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'client_problems_service.dart';
+part of 'technician_problems_services.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'client_problems_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _ClientProblemsService implements ClientProblemsService {
-  _ClientProblemsService(this._dio, {this.baseUrl, this.errorLogger}) {
+class _TechnicianProblemsServices implements TechnicianProblemsServices {
+  _TechnicianProblemsServices(this._dio, {this.baseUrl, this.errorLogger}) {
     baseUrl ??= 'https://safety.runasp.net/api';
   }
 
@@ -20,7 +20,9 @@ class _ClientProblemsService implements ClientProblemsService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<ProblemResponseModel>> getClientProblems(String userToken) async {
+  Future<List<ProblemResponseModel>> getTechnicianProblems(
+    String userToken,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': userToken};
@@ -30,7 +32,7 @@ class _ClientProblemsService implements ClientProblemsService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/Problem/client',
+            '/Problem/technician',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -121,6 +123,59 @@ class _ClientProblemsService implements ClientProblemsService {
           .compose(
             _dio.options,
             '/Problem/${id}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<void> updateProblemImage(
+    String userToken,
+    String id,
+    FormData formData,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': userToken};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = formData;
+    final _options = _setStreamType<void>(
+      Options(
+            method: 'PUT',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'multipart/form-data',
+          )
+          .compose(
+            _dio.options,
+            '/Problem/image/${id}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<void> updateProblemStatus(
+    String userToken,
+    String id,
+    int status,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'status': status};
+    final _headers = <String, dynamic>{r'Authorization': userToken};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<void>(
+      Options(method: 'PUT', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/Problem/status/${id}',
             queryParameters: queryParameters,
             data: _data,
           )

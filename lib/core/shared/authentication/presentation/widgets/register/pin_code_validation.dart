@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/logic/register/register_cubit.dart';
@@ -12,7 +13,7 @@ class PinCodeVerification extends StatefulWidget {
 }
 
 class _PinCodeVerificationState extends State<PinCodeVerification> {
-  TextEditingController textEditingController = TextEditingController();
+  TextEditingController otpCodeController = TextEditingController();
 
   bool hasError = false;
   String currentText = "";
@@ -35,7 +36,7 @@ class _PinCodeVerificationState extends State<PinCodeVerification> {
                 animationType: AnimationType.fade,
                 cursorColor: Colors.black,
                 animationDuration: const Duration(milliseconds: 300),
-                controller: textEditingController,
+                controller: otpCodeController,
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
                   borderRadius: BorderRadius.circular(5),
@@ -63,16 +64,21 @@ class _PinCodeVerificationState extends State<PinCodeVerification> {
                 },
               ),
               verticalSpace(22),
-              AppTextButton(
-                textButton: 'التحقق من الرمز',
-                onPressed: () {
-                  if (RegisterCubit.get(
-                    context,
-                  ).formKeyConfirm.currentState!.validate()) {
-                    RegisterCubit.get(
-                      context,
-                    ).confirmEmail(otpCode: textEditingController.text);
-                  }
+              BlocBuilder<RegisterCubit, RegisterState>(
+                builder: (context, state) {
+                  return AppTextButton(
+                    textButton: 'التحقق من الرمز',
+                    isLoading: state is ConfirmEmailLoadingState ? true : false,
+                    onPressed: () {
+                      if (RegisterCubit.get(
+                        context,
+                      ).formKeyConfirm.currentState!.validate()) {
+                        RegisterCubit.get(
+                          context,
+                        ).confirmEmail(otpCode: otpCodeController.text);
+                      }
+                    },
+                  );
                 },
               ),
               verticalSpace(22),

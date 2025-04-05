@@ -21,7 +21,7 @@ final class GetProblemByIdErrorState extends ClientProblemsState {
   GetProblemByIdErrorState({required this.error});
 }
 
-// Get Problem By Id
+// Delete Problem By Id
 
 final class DeleteProblemLoadingState extends ClientProblemsState {}
 
@@ -33,7 +33,7 @@ final class DeleteProblemErrorState extends ClientProblemsState {
   DeleteProblemErrorState({required this.error});
 }
 
-// Get Problem By Id
+// Update Problem
 
 final class UpdateProblemLoadingState extends ClientProblemsState {}
 
@@ -44,3 +44,31 @@ final class UpdateProblemErrorState extends ClientProblemsState {
 
   UpdateProblemErrorState({required this.error});
 }
+
+// Update Problem Status
+
+final class UpdateProblemStatusLoadingState extends ClientProblemsState {}
+
+final class UpdateProblemStatusSuccessState extends ClientProblemsState {}
+
+final class UpdateProblemStatusErrorState extends ClientProblemsState {
+  final String error;
+
+  UpdateProblemStatusErrorState({required this.error});
+}
+
+// Update Problem Image
+
+final class UpdateProblemImageLoadingState extends ClientProblemsState {}
+
+final class UpdateProblemImageSuccessState extends ClientProblemsState {}
+
+final class UpdateProblemImageErrorState extends ClientProblemsState {
+  final String error;
+
+  UpdateProblemImageErrorState({required this.error});
+}
+
+final class ImageSelectedSuccessState extends ClientProblemsState {}
+
+final class ImageSelectedErrorState extends ClientProblemsState {}

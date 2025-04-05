@@ -30,7 +30,7 @@ class ProblemRepository {
       );
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -40,7 +40,7 @@ class ProblemRepository {
 
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 }

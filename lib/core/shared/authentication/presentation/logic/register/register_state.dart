@@ -29,6 +29,8 @@ final class ConfirmEmailErrorState extends RegisterState {
   ConfirmEmailErrorState(this.error);
 }
 
+final class ResendConfirmEmailLoadingState extends RegisterState {}
+
 final class ResendConfirmEmailSuccessState extends RegisterState {}
 
 final class ResendConfirmEmailErrorState extends RegisterState {

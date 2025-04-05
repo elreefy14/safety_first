@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/helper/functions/show_toast.dart';
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
@@ -27,7 +29,11 @@ class AuthRepository {
 
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -40,7 +46,11 @@ class AuthRepository {
       );
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -49,7 +59,11 @@ class AuthRepository {
       final result = await _authServices.confirmEmail(email, otpCode);
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -60,7 +74,11 @@ class AuthRepository {
       );
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -71,7 +89,11 @@ class AuthRepository {
       final result = await _authServices.forgotPassword(email);
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -82,7 +104,7 @@ class AuthRepository {
       final result = await _authServices.resendOtpResetPassword(email);
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -100,7 +122,11 @@ class AuthRepository {
       );
       return ApiResult.success(result);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 }

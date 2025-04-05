@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/login/login_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/forgot_password_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/repository/auth_repository.dart';
-
-import '../../../../../cache/shared_pref_helper.dart';
 
 part 'login_state.dart';
 
@@ -35,8 +35,10 @@ class LoginCubit extends Cubit<LoginState> {
       userModel = response.data;
       saveUserToken(response.data.accessToken!);
       emit(LoginSuccessState(authResponseModel: userModel!));
-    } else if (response is Failure<AuthResponseModel>) {
-      emit(LoginErrorState(message: response.error.toString()));
+    } else if (response is Failure) {
+      emit(
+        LoginErrorState(message: ApiErrorHandler.handleError(response).message),
+      );
     }
   }
 

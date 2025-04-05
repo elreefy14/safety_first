@@ -17,7 +17,6 @@ class ApiConstants {
   static const String getProfile = '/Authentication';
 
   // Client
-
   static const String updateClient = '/Client';
 
   // Problems
@@ -29,7 +28,8 @@ class ApiConstants {
   static const String getProblemByStatus = '/Problem/status/{id}';
   static const String deleteProblem = '/Problem/{id}';
   static const String updateProblem = '/Problem/{id}';
-  static const String updateProblemStatus = '/Problem';
+  static const String updateProblemImage = '/Problem/image/{id}';
+  static const String updateProblemStatus = '/Problem/status/{id}';
   static const String assignProblemToTechnician =
       '/Problem/{problemId}/assign/{technicianId}';
 

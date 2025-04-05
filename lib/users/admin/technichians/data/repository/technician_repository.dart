@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/helper/functions/show_toast.dart';
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/users/admin/technichians/data/models/add_technician_request_body.dart';
@@ -23,7 +25,11 @@ class TechnicianRepository {
 
       return ApiResult.success(response);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -35,7 +41,11 @@ class TechnicianRepository {
 
       return ApiResult.success(response);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -54,7 +64,11 @@ class TechnicianRepository {
 
       return ApiResult.success(response);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -66,7 +80,11 @@ class TechnicianRepository {
 
       return ApiResult.success(response);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 
@@ -78,7 +96,11 @@ class TechnicianRepository {
 
       return ApiResult.success(response);
     } catch (error) {
-      return ApiResult.failure(ApiErrorHandler());
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
 }

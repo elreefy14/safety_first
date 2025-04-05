@@ -14,7 +14,7 @@ class Routes {
   static const String clientBottomNavBar = '/clientBottomNavBar';
 
   // Technichian
-  static const String technichianBottomNavBar = '/clientBottomNavBar';
+  static const String technicianBottomNavBar = '/technicianBottomNavBar';
 
   // Admin
   static const String adminBottomNavBar = '/adminBottomNavBar';

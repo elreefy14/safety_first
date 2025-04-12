@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safety_frist/app/logic/app_state.dart';
-import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
 
 enum ThemeModeState { light, dark, system }
 

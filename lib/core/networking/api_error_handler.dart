@@ -26,13 +26,18 @@ class ApiErrorHandler {
         return _handleBadResponse(error.response!);
       case DioExceptionType.cancel:
         return ApiErrorModel(statusCode: 499, message: 'تم إلغاء الطلب');
+      case DioExceptionType.connectionError:
+        return ApiErrorModel(
+          statusCode: 499,
+          message: 'لا يوجد اتصال بالإنترنت، يرجى التحقق من الشبكة',
+        );
       case DioExceptionType.unknown:
+        return ApiErrorModel(statusCode: 500, message: 'حدث خطأ غير متوقع');
+      default:
         return ApiErrorModel(
           statusCode: 503,
           message: 'لا يوجد اتصال بالإنترنت، يرجى التحقق من الشبكة',
         );
-      default:
-        return ApiErrorModel(statusCode: 500, message: 'حدث خطأ غير متوقع');
     }
   }
 
@@ -48,7 +53,7 @@ class ApiErrorHandler {
         return ApiErrorModel(
           statusCode: 401,
           message:
-              'عذرًا، البريد الإلكتروني أو كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخر',
+              'البريد الإلكتروني أو كلمة المرور غير صحيحة. الرجاء المحاولة مرة آخرى',
         );
       case 403:
         return ApiErrorModel(
@@ -56,21 +61,21 @@ class ApiErrorHandler {
           message: 'ممنوع، لا تملك صلاحية الوصول.',
         );
       case 404:
-        return ApiErrorModel(statusCode: 404, message: 'المورد غير موجود.');
+        return ApiErrorModel(statusCode: 404, message: 'المورد غير موجود');
       case 500:
         return ApiErrorModel(
           statusCode: 500,
-          message: 'خطأ داخلي في الخادم، يرجى المحاولة لاحقًا.',
+          message: 'خطأ داخلي في الخادم، يرجى المحاولة لاحقًا',
         );
       case 503:
         return ApiErrorModel(
           statusCode: 503,
-          message: 'الخدمة غير متوفرة حاليًا، يرجى المحاولة لاحقًا.',
+          message: 'الخدمة غير متوفرة حاليًا، يرجى المحاولة لاحقًا',
         );
       default:
         return ApiErrorModel(
           statusCode: response.statusCode ?? 500,
-          message: 'حدث خطأ أثناء معالجة الطلب.',
+          message: 'حدث خطأ أثناء معالجة الطلب',
         );
     }
   }

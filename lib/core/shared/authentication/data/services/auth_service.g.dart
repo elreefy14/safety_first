@@ -102,13 +102,13 @@ class _AuthServices implements AuthServices {
 
   @override
   Future<void> resendOtpConfirmEmail(
-    ResendOptConfirmEmailRequestBody email,
+    ResendOptConfirmEmailRequestBody resendOptConfirmEmailRequestBody,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(email.toJson());
+    _data.addAll(resendOptConfirmEmailRequestBody.toJson());
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -123,12 +123,14 @@ class _AuthServices implements AuthServices {
   }
 
   @override
-  Future<void> forgotPassword(ForgotPasswordRequestBody email) async {
+  Future<void> forgotPassword(
+    ForgotPasswordRequestBody forgotPasswordRequestBody,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(email.toJson());
+    _data.addAll(forgotPasswordRequestBody.toJson());
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -143,12 +145,14 @@ class _AuthServices implements AuthServices {
   }
 
   @override
-  Future<void> resendOtpResetPassword(ForgotPasswordRequestBody email) async {
+  Future<void> resendOtpResetPassword(
+    ResentOtpForgotPasswordRewuestBody resentOtpForgotPasswordRewuestBody,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(email.toJson());
+    _data.addAll(resentOtpForgotPasswordRewuestBody.toJson());
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(

@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ProblemShimmerLoadingWidget extends StatelessWidget {
-  const ProblemShimmerLoadingWidget({super.key});
+class TechniciansShimmerLoadingWidget extends StatelessWidget {
+  const TechniciansShimmerLoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

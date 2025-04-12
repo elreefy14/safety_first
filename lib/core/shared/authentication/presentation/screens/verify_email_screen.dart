@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/widgets/register/confirm_email_bloc_listener.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/widgets/register/pin_code_validation.dart';
@@ -25,7 +26,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 22),
                   child: Text(
-                    'الرجاء إدخال الرمز المكون من 6 أرقام المرسل إلى: ${CacheHelper.getData(key: 'email')}',
+                    'الرجاء إدخال الرمز المكون من 6 أرقام المرسل إلى: ${CacheHelper.getSecuredData(key: CacheHelperKeys.email)}',
                     style: Theme.of(context).textTheme.bodyMedium,
                     textAlign: TextAlign.center,
                   ),

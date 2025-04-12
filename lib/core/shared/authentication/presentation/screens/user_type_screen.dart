@@ -24,26 +24,24 @@ class _UserTypeScreenState extends State<UserTypeScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-            child: Column(
-              spacing: 20.h,
-              children: [
-                Text(
-                  'اختر نوع الحساب',
-                  style: Theme.of(context).textTheme.titleLarge,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+          child: Column(
+            spacing: 20.h,
+            children: [
+              Text(
+                'اختر نوع الحساب',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              usersListView(),
+              SizedBox(
+                width: double.infinity,
+                child: AppTextButton(
+                  textButton: 'استمر',
+                  onPressed: () => _navigateToLoginScreen(context),
                 ),
-                usersListView(),
-                SizedBox(
-                  width: double.infinity,
-                  child: AppTextButton(
-                    textButton: 'استمر',
-                    onPressed: () => _navigateToLoginScreen(context),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -54,7 +52,7 @@ class _UserTypeScreenState extends State<UserTypeScreen> {
     return Expanded(
       child: ListView.builder(
         itemCount: listUser.length,
-        physics: NeverScrollableScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.only(bottom: 20.w),

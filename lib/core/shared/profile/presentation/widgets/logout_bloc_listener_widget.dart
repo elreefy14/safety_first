@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/helper/functions/show_toast.dart';
 import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_cubit.dart';
@@ -19,6 +21,7 @@ class LogoutBlocListenerWidget extends StatelessWidget {
         if (state is LogoutUserSuccessState) {
           context.pushReplacement(Routes.userTypeScreen);
           showToast(msg: 'تم تسجيل الخروج بنجاح', color: Colors.green);
+          CacheHelper.saveData(key: CacheHelperKeys.onBoarding, value: false);
         }
       },
       child: CardSettingItemWidget(

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/forgot_password_request_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/resent_otp_forgot_password_rewuest_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/forgot%20password/reset_password_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/repository/auth_repository.dart';
 
 part 'forgot_password_state.dart';
@@ -38,7 +41,9 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   void resendOtpResetPassword() async {
     emit(ResendOTPForgotPasswordLoadingState());
     final response = await _authRepository.resendOtpResetPassword(
-      ForgotPasswordRequestBody(email: emailController.text),
+      ResentOtpForgotPasswordRewuestBody(
+        email: CacheHelper.getSecuredData(key: CacheHelperKeys.email),
+      ),
     );
 
     if (response is Success) {
@@ -50,11 +55,14 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     }
   }
 
-  void resetPassword() async {
+  void resetPassword({required String email}) async {
     emit(ResetPasswordLoadingState());
     final response = await _authRepository.resetPassword(
-      otpCode: otpCodeController.text,
-      newPassword: passwordController.text,
+      ResetPasswordRequestBody(
+        email: CacheHelper.getSecuredData(key: CacheHelperKeys.email),
+        otp: otpCodeController.text,
+        newPassword: passwordController.text,
+      ),
     );
 
     if (response is Success) {
@@ -65,6 +73,6 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   }
 
   saveUserEmail(String email) {
-    CacheHelper.saveData(key: 'email', value: email);
+    CacheHelper.saveSecuredData(key: CacheHelperKeys.email, value: email);
   }
 }

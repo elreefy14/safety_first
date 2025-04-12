@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/logic/forgot%20password/forgot_password_cubit.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/widgets/forgot%20password/otp_code_reset_password_widget.dart';
 import 'package:safety_frist/core/widgets/password_text_form_field.dart';
@@ -46,7 +48,11 @@ class ResetPasswordFormWidget extends StatelessWidget {
                       if (ForgotPasswordCubit.get(
                         context,
                       ).formKeyReset.currentState!.validate()) {
-                        ForgotPasswordCubit.get(context).resetPassword();
+                        ForgotPasswordCubit.get(context).resetPassword(
+                          email: CacheHelper.getSecuredData(
+                            key: CacheHelperKeys.email,
+                          ),
+                        );
                       }
                     },
                   ),

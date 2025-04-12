@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:safety_frist/core/helper/functions/problem_status.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/widgets/appbar_icon.dart';
 import 'package:safety_frist/users/client/bookings/data/models/problem_response_model.dart';
@@ -69,7 +68,7 @@ class ProblemDetailsScreen extends StatelessWidget {
                   ).textTheme.bodyLarge!.copyWith(color: Colors.blue),
                 ),
                 Text(
-                  serviceType(type: problem.type!),
+                  problem.problemTypeName!,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],

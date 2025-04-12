@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/logic/register/register_cubit.dart';
 import 'package:safety_frist/core/widgets/app_text_button.dart';
@@ -73,9 +75,12 @@ class _PinCodeVerificationState extends State<PinCodeVerification> {
                       if (RegisterCubit.get(
                         context,
                       ).formKeyConfirm.currentState!.validate()) {
-                        RegisterCubit.get(
-                          context,
-                        ).confirmEmail(otpCode: otpCodeController.text);
+                        RegisterCubit.get(context).confirmEmail(
+                          email: CacheHelper.getSecuredData(
+                            key: CacheHelperKeys.email,
+                          ),
+                          otpCode: otpCodeController.text,
+                        );
                       }
                     },
                   );

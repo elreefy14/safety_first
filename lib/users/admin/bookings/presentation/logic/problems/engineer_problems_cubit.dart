@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/users/admin/bookings/data/repository/engineer_problems_repository.dart';
-import 'package:safety_frist/users/admin/bookings/presentation/logic/engineer_problems_state.dart';
+import 'package:safety_frist/users/admin/bookings/presentation/logic/problems/engineer_problems_state.dart';
 import 'package:safety_frist/users/client/bookings/data/models/problem_response_model.dart';
 
 class EngineerProblemsCubit extends Cubit<EngineerProblemsState> {

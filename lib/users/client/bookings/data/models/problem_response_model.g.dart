@@ -17,5 +17,6 @@ ProblemResponseModel _$ProblemResponseModelFromJson(
   clientName: json['ClientName'] as String?,
   technicianId: json['TechnicianId'],
   technicianName: json['TechnicianName'] as String?,
-  type: (json['Type'] as num?)?.toInt(),
+  problemTypeId: json['ProblemTypeId'] as String?,
+  problemTypeName: json['ProblemTypeName'] as String?,
 );

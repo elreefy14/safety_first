@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/login/refresh_token_request.dart';
 import 'package:safety_frist/core/shared/authentication/data/services/auth_service.dart';
@@ -8,7 +9,6 @@ import 'package:safety_frist/core/shared/authentication/data/services/auth_servi
 class ApiClient {
   static final ApiClient _instance = ApiClient._internal();
   static final Dio _dio = Dio();
-  final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
   factory ApiClient() {
     return _instance;
@@ -29,7 +29,9 @@ class ApiClient {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          final accessToken = await _storage.read(key: 'access_token');
+          final accessToken = await CacheHelper.getSecuredData(
+            key: CacheHelperKeys.accessToken,
+          );
           if (accessToken != null) {
             options.headers['Authorization'] = 'Bearer $accessToken';
           }
@@ -38,16 +40,19 @@ class ApiClient {
         onError: (DioException error, handler) async {
           if (error.response?.statusCode == 401) {
             // Access Token expired
-            final refreshToken = await _storage.read(key: 'refresh_token');
+            final refreshToken = await CacheHelper.getSecuredData(
+              key: CacheHelperKeys.refreshToken,
+            );
             if (refreshToken != null) {
               try {
                 final newTokens = await _refreshToken(refreshToken);
-                await _storage.write(
-                  key: 'access_token',
+
+                CacheHelper.saveSecuredData(
+                  key: CacheHelperKeys.accessToken,
                   value: newTokens.accessToken,
                 );
-                await _storage.write(
-                  key: 'refresh_token',
+                CacheHelper.saveSecuredData(
+                  key: CacheHelperKeys.refreshToken,
                   value: newTokens.refreshToken,
                 );
 
@@ -58,7 +63,7 @@ class ApiClient {
                 return handler.resolve(response);
               } catch (e) {
                 // Refresh Token failed, log out the user
-                await _storage.deleteAll();
+                await CacheHelper.clearAllSecuredData();
                 // Navigate to login screen
               }
             }

@@ -1,9 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:safety_frist/users/admin/bookings/presentation/logic/engineer_problems_cubit.dart';
+import 'package:safety_frist/users/admin/bookings/presentation/logic/problems/engineer_problems_cubit.dart';
 import 'package:safety_frist/users/admin/bookings/presentation/widgets/task_list_card.dart';
 
 class TaskTabs extends StatelessWidget {
@@ -28,7 +26,6 @@ class TaskTabs extends StatelessWidget {
                 color: Colors.blue.withOpacity(0.2),
               ),
               onTap: (value) {
-                log('$value');
                 if (value == 0) {
                   EngineerProblemsCubit.get(context).getAllProblems();
                 } else if (value == 1) {

@@ -71,7 +71,7 @@ class TechnicianProblemsListViewItem extends StatelessWidget {
                   ),
                   verticalSpace(8),
                   Text(
-                    'المشكلة: ${serviceType(type: problem.type!)}',
+                    'المشكلة: ${problem.problemTypeName}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   verticalSpace(8),

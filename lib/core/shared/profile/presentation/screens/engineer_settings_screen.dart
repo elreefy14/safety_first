@@ -30,6 +30,14 @@ class EngineerSettingsScreen extends StatelessWidget {
           },
         ),
         Divider(color: Colors.grey),
+        CardSettingItemWidget(
+          title: 'الخدمات المتاحة',
+          image: 'assets/icons/feedback-review.svg',
+          onTap: () {
+            context.push(Routes.engineerServicesScreen);
+          },
+        ),
+        Divider(color: Colors.grey),
         const NotificationPlayingWidget(),
         Divider(color: Colors.grey),
         CardSettingItemWidget(
@@ -46,12 +54,6 @@ class EngineerSettingsScreen extends StatelessWidget {
           onTap: () {
             context.push(Routes.addEngineerScreen);
           },
-        ),
-        Divider(color: Colors.grey),
-        CardSettingItemWidget(
-          title: 'قيمنا الأن',
-          image: 'assets/icons/feedback-review.svg',
-          onTap: () {},
         ),
         Divider(color: Colors.grey),
         LogoutBlocListenerWidget(),

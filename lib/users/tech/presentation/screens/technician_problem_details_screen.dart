@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safety_frist/core/di/dependency_injection.dart';
-import 'package:safety_frist/core/helper/functions/problem_status.dart';
 import 'package:safety_frist/core/helper/functions/show_toast.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/widgets/app_text_button.dart';
@@ -89,7 +88,7 @@ class TechnicianProblemDetailsScreen extends StatelessWidget {
                             ).textTheme.bodyLarge!.copyWith(color: Colors.blue),
                           ),
                           Text(
-                            serviceType(type: problem.type!),
+                            problem.problemTypeName!,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ],

@@ -13,7 +13,8 @@ class ProblemResponseModel {
     required this.clientName,
     required this.technicianId,
     required this.technicianName,
-    required this.type,
+    required this.problemTypeId,
+    required this.problemTypeName,
   });
 
   @JsonKey(name: 'Id')
@@ -40,8 +41,11 @@ class ProblemResponseModel {
   @JsonKey(name: 'TechnicianName')
   final String? technicianName;
 
-  @JsonKey(name: 'Type')
-  final int? type;
+  @JsonKey(name: 'ProblemTypeId')
+  final String? problemTypeId;
+
+  @JsonKey(name: 'ProblemTypeName')
+  final String? problemTypeName;
 
   factory ProblemResponseModel.fromJson(Map<String, dynamic> json) =>
       _$ProblemResponseModelFromJson(json);

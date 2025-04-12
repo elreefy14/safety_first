@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/register/client_register_request_body.dart';
+import 'package:safety_frist/core/shared/authentication/data/models/register/resend_otp_confirm_email_request_body.dart';
 import 'package:safety_frist/core/shared/authentication/data/repository/auth_repository.dart';
 
 part 'register_state.dart';
@@ -43,9 +45,12 @@ class RegisterCubit extends Cubit<RegisterState> {
     }
   }
 
-  void confirmEmail({required String otpCode}) async {
+  void confirmEmail({required String email, required String otpCode}) async {
     emit(ConfirmEmailLoadingState());
-    final response = await _authRepository.confirmEmail(otpCode);
+    final response = await _authRepository.confirmEmail(
+      email: email,
+      otpCode: otpCode,
+    );
 
     if (response is Success) {
       emit(ConfirmEmailSuccessState());
@@ -56,7 +61,11 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void resendOtpConfirmEmail() async {
     emit(ResendConfirmEmailLoadingState());
-    final response = await _authRepository.resendOtpConfirmEmail();
+    final response = await _authRepository.resendOtpConfirmEmail(
+      ResendOptConfirmEmailRequestBody(
+        email: CacheHelper.getSecuredData(key: CacheHelperKeys.email),
+      ),
+    );
 
     if (response is Success) {
       emit(ResendConfirmEmailSuccessState());
@@ -66,6 +75,6 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   saveUserEmail(String email) {
-    CacheHelper.saveData(key: 'email', value: email);
+    CacheHelper.saveSecuredData(key: CacheHelperKeys.email, value: email);
   }
 }

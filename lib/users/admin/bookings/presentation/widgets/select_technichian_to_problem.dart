@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
-import 'package:safety_frist/users/admin/bookings/presentation/logic/engineer_problems_cubit.dart';
+import 'package:safety_frist/users/admin/bookings/presentation/logic/problems/engineer_problems_cubit.dart';
 import 'package:safety_frist/users/admin/technichians/data/models/technician_response_model.dart';
 
 class SelectTechnichianToProblem extends StatelessWidget {

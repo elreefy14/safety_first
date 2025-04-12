@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:safety_frist/core/helper/functions/problem_status.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
-import 'package:safety_frist/users/admin/bookings/presentation/logic/engineer_problems_cubit.dart';
+import 'package:safety_frist/users/admin/bookings/presentation/logic/problems/engineer_problems_cubit.dart';
 import 'package:safety_frist/users/admin/bookings/presentation/screens/problem_details_screen.dart';
 import 'package:safety_frist/users/admin/bookings/presentation/widgets/select_technichian_to_problem.dart';
 import 'package:safety_frist/users/admin/technichians/presentation/logic/technician/technician_cubit.dart';
@@ -81,7 +80,7 @@ class EngineerProblemListViewItem extends StatelessWidget {
                   ),
                   verticalSpace(8),
                   Text(
-                    'المشكلة: ${serviceType(type: problemModel.type!)}',
+                    'المشكلة: ${problemModel.problemTypeName}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],

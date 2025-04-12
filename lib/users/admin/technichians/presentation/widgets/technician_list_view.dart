@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safety_frist/users/admin/technichians/data/models/technician_response_model.dart';
 import 'package:safety_frist/users/admin/technichians/presentation/logic/technician/technician_cubit.dart';
 import 'package:safety_frist/users/admin/technichians/presentation/logic/technician/technician_state.dart';
 import 'package:safety_frist/users/admin/technichians/presentation/widgets/technician_list_view_item.dart';
+import 'package:safety_frist/users/admin/technichians/presentation/widgets/technicians_shimmer_loading_widget.dart';
 
 class TechnicianListView extends StatelessWidget {
   const TechnicianListView({super.key});
@@ -20,12 +22,24 @@ class TechnicianListView extends StatelessWidget {
             itemBuilder: (context, index) {
               return Padding(
                 padding: EdgeInsets.only(bottom: 12.h),
-                child: TechnicianListViewItem(technician: technicians[index]),
+                child: showListViewItem(technicians, index, state),
               );
             },
           ),
         );
       },
     );
+  }
+
+  Widget showListViewItem(
+    List<TechnicianResponseModel> technicians,
+    int index,
+    state,
+  ) {
+    if (state is GetAllTechniciansLoadingState) {
+      return TechniciansShimmerLoadingWidget();
+    } else {
+      return TechnicianListViewItem(technician: technicians[index]);
+    }
   }
 }

@@ -20,4 +20,5 @@ class Routes {
   static const String adminBottomNavBar = '/adminBottomNavBar';
   static const String addTechnicianScreen = '/addTechnicianScreen';
   static const String addEngineerScreen = '/addEngineerScreen';
+  static const String engineerServicesScreen = '/engineerServicesScreen';
 }

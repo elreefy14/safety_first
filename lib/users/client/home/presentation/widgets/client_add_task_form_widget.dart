@@ -20,7 +20,6 @@ class ClientAddTaskFormWidget extends StatelessWidget {
           showToast(msg: "تم رفع المشكله بنجاح", color: Colors.green);
           context.read<ProblemCubit>().descriptionController.clear();
           context.read<ProblemCubit>().problemImageFile = null;
-          context.read<ProblemCubit>().serviceType = -1;
         } else if (state is ProblemFailure) {
           showToast(msg: "لم يتم رفع المشكله ", color: Colors.red);
         }

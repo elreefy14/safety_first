@@ -1,4 +1,5 @@
-import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/users/tech/data/models/update_problem_request_body.dart';
@@ -10,7 +11,7 @@ class ClientProblemsRepo {
 
   ClientProblemsRepo(this._clientProblemsService);
 
-  var token = CacheHelper.getData(key: 'token');
+  var token = CacheHelper.getSecuredData(key: CacheHelperKeys.accessToken);
 
   Future<ApiResult<List<ProblemResponseModel>>> getClientProblems() async {
     try {

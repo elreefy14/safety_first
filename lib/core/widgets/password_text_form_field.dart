@@ -41,6 +41,11 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
           ),
           validator: (value) {
             AppRegex.isPasswordValid(value!);
+            if (value.isEmpty) {
+              return 'بالرجاء إدخال كلمة المرور';
+            } else {
+              return null;
+            }
           },
           isObscureText: isObscureText,
           suffixIcon: IconButton(

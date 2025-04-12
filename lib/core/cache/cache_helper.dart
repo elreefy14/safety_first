@@ -1,12 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class CacheHelper {
   static SharedPreferences sharedPreferences = CacheHelper.sharedPreferences;
+  static FlutterSecureStorage flutterSecureStorage =
+      CacheHelper.flutterSecureStorage;
 
-  static init() async {
+  static Future<void> init() async {
     sharedPreferences = await SharedPreferences.getInstance();
+    flutterSecureStorage = const FlutterSecureStorage();
   }
 
   static Future<bool> putData({
@@ -37,25 +39,16 @@ class CacheHelper {
     return await sharedPreferences.setDouble(key, value);
   }
 
-  /// Saves a [value] with a [key] in the FlutterSecureStorage.
-  static setSecuredString(String key, String value) async {
-    const flutterSecureStorage = FlutterSecureStorage();
-    debugPrint(
-      "FlutterSecureStorage : setSecuredString with key : $key and value : $value",
-    );
+  static saveSecuredData({required String key, required dynamic value}) async {
     await flutterSecureStorage.write(key: key, value: value);
   }
 
-  /// Gets an String value from FlutterSecureStorage with given [key].
-  static getSecuredString(String key) async {
-    const flutterSecureStorage = FlutterSecureStorage();
-    debugPrint('FlutterSecureStorage : getSecuredString with key :');
+  static getSecuredData({required String key}) async {
     return await flutterSecureStorage.read(key: key) ?? '';
   }
 
   /// Removes all keys and values in the FlutterSecureStorage
   static clearAllSecuredData() async {
-    debugPrint('FlutterSecureStorage : all data has been cleared');
     const flutterSecureStorage = FlutterSecureStorage();
     await flutterSecureStorage.deleteAll();
   }

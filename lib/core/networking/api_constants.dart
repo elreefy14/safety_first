@@ -44,4 +44,11 @@ class ApiConstants {
   static const String updateEngineer = '/Engineer/{id}';
   static const String getEngineer = '/Engineer/{id}';
   static const String getAllEngineers = '/Engineer/all';
+
+  // Problem Type
+  static const String addProblemType = '/ProblemType';
+  static const String updateProblemType = '/ProblemType/{id}';
+  static const String deleteProblemType = '/ProblemType/{id}';
+  static const String getProblemType = '/ProblemType/{id}';
+  static const String getAllProblemType = '/ProblemType';
 }

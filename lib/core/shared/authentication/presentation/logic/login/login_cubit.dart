@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/core/shared/authentication/data/models/login/auth_response_model.dart';
@@ -21,6 +23,7 @@ class LoginCubit extends Cubit<LoginState> {
   GlobalKey<FormState> formKey = GlobalKey();
 
   late AuthResponseModel? userModel;
+  String userRole = '';
 
   void emitLoginStates() async {
     emit(LoginLoadingState());
@@ -32,8 +35,12 @@ class LoginCubit extends Cubit<LoginState> {
     );
 
     if (response is Success<AuthResponseModel>) {
+      decodeJwt(token: response.data.accessToken!);
+      saveUserTokens(
+        accessToken: response.data.accessToken!,
+        refreshToken: response.data.refreshToken!,
+      );
       userModel = response.data;
-      saveUserToken(response.data.accessToken!);
       emit(LoginSuccessState(authResponseModel: userModel!));
     } else if (response is Failure) {
       emit(
@@ -55,7 +62,27 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  saveUserToken(String token) {
-    CacheHelper.saveData(key: 'token', value: token);
+  decodeJwt({required String token}) {
+    Map<String, dynamic> payload = JwtDecoder.decode(token);
+
+    userRole =
+        payload.entries
+            .firstWhere(
+              (element) =>
+                  element.key ==
+                  'http://schemas.microsoft.com/ws/2008/06/identity/claims/role',
+            )
+            .value;
+  }
+
+  saveUserTokens({required String accessToken, required String refreshToken}) {
+    CacheHelper.saveSecuredData(
+      key: CacheHelperKeys.accessToken,
+      value: accessToken,
+    );
+    CacheHelper.saveSecuredData(
+      key: CacheHelperKeys.refreshToken,
+      value: refreshToken,
+    );
   }
 }

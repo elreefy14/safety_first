@@ -30,11 +30,6 @@ class TechnicianSettingsScreen extends StatelessWidget {
         Divider(color: Colors.grey),
         const NotificationPlayingWidget(),
         Divider(color: Colors.grey),
-        CardSettingItemWidget(
-          title: 'قيمنا الأن',
-          image: 'assets/icons/feedback-review.svg',
-          onTap: () {},
-        ),
         Divider(color: Colors.grey),
         LogoutBlocListenerWidget(),
         Divider(color: Colors.grey),

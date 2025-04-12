@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/helper/functions/show_toast.dart';
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
@@ -12,12 +13,12 @@ class TechnicianRepository {
 
   TechnicianRepository(this._service);
 
+  var token = CacheHelper.getSecuredData(key: CacheHelperKeys.accessToken);
+
   Future<ApiResult<void>> addTechnician(
     AddTechnicianRequestBody technician,
   ) async {
     try {
-      var token = CacheHelper.getData(key: 'token');
-
       final response = await _service.addTechnician(
         "Bearer $token",
         technician,
@@ -35,8 +36,6 @@ class TechnicianRepository {
 
   Future<ApiResult<void>> deleteTechnician(String id) async {
     try {
-      var token = CacheHelper.getData(key: 'token');
-
       final response = await _service.deleteTechnician("Bearer $token", id);
 
       return ApiResult.success(response);
@@ -54,8 +53,6 @@ class TechnicianRepository {
     String id,
   ) async {
     try {
-      var token = CacheHelper.getData(key: 'token');
-
       final response = await _service.updateTechnician(
         "Bearer $token",
         id,
@@ -74,8 +71,6 @@ class TechnicianRepository {
 
   Future<ApiResult<TechnicianResponseModel>> getTechnician(String id) async {
     try {
-      var token = CacheHelper.getData(key: 'token');
-
       final response = await _service.getTechnician("Bearer $token", id);
 
       return ApiResult.success(response);
@@ -90,8 +85,6 @@ class TechnicianRepository {
 
   Future<ApiResult<List<TechnicianResponseModel>>> getAllTechnicians() async {
     try {
-      var token = CacheHelper.getData(key: 'token');
-
       final response = await _service.getAllTechnicians("Bearer $token");
 
       return ApiResult.success(response);

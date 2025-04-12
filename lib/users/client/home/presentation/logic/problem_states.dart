@@ -19,3 +19,14 @@ class ProblemFailure extends ProblemState {
 final class ImageSelectedSuccessState extends ProblemState {}
 
 final class ImageSelectedErrorState extends ProblemState {}
+
+// Get All ProblemType
+final class GetAllProblemTypesLoadingState extends ProblemState {}
+
+final class GetAllProblemTypesSuccessState extends ProblemState {}
+
+final class GetAllProblemTypesErrorState extends ProblemState {
+  final String error;
+
+  GetAllProblemTypesErrorState({required this.error});
+}

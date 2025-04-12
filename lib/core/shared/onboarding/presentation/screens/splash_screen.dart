@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
+import 'package:safety_frist/core/routes/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -27,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          context.go('/onboardingScreen');
+          context.go(startedScreen());
         }
       });
 
@@ -51,5 +54,24 @@ class _SplashScreenState extends State<SplashScreen>
         ),
       ),
     );
+  }
+
+  String startedScreen() {
+    String? login = CacheHelper.getData(key: CacheHelperKeys.login);
+    bool? onBoarding = CacheHelper.getData(key: CacheHelperKeys.onBoarding);
+
+    if (onBoarding == false) {
+      return Routes.userTypeScreen;
+    } else if (login == Routes.clientBottomNavBar) {
+      return Routes.clientBottomNavBar;
+    } else if (login == Routes.adminBottomNavBar) {
+      return Routes.adminBottomNavBar;
+    } else if (login == Routes.technicianBottomNavBar) {
+      return Routes.technicianBottomNavBar;
+    } else if (onBoarding == true) {
+      return Routes.userTypeScreen;
+    } else {
+      return Routes.onboardingScreen;
+    }
   }
 }

@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:safety_frist/core/cache/shared_pref_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
+import 'package:safety_frist/users/admin/bookings/data/models/problem_type_response_model.dart';
 import 'package:safety_frist/users/client/home/data/model/problem_model.dart';
 import 'package:safety_frist/users/client/bookings/data/models/problem_response_model.dart';
 import 'package:safety_frist/users/client/home/data/service/problem_service.dart';
@@ -11,7 +12,7 @@ class ProblemRepository {
 
   ProblemRepository(this._problemService);
 
-  var token = CacheHelper.getData(key: 'token');
+  var token = CacheHelper.getSecuredData(key: 'token');
 
   Future<ApiResult<void>> createProblem(
     ProblemModel problemModel,
@@ -20,7 +21,7 @@ class ProblemRepository {
     try {
       final FormData formData = FormData.fromMap({
         "Description": problemModel.description,
-        "Type": problemModel.type,
+        "ProblemTypeId": problemModel.problemTypeId,
         "Image": imageFile,
       });
 
@@ -39,6 +40,18 @@ class ProblemRepository {
       final result = await _problemService.getClientProblems(token);
 
       return ApiResult.success(result);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
+    }
+  }
+
+  Future<ApiResult<List<ProblemTypeResponseModel>>> getAllProblemTypes() async {
+    try {
+      final response = await _problemService.getAllProblemTypes(
+        "Bearer $token",
+      );
+
+      return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }

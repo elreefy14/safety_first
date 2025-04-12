@@ -8,6 +8,7 @@ import 'package:safety_frist/core/shared/authentication/presentation/screens/res
 import 'package:safety_frist/core/shared/authentication/presentation/screens/user_type_screen.dart';
 import 'package:safety_frist/core/shared/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:safety_frist/core/shared/onboarding/presentation/screens/splash_screen.dart';
+import 'package:safety_frist/core/shared/profile/presentation/screens/engineer_service_type_screen.dart';
 import 'package:safety_frist/users/admin/technichians/presentation/screens/add_engineer_screen.dart';
 import 'package:safety_frist/users/admin/technichians/presentation/screens/add_technician_screen.dart';
 import 'package:safety_frist/users/admin/bookings/presentation/screens/admin_bottom_navigation_bar_screen.dart';
@@ -109,6 +110,13 @@ final GoRouter router = GoRouter(
       path: Routes.addTechnicianScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const AddTechnicianScreen();
+      },
+    ),
+
+    GoRoute(
+      path: Routes.engineerServicesScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const EngineerServiceTypeScreen();
       },
     ),
   ],

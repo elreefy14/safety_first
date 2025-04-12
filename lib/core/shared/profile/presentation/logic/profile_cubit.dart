@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
@@ -29,8 +27,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     if (response is Success<ProfileResponseModel>) {
       userModel = response.data;
 
-      log('${userModel!.email}');
-
       emit(GetProfileSuccessState(profileResponseModel: userModel!));
     } else {
       emit(GetProfileErrorState(message: 'Your Info is not found'));
@@ -44,11 +40,8 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     final response = await _profileRepository.logoutUser();
     if (response is Success<LogoutResponseModel>) {
-      logoutModel = response.data;
-      log('${logoutModel!.message}');
       emit(LogoutUserSuccessState(logoutResponseModel: response.data));
     } else {
-      log('Can not log out');
       emit(LogoutUserErrorState(message: 'Can not log out'));
     }
   }

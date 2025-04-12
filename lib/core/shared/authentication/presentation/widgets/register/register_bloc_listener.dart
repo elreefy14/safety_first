@@ -37,7 +37,7 @@ class RegisterBlocListener extends StatelessWidget {
   void setupError(BuildContext context, error) {
     showToast(
       msg: ApiErrorHandler.handleError(error).message,
-      color: Colors.green,
+      color: Colors.red,
     );
   }
 }

@@ -70,7 +70,7 @@ class ClientProblemListViewItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    serviceType(type: problem.type!),
+                    problem.problemTypeName!,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   verticalSpace(4),

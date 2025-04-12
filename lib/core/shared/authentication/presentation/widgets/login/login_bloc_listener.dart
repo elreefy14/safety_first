@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/di/dependency_injection.dart' show getIt;
 import 'package:safety_frist/core/helper/functions/show_toast.dart';
 import 'package:safety_frist/core/routes/routes.dart';
@@ -27,7 +29,6 @@ class LoginBlocListener extends StatelessWidget {
           switch (state) {
             case LoginSuccessState():
               setupSuccess(context);
-
             default:
           }
         },
@@ -36,13 +37,25 @@ class LoginBlocListener extends StatelessWidget {
   }
 
   void setupSuccess(BuildContext context) {
-    if (userType == UserType.client) {
+    if (LoginCubit.get(context).userRole == 'ClientRole') {
       context.pushReplacement(Routes.clientBottomNavBar);
-    } else if (userType == UserType.admin) {
+      CacheHelper.saveData(
+        key: CacheHelperKeys.login,
+        value: Routes.clientBottomNavBar,
+      );
+    } else if (LoginCubit.get(context).userRole == 'EngineerRole') {
       context.pushReplacement(Routes.adminBottomNavBar);
-    } else if (userType == UserType.technichian) {
+      CacheHelper.saveData(
+        key: CacheHelperKeys.login,
+        value: Routes.adminBottomNavBar,
+      );
+    } else if (LoginCubit.get(context).userRole == 'TechnicianRole') {
       context.pushReplacement(Routes.technicianBottomNavBar);
+      CacheHelper.saveData(
+        key: CacheHelperKeys.login,
+        value: Routes.technicianBottomNavBar,
+      );
     }
-    showToast(msg: 'تم تسجيل الدخول بنجاح', color: Colors.green);
+    showToast(msg: 'تم تسجيل إلي حسابك الدخول بنجاح', color: Colors.green);
   }
 }

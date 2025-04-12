@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:safety_frist/core/cache/cache_helper.dart';
+import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/helper/functions/build_animation.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/core/routes/routes.dart';
@@ -81,6 +83,10 @@ class _BuildItemOnBoardingState extends State<BuildItemOnBoarding> {
                                   Theme.of(context).scaffoldBackgroundColor,
                               onPressed: () {
                                 context.pushReplacement(Routes.userTypeScreen);
+                                CacheHelper.saveData(
+                                  key: CacheHelperKeys.onBoarding,
+                                  value: true,
+                                );
                               },
                             ),
                           )
@@ -118,6 +124,7 @@ class _BuildItemOnBoardingState extends State<BuildItemOnBoarding> {
       });
     } else {
       context.pushReplacement(Routes.userTypeScreen);
+      CacheHelper.saveData(key: CacheHelperKeys.onBoarding, value: true);
     }
   }
 }

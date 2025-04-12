@@ -65,7 +65,7 @@ class TechnicianListViewItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${technician.firstName!} ' + technician.lastName!,
+                    '${technician.firstName!} ${technician.lastName!}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   verticalSpace(8),

@@ -33,7 +33,9 @@ class _BottomNavigationBarScreenState
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => getIt<ProblemCubit>()),
+        BlocProvider(
+          create: (context) => getIt<ProblemCubit>()..getAllProblemTypes(),
+        ),
         BlocProvider(
           create:
               (context) => getIt<ClientProblemsCubit>()..getClientProblems(),

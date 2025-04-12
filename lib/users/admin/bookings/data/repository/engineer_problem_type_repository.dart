@@ -4,20 +4,25 @@ import 'package:safety_frist/core/cache/cache_helper_keys.dart';
 import 'package:safety_frist/core/helper/functions/show_toast.dart';
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
-import 'package:safety_frist/users/admin/technichians/data/models/add_engineer_request_body.dart';
-import 'package:safety_frist/users/admin/technichians/data/models/engineer_response_model.dart';
-import 'package:safety_frist/users/admin/technichians/data/services/engineer_service.dart';
+import 'package:safety_frist/users/admin/bookings/data/models/problem_type_request_body.dart';
+import 'package:safety_frist/users/admin/bookings/data/models/problem_type_response_model.dart';
+import 'package:safety_frist/users/admin/bookings/data/services/engineer_problem_types_service.dart';
 
-class EngineerRepository {
-  final EngineerService _service;
+class EngineerProblemTypeRepository {
+  final EngineerProblemTypesService _service;
 
-  EngineerRepository(this._service);
+  EngineerProblemTypeRepository(this._service);
 
   var token = CacheHelper.getSecuredData(key: CacheHelperKeys.accessToken);
 
-  Future<ApiResult<void>> addEngineer(AddEngineerRequestBody engineer) async {
+  Future<ApiResult<void>> addProblemType(
+    ProblemTypeRequestBody problemType,
+  ) async {
     try {
-      final response = await _service.addEngineer("Bearer $token", engineer);
+      final response = await _service.addProblemType(
+        "Bearer $token",
+        problemType,
+      );
 
       return ApiResult.success(response);
     } catch (error) {
@@ -29,29 +34,15 @@ class EngineerRepository {
     }
   }
 
-  Future<ApiResult<void>> deleteEngineer(String id) async {
-    try {
-      final response = await _service.deleteEngineer("Bearer $token", id);
-
-      return ApiResult.success(response);
-    } catch (error) {
-      showToast(
-        msg: ApiErrorHandler.handleError(error).message,
-        color: Colors.red,
-      );
-      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
-    }
-  }
-
-  Future<ApiResult<void>> updateEngineer(
-    AddEngineerRequestBody engineer,
+  Future<ApiResult<void>> updateProblemType(
+    ProblemTypeRequestBody problemType,
     String id,
   ) async {
     try {
-      final response = await _service.updateEngineer(
+      final response = await _service.updateProblemType(
         "Bearer $token",
         id,
-        engineer,
+        problemType,
       );
 
       return ApiResult.success(response);
@@ -64,9 +55,9 @@ class EngineerRepository {
     }
   }
 
-  Future<ApiResult<EngineerResponseModel>> getEngineer(String id) async {
+  Future<ApiResult<void>> deleteProblemType(String id) async {
     try {
-      final response = await _service.getEngineer("Bearer $token", id);
+      final response = await _service.deleteProblemType("Bearer $token", id);
 
       return ApiResult.success(response);
     } catch (error) {
@@ -78,9 +69,25 @@ class EngineerRepository {
     }
   }
 
-  Future<ApiResult<List<EngineerResponseModel>>> getAllEngineers() async {
+  Future<ApiResult<ProblemTypeResponseModel>> getProblemTypesById(
+    String id,
+  ) async {
     try {
-      final response = await _service.getAllEngineers("Bearer $token");
+      final response = await _service.getProblemTypesById("Bearer $token", id);
+
+      return ApiResult.success(response);
+    } catch (error) {
+      showToast(
+        msg: ApiErrorHandler.handleError(error).message,
+        color: Colors.red,
+      );
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
+    }
+  }
+
+  Future<ApiResult<List<ProblemTypeResponseModel>>> getAllProblemTypes() async {
+    try {
+      final response = await _service.getAllProblemTypes("Bearer $token");
 
       return ApiResult.success(response);
     } catch (error) {

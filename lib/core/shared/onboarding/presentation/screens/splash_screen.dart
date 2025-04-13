@@ -57,9 +57,8 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   String startedScreen() {
-    String? login = CacheHelper.getData(key: CacheHelperKeys.login);
-    bool? onBoarding = CacheHelper.getData(key: CacheHelperKeys.onBoarding);
-
+    var login = CacheHelper.getData(key: CacheHelperKeys.login);
+    var onBoarding = CacheHelper.getData(key: CacheHelperKeys.onBoarding);
     if (onBoarding == false) {
       return Routes.userTypeScreen;
     } else if (login == Routes.clientBottomNavBar) {

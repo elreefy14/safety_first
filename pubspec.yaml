@@ -66,6 +66,7 @@ dependencies:
   retrofit_generator: ^9.1.9
   shared_preferences: ^2.5.2
   shimmer: ^3.0.0
+  skeletonizer: ^1.4.3
   smart_auth: ^3.2.0
   smooth_page_indicator: ^1.2.1
 

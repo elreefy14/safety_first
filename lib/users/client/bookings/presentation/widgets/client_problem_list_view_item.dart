@@ -1,6 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:safety_frist/core/helper/functions/problem_status.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
 import 'package:safety_frist/users/admin/bookings/presentation/screens/problem_details_screen.dart';
@@ -96,7 +99,11 @@ class ClientProblemListViewItem extends StatelessWidget {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.delete, color: Colors.red),
+              icon: SvgPicture.asset(
+                'assets/icons/delete.svg',
+                height: 50,
+                color: Colors.red,
+              ),
               onPressed: () {
                 AwesomeDialog(
                   context: context,

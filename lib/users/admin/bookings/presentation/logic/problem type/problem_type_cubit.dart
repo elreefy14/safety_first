@@ -12,16 +12,19 @@ class ProblemTypeCubit extends Cubit<ProblemTypeState> {
 
   static ProblemTypeCubit get(context) => BlocProvider.of(context);
 
-  GlobalKey<FormState> formKey = GlobalKey();
+  GlobalKey<FormState> addFormKey = GlobalKey();
+  GlobalKey<FormState> updateFormKey = GlobalKey();
   TextEditingController nameTypeController = TextEditingController();
+  TextEditingController updateNameTypeController = TextEditingController();
 
   Future<void> addProblemType() async {
     emit(AddProblemTypeLoadingState());
     final response = await _repository.addProblemType(
-      ProblemTypeRequestBody(name: ''),
+      ProblemTypeRequestBody(name: nameTypeController.text),
     );
 
     if (response is Success) {
+      getAllProblemTypes();
       emit(AddProblemTypeSuccessState());
     } else if (response is Failure) {
       emit(AddProblemTypeErrorState(error: response.error.toString()));
@@ -31,11 +34,12 @@ class ProblemTypeCubit extends Cubit<ProblemTypeState> {
   Future<void> updateProblemType({required String id}) async {
     emit(UpdateProblemTypeLoadingState());
     final response = await _repository.updateProblemType(
-      ProblemTypeRequestBody(name: ''),
+      ProblemTypeRequestBody(name: updateNameTypeController.text),
       id,
     );
 
     if (response is Success) {
+      getAllProblemTypes();
       emit(UpdateProblemTypeSuccessState());
     } else if (response is Failure) {
       emit(UpdateProblemTypeErrorState(error: response.error.toString()));
@@ -47,6 +51,7 @@ class ProblemTypeCubit extends Cubit<ProblemTypeState> {
     final response = await _repository.deleteProblemType(id);
 
     if (response is Success) {
+      getAllProblemTypes();
       emit(DeleteProblemTypeSuccessState());
     } else if (response is Failure) {
       emit(DeleteProblemTypeErrorState(error: response.error.toString()));

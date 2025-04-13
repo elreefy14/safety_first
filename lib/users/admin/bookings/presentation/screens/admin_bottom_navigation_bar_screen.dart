@@ -60,7 +60,6 @@ class _BottomNavigationBarScreenState
           ),
         ),
         bottomNavigationBar: CurvedNavigationBar(
-          // height: 74.h,
           animationDuration: const Duration(milliseconds: 900),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           buttonBackgroundColor:

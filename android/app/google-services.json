@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "334784013429",
+    "project_id": "safety-first-b5ee0",
+    "storage_bucket": "safety-first-b5ee0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334784013429:android:4a98c5d008165ae9e3043c",
+        "android_client_info": {
+          "package_name": "com.example.safety_frist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfLTo9rrPUrRqR8p6fHOO7kpSvoooGQcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -42,7 +42,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     emit(ResendOTPForgotPasswordLoadingState());
     final response = await _authRepository.resendOtpResetPassword(
       ResentOtpForgotPasswordRewuestBody(
-        email: CacheHelper.getSecuredData(key: CacheHelperKeys.email),
+        email: await CacheHelper.getSecuredData(key: CacheHelperKeys.email),
       ),
     );
 
@@ -59,7 +59,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     emit(ResetPasswordLoadingState());
     final response = await _authRepository.resetPassword(
       ResetPasswordRequestBody(
-        email: CacheHelper.getSecuredData(key: CacheHelperKeys.email),
+        email: await CacheHelper.getSecuredData(key: CacheHelperKeys.email),
         otp: otpCodeController.text,
         newPassword: passwordController.text,
       ),

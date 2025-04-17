@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_element_parameter
-
 part of 'technician_problems_services.dart';
 
 // **************************************************************************
@@ -12,7 +10,7 @@ part of 'technician_problems_services.dart';
 
 class _TechnicianProblemsServices implements TechnicianProblemsServices {
   _TechnicianProblemsServices(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://safety.runasp.net/api';
+    baseUrl ??= 'http://www.safetyfirste.com/api';
   }
 
   final Dio _dio;

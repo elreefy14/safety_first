@@ -65,7 +65,7 @@ class AddServiceFloatingActionButtom extends StatelessWidget {
                                           ? true
                                           : false,
                                   onPressed: () {
-                                    if (cubit.updateFormKey.currentState!
+                                    if (cubit.addFormKey.currentState!
                                         .validate()) {
                                       cubit.addProblemType();
                                     }

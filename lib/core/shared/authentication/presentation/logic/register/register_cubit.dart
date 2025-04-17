@@ -39,6 +39,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     if (response is Success<AuthResponseModel>) {
       userModel = response.data;
       saveUserEmail(emailController.text);
+
       emit(RegisterSuccessState(authResponseModel: userModel!));
     } else if (response is Failure<AuthResponseModel>) {
       emit(RegisterErrorState(response.error.toString()));
@@ -63,7 +64,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(ResendConfirmEmailLoadingState());
     final response = await _authRepository.resendOtpConfirmEmail(
       ResendOptConfirmEmailRequestBody(
-        email: CacheHelper.getSecuredData(key: CacheHelperKeys.email),
+        email: await CacheHelper.getSecuredData(key: CacheHelperKeys.email),
       ),
     );
 
@@ -74,7 +75,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     }
   }
 
-  saveUserEmail(String email) {
-    CacheHelper.saveSecuredData(key: CacheHelperKeys.email, value: email);
+  saveUserEmail(String email) async {
+    await CacheHelper.saveSecuredData(key: CacheHelperKeys.email, value: email);
   }
 }

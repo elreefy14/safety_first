@@ -12,16 +12,16 @@ class ClientRegisterRequestBody {
   });
 
   @JsonKey(name: 'FirstName')
-  final String? firstName;
+  final String firstName;
 
   @JsonKey(name: 'LastName')
-  final String? lastName;
+  final String lastName;
 
   @JsonKey(name: 'Email')
-  final String? email;
+  final String email;
 
   @JsonKey(name: 'Password')
-  final String? password;
+  final String password;
 
   Map<String, dynamic> toJson() => _$ClientRegisterRequestBodyToJson(this);
 }

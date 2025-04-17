@@ -12,13 +12,13 @@ class ProblemRepository {
 
   ProblemRepository(this._problemService);
 
-  var token = CacheHelper.getSecuredData(key: 'token');
-
   Future<ApiResult<void>> createProblem(
     ProblemModel problemModel,
     MultipartFile imageFile,
   ) async {
     try {
+      var token = await CacheHelper.getSecuredData(key: 'token');
+
       final FormData formData = FormData.fromMap({
         "Description": problemModel.description,
         "ProblemTypeId": problemModel.problemTypeId,
@@ -37,6 +37,7 @@ class ProblemRepository {
 
   Future<ApiResult<List<ProblemResponseModel>>> getClientProblems() async {
     try {
+      var token = await CacheHelper.getSecuredData(key: 'token');
       final result = await _problemService.getClientProblems(token);
 
       return ApiResult.success(result);
@@ -47,6 +48,7 @@ class ProblemRepository {
 
   Future<ApiResult<List<ProblemTypeResponseModel>>> getAllProblemTypes() async {
     try {
+      var token = await CacheHelper.getSecuredData(key: 'token');
       final response = await _problemService.getAllProblemTypes(
         "Bearer $token",
       );

@@ -1,5 +1,6 @@
 class ApiConstants {
-  static const String baseUrl = 'https://safety.runasp.net/api';
+  static const String baseUrl = 'http://www.safetyfirste.com/api';
+  static const String baseUrlNotification = 'http://www.safetyfirste.com/api';
 
   // Authentication Endpoints
   static const String login = '/Authentication/Login';

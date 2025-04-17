@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/client_register_screen.dart';
-import 'package:safety_frist/core/shared/authentication/presentation/screens/verify_email_screen.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/forgot_password_screen.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/reset_password_screen.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/screens/user_type_screen.dart';
@@ -57,13 +56,13 @@ final GoRouter router = GoRouter(
       },
     ),
 
-    // Verify Email Screen
-    GoRoute(
-      path: Routes.verifyEmailScreen,
-      builder: (BuildContext context, GoRouterState state) {
-        return VerifyEmailScreen();
-      },
-    ),
+    // // Verify Email Screen
+    // GoRoute(
+    //   path: Routes.verifyEmailScreen,
+    //   builder: (BuildContext context, GoRouterState state) {
+    //     return VerifyEmailScreen();
+    //   },
+    // ),
 
     // Client Register Screen
     GoRoute(

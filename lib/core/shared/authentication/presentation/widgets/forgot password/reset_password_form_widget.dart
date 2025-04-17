@@ -44,12 +44,12 @@ class ResetPasswordFormWidget extends StatelessWidget {
                     textButton: 'حفظ كلمة المرور',
                     isLoading:
                         state is ResetPasswordLoadingState ? true : false,
-                    onPressed: () {
+                    onPressed: () async {
                       if (ForgotPasswordCubit.get(
                         context,
                       ).formKeyReset.currentState!.validate()) {
                         ForgotPasswordCubit.get(context).resetPassword(
-                          email: CacheHelper.getSecuredData(
+                          email: await CacheHelper.getSecuredData(
                             key: CacheHelperKeys.email,
                           ),
                         );

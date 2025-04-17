@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_element_parameter
-
 part of 'engineer_service.dart';
 
 // **************************************************************************
@@ -12,7 +10,7 @@ part of 'engineer_service.dart';
 
 class _EngineerService implements EngineerService {
   _EngineerService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://safety.runasp.net/api';
+    baseUrl ??= 'http://www.safetyfirste.com/api';
   }
 
   final Dio _dio;

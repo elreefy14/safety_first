@@ -13,16 +13,16 @@ class AuthResponseModel {
   });
 
   @JsonKey(name: 'FirstName')
-  final String? firstName;
+  final String firstName;
 
   @JsonKey(name: 'LastName')
-  final String? lastName;
+  final String lastName;
 
   @JsonKey(name: 'Email')
-  final String? email;
+  final String email;
 
   @JsonKey(name: 'AccessToken')
-  final String? accessToken;
+  final String accessToken;
 
   @JsonKey(name: 'RefreshToken')
   final String? refreshToken;

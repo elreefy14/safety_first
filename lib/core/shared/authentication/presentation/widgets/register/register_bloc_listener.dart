@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:safety_frist/core/di/dependency_injection.dart' show getIt;
 import 'package:safety_frist/core/helper/functions/show_toast.dart';
-import 'package:safety_frist/core/networking/api_error_handler.dart';
-import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/logic/register/register_cubit.dart';
+import 'package:safety_frist/core/shared/authentication/presentation/screens/verify_email_screen.dart';
 
 class RegisterBlocListener extends StatelessWidget {
   const RegisterBlocListener({super.key, required this.child});
@@ -25,7 +23,10 @@ class RegisterBlocListener extends StatelessWidget {
                 msg: 'بالرجاء قم بفحص الايميل لتأكيد الأكونت',
                 color: Colors.green,
               );
-              context.pushReplacement(Routes.verifyEmailScreen);
+              _navigateToVerifyEmailScreen(
+                context,
+                email: RegisterCubit.get(context).userModel!.email,
+              );
 
             default:
           }
@@ -34,10 +35,26 @@ class RegisterBlocListener extends StatelessWidget {
     );
   }
 
-  void setupError(BuildContext context, error) {
-    showToast(
-      msg: ApiErrorHandler.handleError(error).message,
-      color: Colors.red,
+  void _navigateToVerifyEmailScreen(
+    BuildContext context, {
+    required String email,
+  }) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder:
+            (context, animation, secondaryAnimation) =>
+                VerifyEmailScreen(email: email),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var tween = Tween(
+            begin: const Offset(1.0, 0.0),
+            end: Offset.zero,
+          ).chain(CurveTween(curve: Curves.easeInOut));
+          var offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(position: offsetAnimation, child: child);
+        },
+      ),
     );
   }
 }

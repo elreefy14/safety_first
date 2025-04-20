@@ -38,7 +38,7 @@ class LoginBlocListener extends StatelessWidget {
   }
 
   void setupSuccess(BuildContext context) async {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    // FirebaseMessaging messaging = FirebaseMessaging.instance;
 
     if (LoginCubit.get(context).userRole == 'ClientRole') {
       context.pushReplacement(Routes.clientBottomNavBar);
@@ -52,7 +52,7 @@ class LoginBlocListener extends StatelessWidget {
         key: CacheHelperKeys.login,
         value: Routes.adminBottomNavBar,
       );
-      await messaging.subscribeToTopic('Engineers').then((value) {});
+      // await messaging.subscribeToTopic('Engineers').then((value) {});
     } else if (LoginCubit.get(context).userRole == 'TechnicianRole') {
       context.pushReplacement(Routes.technicianBottomNavBar);
       CacheHelper.saveData(

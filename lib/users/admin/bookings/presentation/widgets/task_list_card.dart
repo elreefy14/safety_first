@@ -10,31 +10,47 @@ class TaskList extends StatelessWidget {
   final String status;
   const TaskList({super.key, required this.status});
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<EngineerProblemsCubit, EngineerProblemsState>(
-      builder: (context, state) {
-        var listProblems = EngineerProblemsCubit.get(context).allProblemsList;
-
-        return ListView.builder(
-          itemCount: listProblems.length,
-          itemBuilder: (context, index) {
-            return showListViewItem(listProblems, index, state);
-          },
-        );
-      },
-    );
-  }
-
-  Widget showListViewItem(
-    List<ProblemResponseModel> listProblems,
-    int index,
-    state,
-  ) {
-    if (state is GetProblemsLoadingState) {
-      return ProblemShimmerLoadingWidget();
-    } else {
-      return EngineerProblemListViewItem(problemModel: listProblems[index]);
+  Future<void> _refresh(BuildContext context) async {
+    final cubit = EngineerProblemsCubit.get(context);
+    if (status == 'الجميع') {
+      await cubit.getAllProblems();
+    } else if (status == '⏳ قيد الانتظار') {
+      await cubit.getProblemsByStatus(statusId: 0);
+    } else if (status == '🔄 جاري التنفيذ') {
+      await cubit.getProblemsByStatus(statusId: 1);
+    } else if (status == '✅ مكتملة') {
+      await cubit.getProblemsByStatus(statusId: 2);
     }
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return RefreshIndicator(
+      onRefresh: () => _refresh(context),
+      child: BlocBuilder<EngineerProblemsCubit, EngineerProblemsState>(
+        builder: (context, state) {
+          var listProblems =
+              EngineerProblemsCubit.get(context).allProblemsList;
+
+          if (state is GetProblemsLoadingState && listProblems.isEmpty) {
+            return ListView.builder(
+              itemCount: 3,
+              itemBuilder: (_, __) => const ProblemShimmerLoadingWidget(),
+            );
+          }
+
+          return ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
+            itemCount: listProblems.length,
+            itemBuilder: (context, index) {
+              return EngineerProblemListViewItem(
+                problemModel: listProblems[index],
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
 }
+

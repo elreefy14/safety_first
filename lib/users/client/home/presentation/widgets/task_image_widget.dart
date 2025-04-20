@@ -90,6 +90,7 @@ class TaskImageWidget extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
             ),
             onTap: () {
+              Navigator.pop(context);
               ProblemCubit.get(context).getProblemImage(ImageSource.gallery);
             },
           ),
@@ -101,6 +102,7 @@ class TaskImageWidget extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
             ),
             onTap: () {
+              Navigator.pop(context);
               ProblemCubit.get(context).getProblemImage(ImageSource.camera);
             },
           ),

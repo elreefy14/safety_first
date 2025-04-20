@@ -40,7 +40,4 @@ class PushNotificationsService {
     });
   }
 
-  // static void sendTokenToServer(String token) {
-  //   CacheHelper.saveSecuredData(key: CacheHelperKeys.userIdToken, value: token);
-  // }
 }

@@ -17,14 +17,14 @@ class LogoutBlocListenerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    // FirebaseMessaging messaging = FirebaseMessaging.instance;
 
     return BlocListener<ProfileCubit, ProfileState>(
       listener: (context, state) {
         if (state is LogoutUserSuccessState) {
           context.pushReplacement(Routes.userTypeScreen);
           showToast(msg: 'تم تسجيل الخروج بنجاح', color: Colors.green);
-          messaging.unsubscribeFromTopic('Engineers');
+          // messaging.unsubscribeFromTopic('Engineers');
 
           CacheHelper.saveData(key: CacheHelperKeys.onBoarding, value: false);
         }

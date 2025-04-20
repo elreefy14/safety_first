@@ -20,34 +20,41 @@ class EngineerProblemListViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        AwesomeDialog(
-          context: context,
-          dialogType: DialogType.question,
-          customHeader: SvgPicture.asset(
-            'assets/icons/power_settings_new.svg',
-            height: 50,
-          ),
-          animType: AnimType.rightSlide,
-          title: 'إرسال المشكلة إلي الفني',
-          desc: 'هل تريد إرسال هذه المشكلة إلي فني متخصص',
-          reverseBtnOrder: true,
-          btnCancelText: 'عرض المشكلة',
-          btnOkText: 'اختيار فني',
-          buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
-          btnCancelOnPress: () {
-            EngineerProblemsCubit.get(
-              context,
-            ).getProblemById(problemId: problemModel.id!);
-            _navigateToProblemDetailsScreen(
-              context: context,
-              problem: problemModel,
-            );
-          },
-          btnOkOnPress: () {
-            selectTechnicianForPoblem(context);
-          },
-        ).show();
+        if (problemModel.status == 1 || problemModel.status == 2) {
+          EngineerProblemsCubit.get(context).getProblemById(problemId: problemModel.id!);
+          _navigateToProblemDetailsScreen(
+            context: context,
+            problem: problemModel,
+          );
+        } else {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.question,
+            customHeader: SvgPicture.asset(
+              'assets/icons/power_settings_new.svg',
+              height: 50,
+            ),
+            animType: AnimType.rightSlide,
+            title: 'إرسال المشكلة إلي الفني',
+            desc: 'هل تريد إرسال هذه المشكلة إلي فني متخصص',
+            reverseBtnOrder: true,
+            btnCancelText: 'عرض المشكلة',
+            btnOkText: 'اختيار فني',
+            buttonsTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+            btnCancelOnPress: () {
+              EngineerProblemsCubit.get(context).getProblemById(problemId: problemModel.id!);
+              _navigateToProblemDetailsScreen(
+                context: context,
+                problem: problemModel,
+              );
+            },
+            btnOkOnPress: () {
+              selectTechnicianForPoblem(context);
+            },
+          ).show();
+        }
       },
+
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 8.h),
         padding: EdgeInsets.all(12.0),

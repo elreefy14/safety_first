@@ -10,36 +10,61 @@ import 'package:safety_frist/users/admin/technichians/presentation/widgets/techn
 class TechnicianListView extends StatelessWidget {
   const TechnicianListView({super.key});
 
+  Future<void> _onRefresh(BuildContext context) async {
+    await TechnicianCubit.get(context).getAllTechnicians();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TechnicianCubit, TechnicianState>(
       builder: (context, state) {
         var technicians = TechnicianCubit.get(context).allTechniciansList;
+
         return SizedBox(
           height: 500.h,
-          child: ListView.builder(
-            itemCount: technicians.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(bottom: 12.h),
-                child: showListViewItem(technicians, index, state),
-              );
-            },
+          child: RefreshIndicator(
+            onRefresh: () => _onRefresh(context),
+            child: technicians.isEmpty && state is! GetAllTechniciansLoadingState
+                ? ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 100.h),
+                  child: Center(
+                    child: Text(
+                      'لا يوجد فنيين حالياً',
+                      style: TextStyle(fontSize: 16.sp),
+                    ),
+                  ),
+                ),
+              ],
+            )
+                : ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: technicians.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.only(bottom: 12.h),
+                  child: _showListViewItem(technicians, index, state),
+                );
+              },
+            ),
           ),
         );
       },
     );
   }
 
-  Widget showListViewItem(
-    List<TechnicianResponseModel> technicians,
-    int index,
-    state,
-  ) {
-    if (state is GetAllTechniciansLoadingState) {
-      return TechniciansShimmerLoadingWidget();
+  Widget _showListViewItem(
+      List<TechnicianResponseModel> technicians,
+      int index,
+      TechnicianState state,
+      ) {
+    if (state is GetAllTechniciansLoadingState && technicians.isEmpty) {
+      return const TechniciansShimmerLoadingWidget();
     } else {
       return TechnicianListViewItem(technician: technicians[index]);
     }
   }
 }
+

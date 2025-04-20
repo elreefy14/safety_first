@@ -15,15 +15,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await PushNotificationsService.init();
-  // await LocalNotificationService.init();
-  // final notificationRepo = NotificationRepository();
-  // final refresher = TokenRefresher(notification: notificationRepo);
-  // await notificationRepo.refreshToken();
-
-  // refresher.start();
-
   await CacheHelper.init();
+  await PushNotificationsService.init();
+  await LocalNotificationService.init();
+  final notificationRepo = NotificationRepository();
+  final refresher = TokenRefresher(notification: notificationRepo);
+  await notificationRepo.refreshToken();
+
+  refresher.start();
   await ScreenUtil.ensureScreenSize();
-  runApp(SafetyFirstApp());
+  runApp( SafetyFirstApp());
+
 }

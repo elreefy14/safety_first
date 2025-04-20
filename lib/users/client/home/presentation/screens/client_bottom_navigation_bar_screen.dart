@@ -94,6 +94,7 @@ class _BottomNavigationBarScreenState
               labelStyle:
                   Theme.of(context).bottomNavigationBarTheme.selectedLabelStyle,
             ),
+
             CurvedNavigationBarItem(
               child: Icon(
                 Icons.settings,

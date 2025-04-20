@@ -35,12 +35,13 @@ class LoginCubit extends Cubit<LoginState> {
     );
 
     if (response is Success<AuthResponseModel>) {
-      decodeJwt(token: response.data.accessToken!);
+      decodeJwt(token: response.data.accessToken);
       saveUserTokens(
-        accessToken: response.data.accessToken!,
+        accessToken: response.data.accessToken,
         refreshToken: response.data.refreshToken!,
       );
       userModel = response.data;
+
       emit(LoginSuccessState(authResponseModel: userModel!));
     } else if (response is Failure) {
       emit(

@@ -30,3 +30,12 @@ final class GetAllProblemTypesErrorState extends ProblemState {
 
   GetAllProblemTypesErrorState({required this.error});
 }
+
+// Notifications
+
+class SendNotificationToEngineerSuccess extends ProblemState {}
+
+class SendNotificationToEngineerFailure extends ProblemState {
+  final String error;
+  SendNotificationToEngineerFailure(this.error);
+}

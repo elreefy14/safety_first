@@ -1,6 +1,11 @@
 class ApiConstants {
   static const String baseUrl = 'http://www.safetyfirste.com/api';
-  static const String baseUrlNotification = 'http://www.safetyfirste.com/api';
+  static const String notificationBaseUrl = 'https://fcm.googleapis.com/v1';
+
+  // Notification Endpoints
+  static const String projectId = 'safety-first-eb105';
+  static const String sendNotificationToUser =
+      '/projects/$projectId/messages:send';
 
   // Authentication Endpoints
   static const String login = '/Authentication/Login';

@@ -1,5 +1,6 @@
 class CacheHelperKeys {
   static const String accessToken = 'accessToken';
+  static const String notificationAccessToken = 'accessToken';
   static const String refreshToken = 'refreshToken';
   static const String email = 'email';
 

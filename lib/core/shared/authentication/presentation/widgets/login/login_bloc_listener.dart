@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -36,7 +37,9 @@ class LoginBlocListener extends StatelessWidget {
     );
   }
 
-  void setupSuccess(BuildContext context) {
+  void setupSuccess(BuildContext context) async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
     if (LoginCubit.get(context).userRole == 'ClientRole') {
       context.pushReplacement(Routes.clientBottomNavBar);
       CacheHelper.saveData(
@@ -49,6 +52,7 @@ class LoginBlocListener extends StatelessWidget {
         key: CacheHelperKeys.login,
         value: Routes.adminBottomNavBar,
       );
+      await messaging.subscribeToTopic('Engineers').then((value) {});
     } else if (LoginCubit.get(context).userRole == 'TechnicianRole') {
       context.pushReplacement(Routes.technicianBottomNavBar);
       CacheHelper.saveData(

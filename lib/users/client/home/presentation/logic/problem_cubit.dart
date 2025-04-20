@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safety_frist/core/networking/api_result.dart';
 import 'package:safety_frist/users/admin/bookings/data/models/problem_type_response_model.dart';
+import 'package:safety_frist/users/client/home/data/model/notification_topic_request_body.dart';
 import 'package:safety_frist/users/client/home/data/model/problem_model.dart';
 import 'package:safety_frist/users/client/home/data/repo/problem_repo.dart';
 import 'package:safety_frist/users/client/home/presentation/logic/problem_states.dart';
@@ -55,6 +56,7 @@ class ProblemCubit extends Cubit<ProblemState> {
     );
 
     if (response is Success) {
+      //  sendNotificationToEngineers();
       emit(ProblemSuccess());
     } else if (response is Failure) {
       emit(ProblemFailure(response.toString()));
@@ -72,6 +74,21 @@ class ProblemCubit extends Cubit<ProblemState> {
       emit(GetAllProblemTypesSuccessState());
     } else if (response is Failure) {
       emit(GetAllProblemTypesErrorState(error: response.toString()));
+    }
+  }
+
+  Future<void> sendNotificationToEngineers() async {
+    final response = await _problemRepository.sendNotificationToAdmins(
+      notificationBody: NotificationBody(
+        title: 'مشكلة جديدة',
+        body: 'هناك عميل قام بإرسال مشكلة جديدة ويطلب تعيين فني متخصص لحلها',
+      ),
+    );
+
+    if (response is Success) {
+      emit(SendNotificationToEngineerSuccess());
+    } else if (response is Failure) {
+      emit(SendNotificationToEngineerFailure(response.toString()));
     }
   }
 }

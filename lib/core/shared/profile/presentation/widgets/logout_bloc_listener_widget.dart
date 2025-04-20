@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,11 +17,15 @@ class LogoutBlocListenerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
     return BlocListener<ProfileCubit, ProfileState>(
       listener: (context, state) {
         if (state is LogoutUserSuccessState) {
           context.pushReplacement(Routes.userTypeScreen);
           showToast(msg: 'تم تسجيل الخروج بنجاح', color: Colors.green);
+          messaging.unsubscribeFromTopic('Engineers');
+
           CacheHelper.saveData(key: CacheHelperKeys.onBoarding, value: false);
         }
       },

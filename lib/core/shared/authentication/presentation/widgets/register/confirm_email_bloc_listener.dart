@@ -6,7 +6,6 @@ import 'package:safety_frist/core/helper/functions/show_toast.dart';
 import 'package:safety_frist/core/networking/api_error_handler.dart';
 import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/authentication/presentation/logic/register/register_cubit.dart';
-import 'package:safety_frist/core/shared/authentication/presentation/screens/verify_email_screen.dart';
 
 class ConfirmEmailBlocListener extends StatelessWidget {
   const ConfirmEmailBlocListener({super.key, required this.child});

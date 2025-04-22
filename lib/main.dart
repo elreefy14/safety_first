@@ -6,18 +6,27 @@ import 'package:safety_frist/core/cache/cache_helper.dart';
 import 'package:safety_frist/core/di/dependency_injection.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  setupGetIt();
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await PushNotificationsService.init();
-  // await LocalNotificationService.init();
-  // final notificationRepo = NotificationRepository();
-  // final refresher = TokenRefresher(notification: notificationRepo);
-  // await notificationRepo.refreshToken();
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  // refresher.start();
+    // Initialize core services
+    await setupGetIt();
+    await CacheHelper.init();
+    await ScreenUtil.ensureScreenSize();
 
-  await CacheHelper.init();
-  await ScreenUtil.ensureScreenSize();
-  runApp(SafetyFirstApp());
+    // Uncomment these if you need Firebase functionality
+    // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    // await PushNotificationsService.init();
+    // await LocalNotificationService.init();
+    // final notificationRepo = NotificationRepository();
+    // final refresher = TokenRefresher(notification: notificationRepo);
+    // await notificationRepo.refreshToken();
+    // refresher.start();
+
+    runApp(const SafetyFirstApp());
+  } catch (e, stackTrace) {
+    print('Error during initialization: $e');
+    print('Stack trace: $stackTrace');
+    rethrow;
+  }
 }

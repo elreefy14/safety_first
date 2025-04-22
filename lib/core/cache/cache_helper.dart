@@ -2,13 +2,17 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
-  static SharedPreferences sharedPreferences = CacheHelper.sharedPreferences;
-  static FlutterSecureStorage flutterSecureStorage =
-      CacheHelper.flutterSecureStorage;
+  static late SharedPreferences sharedPreferences;
+  static late FlutterSecureStorage flutterSecureStorage;
 
   static Future<void> init() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    flutterSecureStorage = const FlutterSecureStorage();
+    try {
+      sharedPreferences = await SharedPreferences.getInstance();
+      flutterSecureStorage = const FlutterSecureStorage();
+    } catch (e) {
+      print('Error initializing CacheHelper: $e');
+      rethrow;
+    }
   }
 
   static Future<bool> putData({
@@ -55,4 +59,4 @@ class CacheHelper {
     const flutterSecureStorage = FlutterSecureStorage();
     await flutterSecureStorage.deleteAll();
   }
-}  
+}

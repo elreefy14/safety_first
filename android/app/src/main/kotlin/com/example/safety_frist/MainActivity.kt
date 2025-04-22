@@ -1,4 +1,4 @@
-package com.safety.safety_frist
+package com.example.safety_frist
 
 import io.flutter.embedding.android.FlutterActivity
 

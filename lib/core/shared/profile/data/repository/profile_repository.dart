@@ -41,4 +41,17 @@ class ProfileRepository {
       return ApiResult.failure(ApiErrorHandler.handleError(error).message);
     }
   }
+
+  Future<ApiResult<void>> deleteClient(String userId) async {
+    try {
+      final response = await _profileServices.deleteClient(
+        "Bearer $token",
+        userId,
+      );
+
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler.handleError(error).message);
+    }
+  }
 }

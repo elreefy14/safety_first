@@ -45,4 +45,16 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(LogoutUserErrorState(message: 'Can not log out'));
     }
   }
+
+  // Delete Client
+  void deleteClient({required String userId}) async {
+    emit(DeleteClientLoadingState());
+
+    final response = await _profileRepository.deleteClient(userId);
+    if (response is Success) {
+      emit(DeleteClientSuccessState());
+    } else {
+      emit(DeleteClientErrorState(message: 'Your Info is not found'));
+    }
+  }
 }

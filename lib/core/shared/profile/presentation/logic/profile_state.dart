@@ -36,3 +36,15 @@ final class LogoutUserErrorState extends ProfileState {
 
   LogoutUserErrorState({required this.message});
 }
+
+/// Delete Client
+
+final class DeleteClientLoadingState extends ProfileState {}
+
+final class DeleteClientSuccessState extends ProfileState {}
+
+final class DeleteClientErrorState extends ProfileState {
+  final String message;
+
+  DeleteClientErrorState({required this.message});
+}

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:safety_frist/core/shared/profile/data/models/profile_response_model.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_cubit.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_state.dart';
-import 'package:safety_frist/core/shared/profile/presentation/screens/profile_screen.dart';
+import 'package:safety_frist/core/shared/profile/presentation/screens/client_profile_screen.dart';
 import 'package:safety_frist/core/shared/profile/presentation/widgets/card_setting_item_widget.dart';
 import 'package:safety_frist/core/shared/profile/presentation/widgets/logout_bloc_listener_widget.dart';
 import 'package:safety_frist/core/shared/profile/presentation/widgets/notification_playing_widget.dart';
@@ -52,7 +52,7 @@ class ClientSettingsScreen extends StatelessWidget {
       PageRouteBuilder(
         pageBuilder:
             (context, animation, secondaryAnimation) =>
-                ProfileScreen(user: user),
+                ClientProfileScreen(user: user),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           var tween = Tween(
             begin: const Offset(1.0, 0.0),

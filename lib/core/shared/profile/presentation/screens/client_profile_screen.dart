@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:safety_frist/core/di/dependency_injection.dart';
+import 'package:safety_frist/core/helper/functions/show_toast.dart';
 import 'package:safety_frist/core/helper/utils/spacing.dart';
+import 'package:safety_frist/core/routes/routes.dart';
 import 'package:safety_frist/core/shared/profile/data/models/profile_response_model.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_cubit.dart';
 import 'package:safety_frist/core/shared/profile/presentation/logic/profile_state.dart';
+import 'package:safety_frist/core/widgets/app_text_button.dart';
 import 'package:safety_frist/core/widgets/appbar_icon.dart';
 import 'package:safety_frist/core/widgets/name_password_text_form.dart';
 import 'package:safety_frist/core/shared/profile/presentation/widgets/profile_email_and_password_widget.dart';
 import 'package:safety_frist/core/shared/profile/presentation/widgets/profile_image_widget.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key, required this.user});
+class ClientProfileScreen extends StatelessWidget {
+  const ClientProfileScreen({super.key, required this.user});
 
   final ProfileResponseModel user;
 
@@ -20,7 +24,15 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<ProfileCubit>(),
-      child: BlocBuilder<ProfileCubit, ProfileState>(
+      child: BlocConsumer<ProfileCubit, ProfileState>(
+        listener: (context, state) {
+          if (state is DeleteClientSuccessState) {
+            showToast(msg: 'تم حذف حسابك بنجاج', color: Colors.green);
+            context.pushReplacement(Routes.userTypeScreen);
+          } else if (state is DeleteClientErrorState) {
+            showToast(msg: 'فشلت عملية حذف حسابك', color: Colors.red);
+          }
+        },
         builder: (context, state) {
           TextEditingController emailController = TextEditingController();
           TextEditingController firstNameController = TextEditingController();
@@ -64,6 +76,22 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           verticalSpace(20),
                           ProfileEmailAndPasswordWidget(email: user.email!),
+                          verticalSpace(50),
+                          SizedBox(
+                            width: double.infinity,
+                            child: AppTextButton(
+                              textButton: 'حذف الحساب',
+                              isLoading:
+                                  state is DeleteClientLoadingState
+                                      ? true
+                                      : false,
+                              onPressed: () {
+                                ProfileCubit.get(
+                                  context,
+                                ).deleteClient(userId: user.id!);
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),

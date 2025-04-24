@@ -24,6 +24,7 @@ class ApiConstants {
 
   // Client
   static const String updateClient = '/Client';
+  static const String deleteClient = '/Client/{id}';
 
   // Problems
   static const String addProblem = '/Problem';

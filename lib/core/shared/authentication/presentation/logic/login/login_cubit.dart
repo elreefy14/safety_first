@@ -76,12 +76,15 @@ class LoginCubit extends Cubit<LoginState> {
             .value;
   }
 
-  saveUserTokens({required String accessToken, required String refreshToken}) {
-    CacheHelper.saveSecuredData(
+  saveUserTokens({
+    required String accessToken,
+    required String refreshToken,
+  }) async {
+    await CacheHelper.saveSecuredData(
       key: CacheHelperKeys.accessToken,
       value: accessToken,
     );
-    CacheHelper.saveSecuredData(
+    await CacheHelper.saveSecuredData(
       key: CacheHelperKeys.refreshToken,
       value: refreshToken,
     );

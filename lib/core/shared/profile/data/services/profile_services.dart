@@ -19,4 +19,10 @@ abstract class ProfileServices {
   Future<LogoutResponseModel> logoutUser(
     @Header('Authorization') String userToken,
   );
+
+  @DELETE(ApiConstants.deleteClient)
+  Future<void> deleteClient(
+    @Header('Authorization') String userToken,
+    @Path("id") String id,
+  );
 }
